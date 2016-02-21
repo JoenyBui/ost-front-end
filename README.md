@@ -7,6 +7,13 @@ run the site.  Additional information will later when a full ansible/vagrant tha
 
 * Quick summary
 * Version
+  Pre-Beta Phase
+
+* Style Guide
+  This project will be following 'johnpapa' styleguide for angularjs.
+  https://github.com/johnpapa/angular-styleguide
+  
+  
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
