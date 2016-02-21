@@ -1,53 +1,71 @@
 <div layout="column" ng-cloak class="md-inline-form">
     <div flex layout="row" layout-align="center center" layout-fill>
         <md-card class="margin-top-40 margin-bottom-200" flex="70" flex-xs="90">
-            <!--<md-content md-theme="dark-knight" layout-gt-sm="row" layout-padding>-->
-            <md-content layout-gt-sm="row" layout-padding>
-                <div>
-                    <md-input-container>
-                        <label>Title</label>
-                        <input ng-model="">
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Email</label>
-                        <input ng-model="" type="email"/>
-                    </md-input-container>
-                </div>
-            </md-content>
+            <form name="userForm">
 
-            <md-content layout-padding>
-                <div>
-                    <form name="userForm">
+                <!--<md-content md-theme="dark-knight" layout-gt-sm="row" layout-padding>-->
+                <md-content layout-padding>
+                    <div>
                         <div layout-gt-xs="row">
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Company (Disabled)</label>
-                                <input disabled>
+                            <md-input-container>
+                                <label>Problem Name</label>
+                                <input ng-model="vm.name">
                             </md-input-container>
-                            <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
-                            </md-datepicker>
                         </div>
+                        <div layout-gt-xs="row">
+                            <md-input-container>
+                                <label>Question Type</label>
+                                <md-select ng-model="vm.qtype">
+                                    <md-option ng-repeat="type in vm.qtype_options">
+                                        {{type}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </md-content>
 
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>State</label>
-                            <md-select ng-model="user.state">
-                                <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                    {{state.abbrev}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
+                <md-content layout-padding>
+                    <div>
+                        <fieldset class="standard">
+                            <legend>Define <code>stem</code></legend>
 
-                        <md-input-container class="md-block">
-                            <!--<label>Biography</label>-->
-                            <!--<textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus>-->
-                            <!--<textarea ui-codemirror ng-model="user.biography" rows="15" md-select-on-focus>-->
-                            <!--</textarea>-->
-                            <ui-codemirror ui-codemirror-opts="vm.editorOptions" rows="15" md-select-on-focus>
+                            <div layout-gt-xs="row">
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Statement</label>
+                                    <textarea ng-model="vm.stem.statement" rows="5" md-select-on-focus>
 
-                            </ui-codemirror>
-                        </md-input-container>
-                    </form>
-                </div>
-            </md-content>
+                                    </textarea>
+
+                                </md-input-container>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Define <code>keys</code></legend>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Answer</label>
+                                <input ng-model="vm.keys.answer">
+                            </md-input-container>
+
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Choices</label>
+                                <input ng-model="vm.keys.choices">
+                            </md-input-container>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Define <code>validation</code></legend>
+                            <md-input-container class="md-block">
+                                <label></label>
+                                <textarea rows="5" md-select-on-focus>
+
+                                </textarea>
+                            </md-input-container>
+                        </fieldset>
+                    </div>
+                </md-content>
+            </form>
         </md-card>
     </div>
 </div>
