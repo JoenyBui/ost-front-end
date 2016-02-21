@@ -1,6 +1,7 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This source code is the repository for the front-end for OST.  You will need to run the backend server to correctly 
+run the site.  Additional information will later when a full ansible/vagrant that run the model.
 
 ### What is this repository for? ###
 
@@ -13,7 +14,23 @@ This README would normally document whatever steps are necessary to get your app
 * Summary of set up
 * Configuration
 * Dependencies
-* Database configuration
+  You will to have npm, gulp, and bower install.  You can install gulp and bower locally or globally.  Check the 
+  installation setup with respect to your operating system.
+  
+* Installation
+
+After node package manager is installed, go to root directory and install package.json on the local directory.
+```
+npm install
+```
+
+Install bower to the local folder.
+```
+npm install -g bower
+
+bower install
+```
+
 * How to run tests
 * Deployment instructions
 
@@ -25,5 +42,4 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Joeny Bui, Ricky Do, Keven Lee
