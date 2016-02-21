@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "EDITOR": {
+            "EDITOR-MODULE": "Editor Module",
+            "EDITOR-PAGE": "Cover Page"
+        }
+    },
+    "EDITOR": {
+        "TITLE": "Welcome to the triangular test page"
+    }
+}
