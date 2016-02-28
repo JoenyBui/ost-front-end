@@ -24,13 +24,19 @@
                         <div layout-gt-xs="row">
                             <md-input-container>
                                 <label>Problem Name</label>
-                                <input ng-model="vm.name">
+                                <input ng-model="vm.fraction.name">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-xs="row">
+                            <md-input-container>
+                                <label>Domain</label>
+                                <input ng-model="vm.fraction.domain" readonly>
                             </md-input-container>
                         </div>
                         <div layout-gt-xs="row">
                             <md-input-container>
                                 <label>Question Type</label>
-                                <md-select ng-model="vm.qtype">
+                                <md-select ng-model="vm.fraction.qtype">
                                     <md-option ng-repeat="type in vm.qtype_options">
                                         {{type}}
                                     </md-option>
@@ -48,7 +54,7 @@
                             <div layout-gt-xs="row">
                                 <md-input-container class="md-block" flex-gt-xs>
                                     <label>Statement</label>
-                                    <textarea ng-model="vm.stem.statement" rows="5" md-select-on-focus>
+                                    <textarea ng-model="vm.fraction.stem.statement" rows="5" md-select-on-focus>
 
                                     </textarea>
 
@@ -60,12 +66,12 @@
                             <legend>Define <code>keys</code></legend>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Answer</label>
-                                <input ng-model="vm.keys.answer">
+                                <input ng-model="vm.fraction.keys.answer">
                             </md-input-container>
 
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Choices</label>
-                                <input ng-model="vm.keys.choices">
+                                <input ng-model="vm.fraction.keys.choices">
                             </md-input-container>
                         </fieldset>
 
@@ -81,10 +87,14 @@
                         </fieldset>
                     </div>
                 </md-content>
+
+                <md-content layout-padding palette-background="deep-orange:300" >
+                    <label>JSON Output</label>
+                    <json-formatter json="vm.fraction" open="1"></json-formatter>
+                </md-content>
             </form>
         </md-card>
     </div>
-
 </div>
 
 <!--<md-grid-list md-cols="5" md-gutter="1em" md-row-height="4:3">-->

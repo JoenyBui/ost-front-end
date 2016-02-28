@@ -3,5 +3,6 @@
 
     angular
         .module('editor', [
+            'jsonFormatter'
         ]);
 })();
