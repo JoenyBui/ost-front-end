@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,UAAW;EACT,UAAU,EAAE,WAAW",
-"sources": ["editor.tmpl.scss"],
+"mappings": "",
+"sources": [],
 "names": [],
 "file": "editor.tmpl.css"
 }

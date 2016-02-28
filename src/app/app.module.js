@@ -46,6 +46,7 @@
         }])
         // set a constant for the API we are connecting to
         .constant('API_CONFIG', {
-            'url':  'http://triangular-api.oxygenna.com/'
+            //'url':  'http://triangular-api.oxygenna.com/'
+            'url': 'http://127.0.0.1:8000/'
         });
 })();

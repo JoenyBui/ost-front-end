@@ -13,6 +13,35 @@ run the site.  Additional information will later when a full ansible/vagrant tha
   This project will be following 'johnpapa' styleguide for angularjs.
   https://github.com/johnpapa/angular-styleguide
   
+* Design Language
+  We're utilizing Google's Material Design principles in our application.
+  http://www.google.com/design/spec/material-design/introduction.html
+
+* Icons
+  Icons should follow material design principle.
+  http://www.google.com/design/spec/style/icons.html#icons-product-icons
+  
+  A list of free/open available icon can be located at
+  https://design.google.com/icons/
+
+* Responsive UI
+  http://www.google.com/design/spec/layout/responsive-ui.html#responsive-ui-breakpoints
+  
+1. Summary and detail view content in layouts
+  
+  Layouts under 600dp wide may fill the screen with a single level of content hierarchy (either summary or detail content, but not both).
+  Layouts over 600dp wide may place two levels of content hierarchy on the screen (both summary and detail content).
+  
+2. Max screen widths
+  
+  Layouts over 1600dp wide may let the layout grow until it hits a max width. At this point, the grid may do one of the following:
+  
+  Become center aligned with increased margins
+  Remain left aligned while the right margin grows
+  Continue to grow while revealing additional content
+  
+  ![Alt text](docs/layout_adaptive_breakpoints_01.png "Responsive UI Layout")
+
   
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
