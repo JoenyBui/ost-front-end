@@ -15,7 +15,13 @@
             templateUrl: 'app/editor/editor.tmpl.html',
             // set the controller to load for this page
             controller: 'EditorPageController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            data: {
+                layout: {
+                    contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                        innerContentClass: 'overlay-gradient-20'
+                }
+            }
         });
 
         triMenuProvider.addMenu({

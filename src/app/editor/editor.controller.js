@@ -29,12 +29,15 @@
             explanation:{
 
             },
-            editors:[]
+            editors:[],
+            tags:[]
         };
-        //
-        //vm.name = 'Test Problem';
-        //vm.qtype = 0;
-        vm.qtype_options = ['True or False', 'Multiple Choice', 'Fill-in-the-Blank'];
+
+        vm.qtype_options = [
+            ['True or False', 0],
+            ['Multiple Choice', 1],
+            ['Fill-in-the-Blank', 2]
+        ];
         //vm.stem = {
         //    statement: "Tell if the fraction on the left is less or greater than the fraction on the right."
         //};

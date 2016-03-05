@@ -1,101 +1,115 @@
-<div layout="column" ng-cloak class="md-inline-form">
-    <div flex layout="row" layout-align="center center" layout-fill>
+<div class="dashboard-container overlay-10 padded-content-page" layout="column">
+    <div layout="row" layout-xs="column" layout-margin="">
 
-        <md-card class="margin-top-40 margin-bottom-200" flex="70" flex-xs="90">
-            <md-toolbar>
-                <md-fab-actions class="md-toolbar-tools">
-                    <md-button aria-label="comment" class="md-icon-button">
-                        <md-icon md-svg-src="img/icons/ic_comment_24px.svg"></md-icon>
-                    </md-button>
-                    <md-button aria-label="label" class="md-icon-button">
-                        <md-icon md-svg-src="img/icons/ic_label_24px.svg"></md-icon>
-                    </md-button>
-                    <md-button aria-label="photo" class="md-icon-button">
-                        <md-icon md-svg-src="img/icons/ic_photo_24px.svg"></md-icon>
-                    </md-button>
-                </md-fab-actions>
+        <tri-widget content-padding>
+            <md-toolbar md-theme="{{triSkin.elements.content}}">
+                <h2 class="md-toolbar-tools" translate>New Fraction Template</h2>
             </md-toolbar>
 
-            <form name="userForm">
+            <div>
+                <md-input-container class="md-block">
+                    <label>Problem Name</label>
+                    <input type='text' ng-model="vm.fraction.name">
+                </md-input-container>
 
-                <!--<md-content md-theme="dark-knight" layout-gt-sm="row" layout-padding>-->
-                <md-content layout-padding>
-                    <div>
-                        <div layout-gt-xs="row">
-                            <md-input-container>
-                                <label>Problem Name</label>
-                                <input ng-model="vm.fraction.name">
-                            </md-input-container>
-                        </div>
-                        <div layout-gt-xs="row">
-                            <md-input-container>
-                                <label>Domain</label>
-                                <input ng-model="vm.fraction.domain" readonly>
-                            </md-input-container>
-                        </div>
-                        <div layout-gt-xs="row">
-                            <md-input-container>
-                                <label>Question Type</label>
-                                <md-select ng-model="vm.fraction.qtype">
-                                    <md-option ng-repeat="type in vm.qtype_options">
-                                        {{type}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                    </div>
-                </md-content>
+                <md-input-container class="md-block">
+                    <label>Domain</label>
+                    <input ng-model="vm.fraction.domain" readonly>
+                </md-input-container>
 
-                <md-content layout-padding>
-                    <div>
-                        <fieldset class="standard">
-                            <legend>Define <code>stem</code></legend>
+                <md-input-container class="md-block">
+                    <label>Question Type</label>
+                    <md-select placeholder='Pick Q-Type' ng-model="vm.fraction.qtype">
+                        <md-option ng-repeat="type in vm.qtype_options" value="{{type[1]}}">
+                            {{type[0]}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
 
-                            <div layout-gt-xs="row">
-                                <md-input-container class="md-block" flex-gt-xs>
-                                    <label>Statement</label>
-                                    <textarea ng-model="vm.fraction.stem.statement" rows="5" md-select-on-focus>
+            </div>
 
-                                    </textarea>
+            <div>
+                <legend>Define <code>stem</code></legend>
 
-                                </md-input-container>
-                            </div>
-                        </fieldset>
+                <md-input-container class="md-block">
+                    <label>Statement</label>
+                    <textarea ng-model="vm.fraction.stem.statement" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+            </div>
 
-                        <fieldset>
-                            <legend>Define <code>keys</code></legend>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Answer</label>
-                                <input ng-model="vm.fraction.keys.answer">
-                            </md-input-container>
+            <div>
+                <legend>Define <code>keys</code></legend>
+                <md-input-container class="md-block">
+                    <label>Answer</label>
+                    <input ng-model="vm.fraction.keys.answer">
+                </md-input-container>
 
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Choices</label>
-                                <input ng-model="vm.fraction.keys.choices">
-                            </md-input-container>
-                        </fieldset>
 
-                        <fieldset>
-                            <legend>Define <code>validation</code></legend>
-                            <md-input-container class="md-block">
-                                <label></label>
-                                <textarea rows="5" md-select-on-focus>
+                <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="choice in vm.fraction.keys.choices">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Choice {{$index+1}}</label>
+                            <input ng-model="choice">
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
 
-                                </textarea>
-                                <!--<md-content flex layout-padding></md-content>-->
-                            </md-input-container>
-                        </fieldset>
-                    </div>
-                </md-content>
+                <legend>Define <code>validation</code></legend>
+                <md-input-container class="md-block">
+                    <label></label>
+                    <textarea rows="5" ng-model="vm.fraction.validation" md-select-on-focus>
 
-                <md-content layout-padding palette-background="deep-orange:300" >
-                    <label>JSON Output</label>
-                    <json-formatter json="vm.fraction" open="1"></json-formatter>
-                </md-content>
-            </form>
-        </md-card>
+                    </textarea>
+                    <!--<md-content flex layout-padding></md-content>-->
+                </md-input-container>
+
+            </div>
+        </tri-widget>
+    </div>
+
+    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+        <tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}" subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">
+            <md-content layout-padding palette-background="deep-orange:300" >
+                <label>JSON Output</label>
+                <json-formatter json="vm.fraction" open="1"></json-formatter>
+            </md-content>
+        </tri-widget>
+        <tri-widget>
+            <!--<md-chips ng-model="vm.fraction.tag">-->
+                <!--<md-chip-template>-->
+                    <!--&lt;!&ndash;<strong>{{$chip}}</strong>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<em>(fruit)</em>&ndash;&gt;-->
+                    <!--<strong>HELP</strong>-->
+                    <!--<em>HELP</em>-->
+                <!--</md-chip-template>-->
+            <!--</md-chips>-->
+        </tri-widget>
     </div>
 </div>
+
+<!--<div class="drag-container" dragula='"drag-container"' layout="column" layout-xs="column" layout-align="space-between" layout-margin>-->
+
+    <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}" subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE1' | translate}}" title-position="top" palette-background="blue-grey:500" background="primary">-->
+        <!--<md-card>-->
+            <!--HELLO-->
+        <!--</md-card>-->
+    <!--</tri-widget>-->
+    <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"-->
+                <!--subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE2' | translate}}"-->
+                <!--title-position="top" palette-background="blue-grey:600" background="primary">-->
+
+        <!--<md-content layout-padding palette-background="deep-orange:300" >-->
+            <!--<label>JSON Output</label>-->
+            <!--<json-formatter json="vm.fraction" open="1"></json-formatter>-->
+        <!--</md-content>-->
+    <!--</tri-widget>-->
+    <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}" subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE3' | translate}}" title-position="top" palette-background="blue-grey:700" background="primary">-->
+
+    <!--</tri-widget>-->
+    <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}" subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:800" background="primary">-->
+
+    <!--</tri-widget>-->
+<!--</div>-->
 
 <!--<md-grid-list md-cols="5" md-gutter="1em" md-row-height="4:3">-->
     <!--<md-grid-tile><md-card class="margin-top-40 margin-bottom-200" flex="70" flex-xs="90">What is Up.</md-card></md-grid-tile>-->

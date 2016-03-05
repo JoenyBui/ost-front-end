@@ -34,19 +34,23 @@
         .constant('APP_LANGUAGES', [{
             name: 'LANGUAGES.CHINESE',
             key: 'zh'
-        },{
+        }, {
             name: 'LANGUAGES.ENGLISH',
             key: 'en'
-        },{
+        }, {
             name: 'LANGUAGES.FRENCH',
             key: 'fr'
-        },{
+        }, {
             name: 'LANGUAGES.PORTUGUESE',
             key: 'pt'
         }])
         // set a constant for the API we are connecting to
         .constant('API_CONFIG', {
             //'url':  'http://triangular-api.oxygenna.com/'
-            'url': 'http://127.0.0.1:8000/'
+            'url': 'http://127.0.0.1:8000/',
+            'accounts': 'accounts'
+        })
+        .run(function (allAuth, API_CONFIG) {
+            allAuth.initialize(API_CONFIG.url + '/' + API_CONFIG.accounts, false);
         });
 })();
