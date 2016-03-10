@@ -25,7 +25,7 @@
             'ngFileUpload',
             'ui.codemirror',
 
-            'editor',
+            'app.editor',
             // 'seed-module',
             // uncomment above to activate the example seed module
             'app.examples'

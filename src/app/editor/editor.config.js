@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('editor')
+        .module('app.editor')
         .config(moduleConfig);
 
     /* @ngInject */
@@ -10,12 +10,23 @@
         $translatePartialLoaderProvider.addPart('app/editor');
 
         $stateProvider
-        .state('triangular.admin-default.seed-page', {
-            url: '/editor/editor-page',
-            templateUrl: 'app/editor/editor.tmpl.html',
-            // set the controller to load for this page
-            controller: 'EditorPageController',
-            controllerAs: 'vm',
+        .state('triangular.admin-default.fraction', {
+            url: '/editor/fraction',
+            views: {
+                '': {
+                    templateUrl: 'app/editor/fraction/editor-fraction.tmpl.html',
+
+                    // set the controller to load for this page
+                    controller: 'EditorFractionPageController',
+                    controllerAs: 'vm'
+                },
+                'belowContent': {
+                    templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+
+                    controller: 'EditorFractionFabController',
+                    controllerAs: 'vm'
+                }
+            },
             data: {
                 layout: {
                     contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
@@ -30,8 +41,8 @@
             type: 'dropdown',
             priority: 1.1,
             children: [{
-                name: 'MENU.EDITOR.EDITOR-PAGE',
-                state: 'triangular.admin-default.seed-page',
+                name: 'MENU.EDITOR.FRACTION-PAGE',
+                state: 'triangular.admin-default.fraction',
                 type: 'link'
             }]
         });

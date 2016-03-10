@@ -3,10 +3,10 @@
 
     angular
         .module('app.editor')
-        .controller('EditorPageController', EditorPageController);
+        .controller('EditorFractionPageController', EditorFractionPageController);
 
     /* @ngInject */
-    function EditorPageController() {
+    function EditorFractionPageController() {
         var vm = this;
 
         vm.fraction = {
@@ -44,17 +44,6 @@
             ['Fill-in-the-Blank', 2]
         ];
 
-        vm.add_choice = function () {
-            this.fraction.keys.choices.push("1/2");
-        };
-
-        vm.add_line_chart = function () {
-            console.log('Add Line Chart');
-        };
-
-        vm.add_pie_chart = function () {
-            console.log('Add Pie Chart');
-        };
 
     }
 })();

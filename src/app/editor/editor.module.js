@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('editor', [
+        .module('app.editor', [
             'jsonFormatter'
         ]);
 })();

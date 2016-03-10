@@ -1,8 +1,9 @@
 {
     "MENU": {
         "EDITOR": {
-            "EDITOR-MODULE": "Editor Module",
-            "EDITOR-PAGE": "Cover Page"
+            "EDITOR-MODULE": "Editor",
+            "EDITOR-PAGE": "Cover Page",
+            "FRACTION-PAGE": "Fraction"
         }
     },
     "EDITOR": {
