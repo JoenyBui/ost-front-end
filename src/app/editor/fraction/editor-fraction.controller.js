@@ -6,7 +6,7 @@
         .controller('EditorFractionPageController', EditorFractionPageController);
 
     /* @ngInject */
-    function EditorFractionPageController() {
+    function EditorFractionPageController($scope, $mdDialog) {
         var vm = this;
 
         vm.fraction = {
@@ -44,6 +44,18 @@
             ['Fill-in-the-Blank', 2]
         ];
 
+        // watches
 
+        $scope.$on('addVariable', function( ev ){
+            $mdDialog.show({
+                    templateUrl: 'app/editor/form/editor-variable.tmpl.html',
+                    targetEvent: ev,
+                    controller: 'EditorVariableDialogController',
+                    controllerAs: 'vm'
+                })
+                .then(function(answer) {
+                    vm.variables.push(answer);
+                });
+        });
     }
 })();

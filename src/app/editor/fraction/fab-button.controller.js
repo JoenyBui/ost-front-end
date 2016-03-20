@@ -19,10 +19,16 @@
 
         vm.add_line_chart = function () {
             console.log('Add Line Chart');
+            $rootScope.$broadcast('addLineChart', $event);
         };
 
         vm.add_pie_chart = function () {
             console.log('Add Pie Chart');
+            $rootScope.$broadcast('addPieChart', $event);
+        };
+
+        vm.add_variable = function ($event) {
+            $rootScope.$broadcast('addVariable', $event);
         };
 
         ////////////////
