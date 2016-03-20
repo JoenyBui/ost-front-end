@@ -2,7 +2,7 @@
     <md-toolbar md-theme="{{triSkin.elements.content}}">
         <div class="md-toolbar-tools">
             <h2>
-                <span translate>MENU.TODO.DIALOG.NEW</span>
+                <span translate>EDITOR.DIALOG.VARIABLE.TITLE</span>
             </h2>
         </div>
     </md-toolbar>
@@ -12,22 +12,35 @@
     <md-dialog-content class="md-dialog-content">
         <form name="taskForm" novalidate layout="column">
             <md-input-container>
-                <label translate>MENU.TODO.DIALOG.DESC</label>
-                <input ng-model="vm.item.description" class="dialog-close" name="task" required/>
+                <label translate>EDITOR.DIALOG.VARIABLE.NAME</label>
+                <input ng-model="vm.item.name" class="dialog-close" name="task" required/>
                 <div ng-messages="taskForm.task.$error">
                     <div ng-message when="required">
                         <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
                     </div>
                 </div>
             </md-input-container>
+
             <md-input-container>
-                <label translate>MENU.TODO.DIALOG.PRIORITY</label>
-                <md-select placeholder="{{'MENU.TODO.DIALOG.PRIORITY' | translate}}" ng-model="vm.item.priority">
-                    <md-option value="high" translate>MENU.TODO.DIALOG.HIGH</md-option>
-                    <md-option value="medium" translate>MENU.TODO.DIALOG.MEDIUM</md-option>
-                    <md-option value="low" translate>MENU.TODO.DIALOG.LOW</md-option>
+                <label translate>EDITOR.DIALOG.VARIABLE.TYPE</label>
+                <md-select placeholder="{{'EDITOR.DIALOG.VARIABLE.TYPE' | translate}}" ng-model="vm.item.type">
+                    <md-option value="whole" translate>EDITOR.DIALOG.VARIABLE.WHOLE_NUMBER</md-option>
+                    <md-option value="real" translate>EDITOR.DIALOG.VARIABLE.REAL_NUMBER</md-option>
+                    <md-option value="range" translate>EDITOR.DIALOG.VARIABLE.RANGE</md-option>
+                    <md-option value="text" translate>EDITOR.DIALOG.VARIABLE.TEXT</md-option>
                 </md-select>
             </md-input-container>
+
+            <md-input-container>
+                <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                <input ng-model="vm.item.value" class="dialog-close" name="task" required/>
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                    </div>
+                </div>
+            </md-input-container>
+
         </form>
     </md-dialog-content>
     <md-dialog-actions layout="row">

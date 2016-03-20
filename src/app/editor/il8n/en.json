@@ -7,6 +7,18 @@
         }
     },
     "EDITOR": {
-        "TITLE": "Welcome to the triangular test page"
+        "TITLE": "Welcome to the triangular test page",
+        "DIALOG": {
+            "VARIABLE": {
+                "TITLE": "Add Variable",
+                "NAME": "Name",
+                "VALUE": "Value",
+                "TYPE": "Type",
+                "WHOLE_NUMBER": "Whole Number",
+                "REAL_NUMBER": "Real Number",
+                "RANGE": "Range",
+                "TEXT": "Text"
+            }
+        }
     }
 }

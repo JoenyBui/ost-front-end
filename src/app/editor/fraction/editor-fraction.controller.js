@@ -21,6 +21,10 @@
                 choices: [
                     "2/3",
                     "3/5"
+                ],
+                variables: [
+                    {name: 'numerator', value: 1, type: 'whole'},
+                    {name: 'denominator', value: 2, type: 'whole'}
                 ]
             },
             validation:{
@@ -33,10 +37,6 @@
             tags:['math']
         };
 
-        vm.variables = [
-            {name: 'numerator', value: 1, type: 'int'},
-            {name: 'denominator', value: 2, type: 'int'}
-        ];
 
         vm.qtype_options = [
             ['True or False', 0],
@@ -54,7 +54,7 @@
                     controllerAs: 'vm'
                 })
                 .then(function(answer) {
-                    vm.variables.push(answer);
+                    vm.fraction.keys.variables.push(answer);
                 });
         });
     }

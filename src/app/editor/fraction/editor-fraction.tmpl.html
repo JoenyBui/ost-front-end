@@ -98,38 +98,27 @@
                 <json-formatter json="vm.fraction" open="1"></json-formatter>
             </md-content>
         </tri-widget>
-        <tri-widget>
-            <!--<md-chips ng-model="vm.fraction.tag">-->
-            <!--<md-chip-template>-->
-            <!--&lt;!&ndash;<strong>{{$chip}}</strong>&ndash;&gt;-->
-            <!--&lt;!&ndash;<em>(fruit)</em>&ndash;&gt;-->
-            <!--<strong>HELP</strong>-->
-            <!--<em>HELP</em>-->
-            <!--</md-chip-template>-->
-            <!--</md-chips>-->
-        </tri-widget>
-
-    </div>
-
-
-    <div>
-        <tri-widget>
-            <md-card-content class="overflow-auto">
-                <md-list class="margin-bottom-10">
-                    <md-list-item ng-repeat="var in vm.variables" class="slide" md-swipe-right="vm.removeVariable(var)" md-no-ink>
-                        <p class="no-select">{{::var.name}}</p>
-
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Choice</label>
-                            <input type="text" ng-model="var.value">
-                        </md-input-container>
-
-                        <p class>{{::var.type}}</p>
-                        <em></em>
-                    </md-list-item>
-                </md-list>
-            </md-card-content>
+        <tri-widget flex>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!--<th ng-repeat="header in ::referrals.header | limitTo:3">{{::header}}</th>-->
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="var in vm.fraction.keys.variables | limitTo:5">
+                        <!--<td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>-->
+                        <td>{{var.name}}</td>
+                        <td>{{var.value}}</td>
+                        <td>{{var.type}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
         </tri-widget>
+
     </div>
 </div>

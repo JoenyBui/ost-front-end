@@ -10,10 +10,15 @@
         var vm = this;
         vm.cancel = cancel;
         vm.hide = hide;
+
+        vm.name = '';
+        vm.type_options = '';
+        vm.type = '';
+
         vm.item = {
-            description: '',
-            priority: '',
-            selected: false
+            name: '',
+            value: '',
+            type: ''
         };
 
         /////////////////////////
