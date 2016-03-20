@@ -18,6 +18,9 @@
                 "REAL_NUMBER": "Real Number",
                 "RANGE": "Range",
                 "TEXT": "Text"
+            },
+            "PIE-CHART": {
+                "TITLE": "Add Pie Chart"
             }
         }
     }

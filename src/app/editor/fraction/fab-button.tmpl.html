@@ -5,16 +5,16 @@
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-        <md-button aria-label="Files" class="md-fab md-raised md-mini" ng-click="">
+        <md-button aria-label="Files" class="md-fab md-raised md-mini" ng-click="vm.add_file($event)">
             <md-icon md-font-icon="zmdi zmdi-file"></md-icon>
         </md-button>
         <md-button aria-label="Variable" class="md-fab md-raised md-mini" ng-click="vm.add_variable($event)">
             <md-icon md-font-icon="zmdi zmdi-memory"></md-icon>
         </md-button>
-        <md-button aria-label="Image" class="md-fab md-raised md-mini" ng-click="vm.share('Shared on Facebook', $event)">
+        <md-button aria-label="Image" class="md-fab md-raised md-mini" ng-click="vm.add_image($event)">
             <md-icon md-font-icon="zmdi zmdi-image-o"></md-icon>
         </md-button>
-        <md-button aria-label="Chart" class="md-fab md-raised md-mini" ng-click="vm.share('Shared on Google+', $event)">
+        <md-button aria-label="Chart" class="md-fab md-raised md-mini" ng-click="vm.add_pie_chart($event)">
             <md-icon md-font-icon="zmdi zmdi-chart"></md-icon>
         </md-button>
     </md-fab-actions>

@@ -1,0 +1,19 @@
+<md-dialog aria-label="Add Variable" flex="30" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span translate>EDITOR.DIALOG.PIE-CHART.TITLE</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <md-dialog-content class="md-dialog-content">
+        <canvas class="chart-pie"
+                chart-data="vm.data"
+                chart-labels="vm.labels"
+                chart-legend="true"
+                chart-options="vm.options"></canvas>
+    </md-dialog-content>
+</md-dialog>

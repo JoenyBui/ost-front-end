@@ -14,7 +14,9 @@
             domain: 1004,
             qtype: 0,
             stem: {
-                statement: "Tell if the fraction on the left is less or greater than the fraction on the right."
+                statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
+                figures: [],
+                charts: []
             },
             keys: {
                 answer: 0,
@@ -54,8 +56,19 @@
                     controllerAs: 'vm'
                 })
                 .then(function(answer) {
-                    vm.fraction.keys.variables.push(answer);
+                    vm.fraction.stem.variables.push(answer);
                 });
+        });
+
+        $scope.$on('addPieChart', function (ev) {
+            $mdDialog.show({
+                templateUrl: 'app/editor/form/editor-pie-chart.tmpl.html',
+                targetEvent: ev,
+                controller: 'EditorChartJsPieController',
+                controllerAs: 'vm'
+            }).then(function (chart) {
+                vm.fraction.stem.charts.push(chart);
+            });
         });
     }
 })();
