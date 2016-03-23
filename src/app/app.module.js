@@ -50,7 +50,7 @@
             'url': 'http://127.0.0.1:8000/',
             'accounts': 'accounts'
         })
-        .run(function (allAuth, API_CONFIG) {
-            allAuth.initialize(API_CONFIG.url + '/' + API_CONFIG.accounts, false);
+        .run(function (djangoAuth, API_CONFIG) {
+            djangoAuth.initialize(API_CONFIG.url + '/' + API_CONFIG.accounts, false);
         });
 })();
