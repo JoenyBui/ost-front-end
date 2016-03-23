@@ -56,16 +56,16 @@
                     </md-list-item>
                 </md-list>
 
-                <legend>Define <code>validation</code></legend>
-                <md-input-container class="md-block">
-                    <label></label>
-                    2
-                    i
-                    <textarea rows="5" ng-model="vm.fraction.validation" md-select-on-focus>
+                <!--<legend>Define <code>validation</code></legend>-->
+                <!--<md-input-container class="md-block">-->
+                    <!--<label></label>-->
+                    <!--2-->
+                    <!--i-->
+                    <!--<textarea rows="5" ng-model="vm.fraction.validation" md-select-on-focus>-->
 
-                    </textarea>
-                    <!--<md-content flex layout-padding></md-content>-->
-                </md-input-container>
+                    <!--</textarea>-->
+                    <!--&lt;!&ndash;<md-content flex layout-padding></md-content>&ndash;&gt;-->
+                <!--</md-input-container>-->
 
             </div>
 
@@ -120,5 +120,16 @@
 
         </tri-widget>
 
+    </div>
+
+    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'
+         ng-repeat="chart in vm.fraction.stem.charts">
+        <tri-widget flex>
+            <canvas class="chart-pie"
+                    chart-data="chart.chart.data"
+                    chart-labels="chart.chart.labels"
+                    chart-legend="true"
+                    chart-options="chart.chart.options"></canvas>
+        </tri-widget>
     </div>
 </div>

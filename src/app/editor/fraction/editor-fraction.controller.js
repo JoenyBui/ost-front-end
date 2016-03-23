@@ -56,7 +56,7 @@
                     controllerAs: 'vm'
                 })
                 .then(function(answer) {
-                    vm.fraction.stem.variables.push(answer);
+                    vm.fraction.keys.variables.push(answer);
                 });
         });
 
@@ -65,7 +65,10 @@
                 templateUrl: 'app/editor/form/editor-pie-chart.tmpl.html',
                 targetEvent: ev,
                 controller: 'EditorChartJsPieController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                locals: {
+                    variables: vm.fraction.keys.variables
+                }
             }).then(function (chart) {
                 vm.fraction.stem.charts.push(chart);
             });

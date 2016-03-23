@@ -11,9 +11,35 @@
 
     <md-dialog-content class="md-dialog-content">
         <canvas class="chart-pie"
-                chart-data="vm.data"
-                chart-labels="vm.labels"
+                chart-data="vm.chart.data"
+                chart-labels="vm.chart.labels"
                 chart-legend="true"
-                chart-options="vm.options"></canvas>
+                chart-options="vm.chart.options"></canvas>
+
+        <md-input-container class="md-block">
+            <label>Numerator</label>
+            <md-select ng-model="vm.selected_numerator" ng-change="vm.selectChangedNumerator()">
+                <md-option ng-repeat="v in vm.variable_option" ng-value="v.index">
+                    {{v.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Denominator</label>
+            <md-select ng-model="vm.selected_denominator" ng-change="vm.selectChangedDenominator()">
+                <md-option ng-repeat="v in vm.variable_option" ng-value="v.index">
+                    {{v.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
     </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="taskForm.$invalid">Ok</md-button>
+    </md-dialog-actions>
+
 </md-dialog>

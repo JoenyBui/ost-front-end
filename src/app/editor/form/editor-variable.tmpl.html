@@ -21,13 +21,22 @@
                 </div>
             </md-input-container>
 
-            <md-input-container>
-                <label translate>EDITOR.DIALOG.VARIABLE.TYPE</label>
-                <md-select placeholder="{{'EDITOR.DIALOG.VARIABLE.TYPE' | translate}}" ng-model="vm.item.type">
-                    <md-option value="whole" translate>EDITOR.DIALOG.VARIABLE.WHOLE_NUMBER</md-option>
-                    <md-option value="real" translate>EDITOR.DIALOG.VARIABLE.REAL_NUMBER</md-option>
-                    <md-option value="range" translate>EDITOR.DIALOG.VARIABLE.RANGE</md-option>
-                    <md-option value="text" translate>EDITOR.DIALOG.VARIABLE.TEXT</md-option>
+            <!--<md-input-container>-->
+                <!--<label translate>EDITOR.DIALOG.VARIABLE.TYPE</label>-->
+                <!--<md-select placeholder="{{'EDITOR.DIALOG.VARIABLE.TYPE' | translate}}" ng-model="vm.item.type">-->
+                    <!--<md-option value="whole" translate>EDITOR.DIALOG.VARIABLE.WHOLE_NUMBER</md-option>-->
+                    <!--<md-option value="real" translate>EDITOR.DIALOG.VARIABLE.REAL_NUMBER</md-option>-->
+                    <!--<md-option value="range" translate>EDITOR.DIALOG.VARIABLE.RANGE</md-option>-->
+                    <!--<md-option value="text" translate>EDITOR.DIALOG.VARIABLE.TEXT</md-option>-->
+                <!--</md-select>-->
+            <!--</md-input-container>-->
+
+            <md-input-container class="md-block">
+                <label>Numerator</label>
+                <md-select ng-model="vm.item.type" ng-change="vm.selectChangeType()">
+                    <md-option ng-repeat="v in vm.type_options" ng-value="v.value">
+                        {{v.text}}
+                    </md-option>
                 </md-select>
             </md-input-container>
 
