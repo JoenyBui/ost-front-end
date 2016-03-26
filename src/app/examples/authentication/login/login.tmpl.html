@@ -12,14 +12,22 @@
 
             <md-content class="md-padding">
                 <form name="login">
+                    <!--<md-input-container class="md-block">-->
+                        <!--<label for="email" translate>LOGIN.EMAIL.LABEL</label>-->
+                        <!--<input id="email" label="email" name="email" type="email" ng-model="vm.user.email" required/>-->
+                        <!--<div ng-messages="login.email.$error" ng-if="login.email.$dirty">-->
+                            <!--<div ng-message when="required"><span translate>LOGIN.EMAIL.PLEASE_ENTER</span></div>-->
+                            <!--<div ng-message when="email"><span translate>LOGIN.EMAIL.PLEASE_VALID</span></div>-->
+                        <!--</div>-->
+                    <!--</md-input-container>-->
                     <md-input-container class="md-block">
-                        <label for="email" translate>LOGIN.EMAIL.LABEL</label>
-                        <input id="email" label="email" name="email" type="email" ng-model="vm.user.email" required/>
+                        <label for="username" translate>LOGIN.EMAIL.LABEL</label>
+                        <input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>
                         <div ng-messages="login.email.$error" ng-if="login.email.$dirty">
                             <div ng-message when="required"><span translate>LOGIN.EMAIL.PLEASE_ENTER</span></div>
-                            <div ng-message when="email"><span translate>LOGIN.EMAIL.PLEASE_VALID</span></div>
                         </div>
                     </md-input-container>
+
                     <md-input-container class="md-block">
                         <label for="password" translate>LOGIN.PASSWORD.LABEL</label>
                         <input  id="password" label="password" name="password" type="password" ng-model="vm.user.password" required/>

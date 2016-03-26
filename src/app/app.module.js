@@ -46,11 +46,20 @@
         }])
         // set a constant for the API we are connecting to
         .constant('API_CONFIG', {
-            //'url':  'http://triangular-api.oxygenna.com/'
-            'url': 'http://127.0.0.1:8000/',
-            'accounts': 'accounts'
+            /*'url': 'http://127.0.0.1:8000/',*/
+            'url': '//127.0.0.1:8000/',
+            'accounts': 'rest-auth/'
         })
+        .config(['$cookiesProvider', function($cookiesProvider) {
+            $cookiesProvider.defaults.path = 'http://localhost:3000/';
+            $cookiesProvider.defaults.domain = 'localhost';
+        }])
         .run(function (djangoAuth, API_CONFIG) {
-            djangoAuth.initialize(API_CONFIG.url + '/' + API_CONFIG.accounts, false);
+            djangoAuth.initialize(API_CONFIG.url, false)
+                .then(function(data) {
+
+                }, function(reason) {
+
+                });
         });
 })();

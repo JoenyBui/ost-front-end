@@ -124,6 +124,8 @@
                     }
                     djangoAuth.authenticated = true;
                     $rootScope.$broadcast('djangoAuth.logged_in', data);
+                }, function(reason) {
+                    console.log(reason);
                 });
             },
             'logout': function(){

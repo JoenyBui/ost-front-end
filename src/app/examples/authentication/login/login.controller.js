@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController($state, triSettings) {
+    function LoginController($state, $mdToast, $location, triSettings, djangoAuth) {
         var vm = this;
         vm.loginClick = loginClick;
         vm.socialLogins = [{
@@ -29,14 +29,26 @@
         vm.triSettings = triSettings;
         // create blank user variable for login form
         vm.user = {
-            email: '',
+            username: '',
             password: ''
         };
 
         ////////////////
 
         function loginClick() {
-            $state.go('triangular.admin-default.introduction');
+            djangoAuth.login(vm.user.username, vm.user.password)
+                .then(function(data) {
+                    // Successful login.
+                    $location.path("/");
+                }, function(reason) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Unable to log in with provided credientials')
+                            .position('bottom right')
+                            .hideDelay(5000)
+
+                    );
+                })
         }
     }
 })();
