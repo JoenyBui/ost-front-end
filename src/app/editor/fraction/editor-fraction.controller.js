@@ -6,7 +6,7 @@
         .controller('EditorFractionPageController', EditorFractionPageController);
 
     /* @ngInject */
-    function EditorFractionPageController($scope, $mdDialog) {
+    function EditorFractionPageController($scope, $log, $mdDialog, djangoAuth) {
         var vm = this;
 
         vm.fraction = {
@@ -35,16 +35,29 @@
             explanation:{
 
             },
-            editors:['jbui', 'cdavis'],
+            editors:[1],
             tags:['math']
         };
 
+        // editors:['jbui', 'cdavis'],
 
         vm.qtype_options = [
             ['True or False', 0],
             ['Multiple Choice', 1],
             ['Fill-in-the-Blank', 2]
         ];
+
+        vm.submit_job = function () {
+            djangoAuth.request({
+                method: 'POST',
+                url: 'v1/math/fractions/',
+                data: vm.fraction
+            }).then(function(data) {
+                $log.log(data);
+            }, function(reason) {
+                $log.log(reason);
+            });
+        };
 
         // watches
 

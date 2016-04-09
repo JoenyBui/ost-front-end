@@ -2,12 +2,23 @@
     'use strict';
 
     angular
-        .module('app.examples.authentication')
-        .controller('ProfileController', ProfileController);
+        .module('app.authentication')
+        .controller('EditorSettingController', EditorSettingController);
 
     /* @ngInject */
-    function ProfileController() {
+    function EditorSettingController(djangoAuth) {
         var vm = this;
+
+        djangoAuth.request({
+            method: 'GET',
+            url: 'v1/editor/',
+            data: {}
+        }).then(function(data) {
+            $log.log(data);
+        }, function(reason) {
+            $log.log(reason);
+        });
+
         vm.settingsGroups = [{
             name: 'ADMIN.NOTIFICATIONS.ACCOUNT_SETTINGS',
             settings: [{

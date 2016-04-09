@@ -2,45 +2,51 @@
     'use strict';
 
     angular
-        .module('app.examples.authentication')
+        .module('app.authentication')
         .config(moduleConfig);
 
     /* @ngInject */
     function moduleConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/examples/authentication');
+        $translatePartialLoaderProvider.addPart('app/authentication');
 
         $stateProvider
         .state('authentication', {
             abstract: true,
-            templateUrl: 'app/examples/authentication/layouts/authentication.tmpl.html'
+            templateUrl: 'app/authentication/layouts/authentication.tmpl.html'
         })
         .state('authentication.login', {
             url: '/login',
-            templateUrl: 'app/examples/authentication/login/login.tmpl.html',
+            templateUrl: 'app/authentication/login/login.tmpl.html',
             controller: 'LoginController',
             controllerAs: 'vm'
         })
         .state('authentication.signup', {
             url: '/signup',
-            templateUrl: 'app/examples/authentication/signup/signup.tmpl.html',
+            templateUrl: 'app/authentication/signup/signup.tmpl.html',
             controller: 'SignupController',
             controllerAs: 'vm'
         })
         .state('authentication.lock', {
             url: '/lock',
-            templateUrl: 'app/examples/authentication/lock/lock.tmpl.html',
+            templateUrl: 'app/authentication/lock/lock.tmpl.html',
             controller: 'LockController',
             controllerAs: 'vm'
         })
         .state('authentication.forgot', {
             url: '/forgot',
-            templateUrl: 'app/examples/authentication/forgot/forgot.tmpl.html',
+            templateUrl: 'app/authentication/forgot/forgot.tmpl.html',
             controller: 'ForgotController',
+            controllerAs: 'vm'
+        })
+        .state('triangular.admin-default.editor-setting', {
+            url: '/editor',
+            templateUrl: 'app/authentication/editor/editor.tmpl.html',
+            controller: 'EditorSettingController',
             controllerAs: 'vm'
         })
         .state('triangular.admin-default.profile', {
             url: '/profile',
-            templateUrl: 'app/examples/authentication/profile/profile.tmpl.html',
+            templateUrl: 'app/authentication/profile/profile.tmpl.html',
             controller: 'ProfileController',
             controllerAs: 'vm'
         });
