@@ -1,4 +1,4 @@
-(function() {addEvent
+(function() {
     'use strict';
 
     angular

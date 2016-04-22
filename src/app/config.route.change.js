@@ -14,6 +14,8 @@
                 }
 
                 if (!djangoAuth.authenticated) {
+                    console.log('djangoAuth.authenticated not authenticated');
+
                     // Check if the user is authenticated.
                     $state.transitionTo("authentication.login");
 

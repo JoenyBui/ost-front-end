@@ -27,6 +27,7 @@
 
 
             'app.editor',
+            'app.classroom',
             'app.authentication',
             // 'seed-module',
             // uncomment above to activate the example seed module
@@ -55,13 +56,14 @@
         .config(['$cookiesProvider', function($cookiesProvider) {
             $cookiesProvider.defaults.path = 'http://localhost:3000/';
             $cookiesProvider.defaults.domain = 'localhost';
+
         }])
         .run(function (djangoAuth, API_CONFIG) {
             djangoAuth.initialize(API_CONFIG.url, false)
                 .then(function(data) {
-
+                    console.log('djangoAuth.initialize: success');
                 }, function(reason) {
-
+                    console.log('djangoAuth.initialize: failed');
                 });
         });
 })();

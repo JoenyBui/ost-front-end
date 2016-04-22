@@ -1,0 +1,18 @@
+{
+  "MENU": {
+    "CLASSROOM": {
+      "TITLE": "Classroom",
+      "SENSEI": {
+        "TITLE": "Sensei",
+        "DASHBOARD": "Dashboard"
+      },
+      "PUPIL": {
+        "TITLE": "Pupil",
+        "DASHBOARD": "Dashboard"
+      }
+    }
+  },
+  "CLASSROOM": {
+    "TITLE": "Classroom time."
+  }
+}
