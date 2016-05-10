@@ -33,6 +33,12 @@
                         innerContentClass: 'overlay-gradient-20'
                 }
             }
+        })
+        .state('triangular.admin-default.editor-dashboard', {
+            url: '/editor/dashboard',
+            templateUrl: 'app/editor/dashboard/editor-dashboard.tmpl.html',
+            controller: 'EditorDashboardController',
+            controllerAs: 'vm'
         });
 
         triMenuProvider.addMenu({
@@ -41,6 +47,10 @@
             type: 'dropdown',
             priority: 1.1,
             children: [{
+                name: 'MENU.EDITOR.EDITOR-DASHBOARD',
+                state: 'triangular.admin-default.editor-dashboard',
+                type: 'link'
+            }, {
                 name: 'MENU.EDITOR.FRACTION-PAGE',
                 state: 'triangular.admin-default.fraction',
                 type: 'link'

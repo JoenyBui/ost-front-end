@@ -2,6 +2,7 @@
     "MENU": {
         "EDITOR": {
             "EDITOR-MODULE": "Editor",
+            "EDITOR-DASHBOARD": "Dashboard",
             "EDITOR-PAGE": "Cover Page",
             "FRACTION-PAGE": "Fraction"
         }
