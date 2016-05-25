@@ -5,11 +5,17 @@
 
 - include: create_users_and_groups.yml
 
-- include: setup_supervisor.yml
-  tags: supervisor
+- include: setup_front_end.yml
+  tags: frontend
 
 - include: set_file_permissions.yml
   tags: deploy
 
 - include: setup_nginx.yml
   tags: nginx
+
+- name: restart nginx
+  service: name=nginx state=restarted enabled=yes
+
+- name: reload nginx
+  service: name=nginx state=reloaded
