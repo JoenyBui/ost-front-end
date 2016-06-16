@@ -13,14 +13,14 @@
         $translatePartialLoaderProvider.addPart('app/classroom');
 
         $stateProvider
-            .state('triangular.admin-default.sensei', {
+            .state('triangular.admin-default.sensei-dashboard', {
                 url: '/classroom/sensei',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/sensei-dashboard.tmpl.html',
 
                         // set the controller to load for this page
-                        controller: 'ClassroomSenseiController',
+                        controller: 'SenseiDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
@@ -37,14 +37,22 @@
                     }
                 }
             })
+            .state('triangular.admin-default.sensei-test', {
+                url: '/classroom/sensei/test',
+                templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html'
+            })
+            .state('triangular.admin-default.sensei-problem', {
+                url: '/classroom/sensei/problem',
+                templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html'
+            })
             .state('triangular.admin-default.pupil', {
                 url: '/classroom/pupil',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/pupil/pupil.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/pupil-dashboard.tmpl.html',
 
                         // set the controller to load for this page
-                        controller: 'ClassroomPupilController',
+                        controller: 'PupilDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
@@ -60,6 +68,10 @@
                         innerContentClass: 'overlay-gradient-20'
                     }
                 }
+            })
+            .state('triangular.admin-default.pupil-test', {
+                url: '/classroom/pupil/test',
+                templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html'
             });
 
         triMenuProvider.addMenu({
@@ -74,7 +86,15 @@
                 children: [{
                     name: 'MENU.CLASSROOM.SENSEI.DASHBOARD',
                     type: 'link',
-                    state: 'triangular.admin-default.sensei'
+                    state: 'triangular.admin-default.sensei-dashboard'
+                }, {
+                    name: 'MENU.CLASSROOM.SENSEI.TEST',
+                    type: 'link',
+                    state: 'triangular.admin-default.sensei-test'
+                }, {
+                    name: 'MENU.CLASSROOM.SENSEI.PROBLEM',
+                    type: 'link',
+                    state: 'triangular.admin-default.sensei-problem'
                 }]
             }, {
                 name: 'MENU.CLASSROOM.PUPIL.TITLE',
@@ -83,7 +103,11 @@
                 children: [{
                     name: 'MENU.CLASSROOM.PUPIL.DASHBOARD',
                     type: 'link',
-                    state: 'triangular.admin-default.pupil'
+                    state: 'triangular.admin-default.pupil-dashboard'
+                }, {
+                    name: 'MENU.CLASSROOM.PUPIL.TEST',
+                    type: 'link',
+                    state: 'triangular.admin-default.pupil-test'
                 }]
             }]
         });

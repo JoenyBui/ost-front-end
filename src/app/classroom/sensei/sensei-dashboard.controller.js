@@ -6,10 +6,10 @@
 
     angular
         .module('app.classroom')
-        .controller('ClassroomSenseiController', ClassroomSenseiController);
+        .controller('SenseiDashboardController', SenseiDashboardController);
 
     /* @ngInject */
-    function ClassroomSenseiController($scope,$log, $mdDialog, djangoAuth) {
+    function SenseiDashboardController($scope,$log, $mdDialog, djangoAuth) {
         var vm =this;
 
 

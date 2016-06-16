@@ -4,11 +4,14 @@
       "TITLE": "Classroom",
       "SENSEI": {
         "TITLE": "Sensei",
-        "DASHBOARD": "Dashboard"
+        "DASHBOARD": "Dashboard",
+        "TEST": "Test",
+        "PROBLEM": "Problem"
       },
       "PUPIL": {
         "TITLE": "Pupil",
-        "DASHBOARD": "Dashboard"
+        "DASHBOARD": "Dashboard",
+        "TEST": "Test"
       }
     }
   },
