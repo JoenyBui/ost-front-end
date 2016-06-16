@@ -1,0 +1,26 @@
+---
+
+- name: Create the directory
+  file: path={{virtualenv_path}} state=directory
+
+- name: Create the application log folder
+  file: path={{ application_log_dir }}
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
+        mode=0774
+        state=directory
+
+- name: Create the application log file
+  command: touch {{ application_log_file }}
+           creates={{ application_log_file }}
+
+- name: Set permission to the application log file
+  file: path={{ application_log_file }}
+        owner={{ gunicorn_user }}
+        group={{ gunicorn_group }}
+        mode=0664
+        state=file
+
+- name: Copy dist folder to webapp path
+  copy: src=../dist/ dest={{virtualenv_path}}
+
