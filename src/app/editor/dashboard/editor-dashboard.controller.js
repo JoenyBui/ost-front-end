@@ -9,46 +9,63 @@
         .controller('EditorDashboardController', EditorDashboardController);
     
     /* @ngInject */
-    function EditorDashboardController($mdDialog) {
+    function EditorDashboardController($mdDialog, $log, djangoAuth) {
         var vm = this;
 
-        vm.feed = [
-            {
-                date: moment().subtract(1, 'days'),
-                entries: [
-                    {
-                        id:1,
-                        name:"Trial 1",
-                        domain: 1004
-                    },
-                    {
-                        id:2,
-                        name:"Trial 2",
-                        domain: 1004
-                    },
-                    {
-                        id:3,
-                        name:"Trial 3"
-                    },
-                    {
-                        id:4,
-                        name: "Trial 4"
-                    }]
-            },
-            {
-                date: moment().subtract(2, 'days'),
-                entries: [
-                    {
-                        id:1,
-                        name:"Trial 5"
-                    },
-                    {
-                        id:2,
-                        name:"Trial 6"
-                    }
-                ]
+        vm.feed = [];
+
+        djangoAuth.request({
+            method: 'GET',
+            url: 'v1/problem/problem-base',
+            data:{}
+        }).then(function (data) {
+            $log.log(data);
+
+
+            for (var key in data) {
+            //    TODO: Added new feed .
             }
-        ];
+        }, function (reason) {
+            $log.log(reason);
+        });
+
+        // vm.feed = [
+        //     {
+        //         date: moment().subtract(1, 'days'),
+        //         entries: [
+        //             {
+        //                 id:1,
+        //                 name:"Trial 1",
+        //                 domain: 1004
+        //             },
+        //             {
+        //                 id:2,
+        //                 name:"Trial 2",
+        //                 domain: 1004
+        //             },
+        //             {
+        //                 id:3,
+        //                 name:"Trial 3"
+        //             },
+        //             {
+        //                 id:4,
+        //                 name: "Trial 4"
+        //             }]
+        //     },
+        //     {
+        //         date: moment().subtract(2, 'days'),
+        //         entries: [
+        //             {
+        //                 id:1,
+        //                 name:"Trial 5"
+        //             },
+        //             {
+        //                 id:2,
+        //                 name:"Trial 6"
+        //             }
+        //         ]
+        //     }
+        // ];
 
         vm.openEntry = openEntry;
 

@@ -6,7 +6,7 @@
         .controller('EditorSettingController', EditorSettingController);
 
     /* @ngInject */
-    function EditorSettingController(djangoAuth) {
+    function EditorSettingController($log, djangoAuth) {
         var vm = this;
 
         djangoAuth.request({
