@@ -1,3 +1,11 @@
-<div class="dashboard-container" layout="column">
-
+<div class="dashboard-container overlay-10 padded-content-page" layout="column">
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget content-padding>
+            <p><strong>{{vm.problem.name}}</strong></p>
+            <p>{{vm.problem.stem.statement}}</p>
+            <md-radio-group class="md-primary" ng-model="vm.choice" ng-init="data.primary = 'Red'">
+                <md-radio-button value="{{choice}}" ng-repeat="choice in vm.problem.keys.choices">{{choice}}</md-radio-button>
+            </md-radio-group>
+        </tri-widget>
+    </div>
 </div>

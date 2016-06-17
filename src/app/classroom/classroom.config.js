@@ -39,13 +39,39 @@
             })
             .state('triangular.admin-default.sensei-test', {
                 url: '/classroom/sensei/test',
-                templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html'
+                views: {
+                    '': {
+                        templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html',
+
+                        controller: 'SenseiTestController',
+                        controllerAs: 'vm'
+                    }
+                },
+                data: {
+                    layout: {
+                        contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                        innerContentClass: 'overlay-gradient-20'
+                    }
+                }
             })
             .state('triangular.admin-default.sensei-problem', {
                 url: '/classroom/sensei/problem',
-                templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html'
+                views: {
+                    '': {
+                        templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html',
+
+                        controller: 'SenseiProblemController',
+                        controllerAs: 'vm'
+                    }
+                },
+                data: {
+                    layout: {
+                        contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                        innerContentClass: 'overlay-gradient-20'
+                    }
+                }
             })
-            .state('triangular.admin-default.pupil', {
+            .state('triangular.admin-default.pupil-dashboard', {
                 url: '/classroom/pupil',
                 views: {
                     '': {
@@ -71,7 +97,20 @@
             })
             .state('triangular.admin-default.pupil-test', {
                 url: '/classroom/pupil/test',
-                templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html'
+                views: {
+                    '': {
+                        templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html',
+
+                        controller: 'PupilTestController',
+                        controllerAs: 'vm'
+                    }
+                },
+                data: {
+                    layout: {
+                        contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                        innerContentClass: 'overlay-gradient-20'
+                    }
+                }
             });
 
         triMenuProvider.addMenu({

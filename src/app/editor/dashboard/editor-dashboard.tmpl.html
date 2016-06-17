@@ -1,20 +1,56 @@
-<md-content class="extras-gallery-container">
-    <md-list>
-        <div ng-repeat="day in ::vm.feed">
-            <md-subheader>{{day.date | amCalendar}}</md-subheader>
-            <md-list-item>
-                <md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">
-                    <md-grid-tile ng-click="vm.openEntry(day, entry, $event)"
-                                  md-rowspan="1"
-                                  md-colspan="1"
-                                  ng-repeat="entry in ::day.entries">
-                        {{entry.name}}
-                        <md-grid-tile-footer>
-                            <h3>{{::entry.id}}</h3>
-                        </md-grid-tile-footer>
-                    </md-grid-tile>
-                </md-grid-list>
-            </md-list-item>
-        </div>
-    </md-list>
-</md-content>
+<!--<md-content class="extras-gallery-container">-->
+    <!--<md-list>-->
+        <!--<div ng-repeat="day in ::vm.feed">-->
+            <!--<md-subheader>{{day.date | amCalendar}}</md-subheader>-->
+            <!--<md-list-item>-->
+                <!--<md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">-->
+                    <!--<md-grid-tile ng-click="vm.openEntry(day, entry, $event)"-->
+                                  <!--md-rowspan="1"-->
+                                  <!--md-colspan="1"-->
+                                  <!--ng-repeat="entry in ::day.entries">-->
+                        <!--{{entry.name}}-->
+                        <!--<md-grid-tile-footer>-->
+                            <!--<h3>{{::entry.id}}</h3>-->
+                        <!--</md-grid-tile-footer>-->
+                    <!--</md-grid-tile>-->
+                <!--</md-grid-list>-->
+            <!--</md-list-item>-->
+        <!--</div>-->
+    <!--</md-list>-->
+<!--</md-content>-->
+
+<!--<md-content class="extras-gallery-container">-->
+    <!--<md-list>-->
+        <!--<div ng-repeat="obj in ::vm.feed">-->
+            <!--<md-subheader>{{obj.id}}</md-subheader>-->
+            <!--<md-list-item>-->
+                <!--<md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">-->
+                    <!--<md-grid-tile ng-click="vm.openEntry(day, entry, $event)"-->
+                                  <!--md-rowspan="1"-->
+                                  <!--md-colspan="1"-->
+                                  <!--ng-repeat="entry in ::day.entries">-->
+                        <!--{{entry.name}}-->
+                        <!--<md-grid-tile-footer>-->
+                            <!--<h3>{{::entry.id}}</h3>-->
+                        <!--</md-grid-tile-footer>-->
+                    <!--</md-grid-tile>-->
+                <!--</md-grid-list>-->
+            <!--</md-list-item>-->
+        <!--</div>-->
+    <!--</md-list>-->
+<!--</md-content>-->
+
+<md-list-item>
+    <md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">
+        <md-grid-tile ng-click="vm.openEntry(day, entry, $event)"
+                      md-rowspan="1"
+                      md-colspan="1"
+                      ng-repeat="entry in vm.feed">
+            Print
+            {{entry.name}}
+            <md-grid-tile-footer>
+                <h3>{{::entry.id}}</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+    </md-grid-list>
+</md-list-item>
