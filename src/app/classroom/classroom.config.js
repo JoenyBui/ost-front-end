@@ -55,7 +55,7 @@
                 }
             })
             .state('triangular.admin-default.sensei-problem', {
-                url: '/classroom/sensei/problem',
+                url: '/classroom/sensei/problem/:problemId',
                 views: {
                     '': {
                         templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html',

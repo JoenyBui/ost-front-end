@@ -9,23 +9,28 @@
         .controller('SenseiProblemController', SenseiProblemController);
 
     /* @ngInject */
-    function SenseiProblemController($scope, $log, $mdDialog, djangoAuth) {
+    function SenseiProblemController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
         var vm = this;
 
         vm.problem = false;
         vm.answer = true;
 
-        djangoAuth.request({
-            method: 'GET',
-            url: 'v1/math/maths/1',
-            data: {}
-        }).then(function (data) {
-            $log.log(data);
+        if ($stateParams.hasOwnProperty('problemId')) {
+            // TODO: Need to see if problemId is a valid number and use better concatenation.
+            djangoAuth.request({
+                method: 'GET',
+                url: 'v1/math/maths/' + $stateParams.problemId,
+                data: {}
+            }).then(function (data) {
+                $log.log(data);
 
-            vm.problem = data;
+                vm.problem = data;
 
-        }, function (reason) {
-            $log.log(reason);
-        });
+            }, function (reason) {
+                $log.log(reason);
+            });
+        } else {
+            $log.log("Param not specified");
+        }
     }
 })();
