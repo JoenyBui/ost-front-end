@@ -6,38 +6,53 @@
         .controller('EditorFractionPageController', EditorFractionPageController);
 
     /* @ngInject */
-    function EditorFractionPageController($scope, $log, $mdDialog, djangoAuth) {
+    function EditorFractionPageController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
         var vm = this;
 
-        vm.fraction = {
-            name: 'Test Problem',
-            domain: 1004,
-            qtype: 0,
-            stem: {
-                statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
-                figures: [],
-                charts: []
-            },
-            keys: {
-                answer: 0,
-                choices: [
-                    "2/3",
-                    "3/5"
-                ],
-                variables: [
-                    {name: 'numerator', value: 1, type: 'whole'},
-                    {name: 'denominator', value: 2, type: 'whole'}
-                ]
-            },
-            validation:{
+        vm.fraction = null;
+        vm.problemId = null;
 
-            },
-            explanation:{
+        if ($stateParams.hasOwnProperty('problemId')) {
+            vm.problemId = $stateParams.problemId;
 
-            },
-            editors:[1],
-            tags:['math']
-        };
+            djangoAuth.request({
+                method: 'GET',
+                url: 'v1/math/fractions/' + vm.problemId,
+                data: {}
+            }).then(function (data) {
+                vm.fraction = data;
+            }, function (reason) {
+                $log.log(reason);
+            });
+        } else {
+            // Initialize fraction problem.
+            vm.fraction = {
+                name: 'Test Problem',
+                domain: 1004,
+                qtype: 0,
+                stem: {
+                    statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
+                    figures: [],
+                    charts: []
+                },
+                keys: {
+                    answer: 0,
+                    choices: [
+                        "2/3",
+                        "3/5"
+                    ],
+                    variables: [
+                        {name: 'numerator', value: 1, type: 'whole'},
+                        {name: 'denominator', value: 2, type: 'whole'}
+                    ]
+                },
+                validation: {},
+                explanation: {},
+                editors:[1],
+                tags:['math']
+            };
+        }
+
 
         // editors:['jbui', 'cdavis'],
 

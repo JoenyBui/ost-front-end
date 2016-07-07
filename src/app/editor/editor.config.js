@@ -11,7 +11,8 @@
 
         $stateProvider
         .state('triangular.admin-default.fraction', {
-            url: '/editor/fraction',
+            url: '/editor/fraction/:problemId',
+            // url: '/editor/fraction/{problemId:[0-9]}',
             views: {
                 '': {
                     templateUrl: 'app/editor/fraction/editor-fraction.tmpl.html',

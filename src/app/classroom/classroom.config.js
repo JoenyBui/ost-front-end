@@ -38,7 +38,7 @@
                 }
             })
             .state('triangular.admin-default.sensei-test', {
-                url: '/classroom/sensei/test',
+                url: '/classroom/sensei/test/:testId',
                 views: {
                     '': {
                         templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html',
