@@ -60,7 +60,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "build": "gulp",
-    "start": "node app.js"
+    "start": "node src/app/app.module.js"
   },
   "author": "",
   "license": "ISC",
