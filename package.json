@@ -59,8 +59,8 @@
   },
   "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp",
-    "start": "node src/app/app.module.js"
+    "start": "node app",
+    "postinstall": "gulp default"
   },
   "author": "",
   "license": "ISC",
