@@ -9,32 +9,32 @@
     function ProfileController() {
         var vm = this;
         vm.settingsGroups = [{
-            name: 'ADMIN.NOTIFICATIONS.ACCOUNT_SETTINGS',
+            name: 'Account Settings',
             settings: [{
-                title: 'ADMIN.NOTIFICATIONS.SHOW_LOCATION',
+                title: 'Show my location',
                 icon: 'zmdi zmdi-pin',
                 enabled: true
             },{
-                title: 'ADMIN.NOTIFICATIONS.SHOW_AVATAR',
+                title: 'Show my avatar',
                 icon: 'zmdi zmdi-face',
                 enabled: false
             },{
-                title: 'ADMIN.NOTIFICATIONS.SEND_NOTIFICATIONS',
+                title: 'Send me notifications',
                 icon: 'zmdi zmdi-notifications-active',
                 enabled: true
             }]
         },{
-            name: 'ADMIN.NOTIFICATIONS.CHAT_SETTINGS',
+            name: 'Chat Settings',
             settings: [{
-                title: 'ADMIN.NOTIFICATIONS.SHOW_USERNAME',
+                title: 'Show my username',
                 icon: 'zmdi zmdi-account',
                 enabled: true
             },{
-                title: 'ADMIN.NOTIFICATIONS.SHOW_PROFILE',
+                title: 'Make my profile public',
                 icon: 'zmdi zmdi-account-box',
                 enabled: false
             },{
-                title: 'ADMIN.NOTIFICATIONS.ALLOW_BACKUPS',
+                title: 'Allow cloud backups',
                 icon: 'zmdi zmdi-cloud-upload',
                 enabled: true
             }]

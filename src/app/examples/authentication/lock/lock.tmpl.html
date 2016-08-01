@@ -7,26 +7,26 @@
                 </div>
                 <div layout="row" layout-align="center center">
                     <h1 class="md-headline">
-                        <span translate>LOCK.TITLE</span> {{vm.user.name}}
+                        <span translate>Welcome back</span> {{vm.user.name}}
                     </h1>
                 </div>
             </md-toolbar>
 
             <md-content class="md-padding">
-                <p class="margin-top-20 margin-bottom-20" translate>LOCK.LOGGED_OUT</p>
+                <p class="margin-top-20 margin-bottom-20" translate>You have been logged out due to idleness. Enter your password to log back in.</p>
 
                 <form name="lock">
                     <md-input-container class="md-block">
-                        <label for="password" translate>LOCK.PASSWORD.LABEL</label>
+                        <label for="password" translate>password</label>
                         <input label="password" name="password" type="password" ng-model="vm.user.password" required/>
-                        <div ng-messages for="lock.password.$error" ng-if="lock.password.$dirty">
-                            <div ng-message when="required"><span translate>LOCK.PASSWORD.PLEASE_ENTER</span></div>
+                        <div ng-messages for="lock.password.$error" md-auto-hide="false" ng-show="lock.password.$touched">
+                            <div ng-message when="required"><span translate>Please enter your password.</span></div>
                         </div>
                     </md-input-container>
 
                     <div layout="row">
-                        <md-button flex href="#/login" translate="LOCK.LOGOUT"></md-button>
-                        <md-button flex class="md-primary" ng-click="vm.loginClick()" ng-disabled="lock.$invalid" translate="LOCK.LOGIN"></md-button>
+                        <md-button flex href="#/login" translate="Log out"></md-button>
+                        <md-button flex class="md-primary" ng-click="vm.loginClick()" ng-disabled="lock.$invalid" translate="Log in"></md-button>
                     </div>
                 </form>
             </md-content>

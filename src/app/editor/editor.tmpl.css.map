@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIA,qDAAsD;EACpD,MAAM,EAAE,KAAK;EACb,KAAK,EAAE,KAAK;;AACd,gDAAiD;EAC/C,aAAa,EAAE,cAAc;EAC7B,UAAU,EAAE,UAAU;EACtB,MAAM,EAAE,IAAI;EACZ,WAAW,EAAE,IAAI;;AACnB,4CAA6C;EAC3C,MAAM,EAAE,IAAI;;AACd,6DAA8D;EAC5D,MAAM,EAAE,cAAc;;AACxB,+FAAgG;EAC9F,YAAY,EAAE,IAAI",
+"sources": ["editor.tmpl.scss"],
+"names": [],
+"file": "editor.tmpl.css"
+}

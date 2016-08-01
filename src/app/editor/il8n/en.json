@@ -1,0 +1,28 @@
+{
+    "MENU": {
+        "EDITOR": {
+            "EDITOR-MODULE": "Editor",
+            "EDITOR-DASHBOARD": "Dashboard",
+            "EDITOR-PAGE": "Cover Page",
+            "FRACTION-PAGE": "Fraction"
+        }
+    },
+    "EDITOR": {
+        "TITLE": "Welcome to the triangular test page",
+        "DIALOG": {
+            "VARIABLE": {
+                "TITLE": "Add Variable",
+                "NAME": "Name",
+                "VALUE": "Value",
+                "TYPE": "Type",
+                "WHOLE_NUMBER": "Whole Number",
+                "REAL_NUMBER": "Real Number",
+                "RANGE": "Range",
+                "TEXT": "Text"
+            },
+            "PIE-CHART": {
+                "TITLE": "Add Pie Chart"
+            }
+        }
+    }
+}

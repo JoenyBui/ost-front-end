@@ -21,7 +21,7 @@
         // controller to handle login check
         function loginClick() {
             // user logged in ok so goto the dashboard
-            $state.go('triangular.admin-default.dashboard-general');
+            $state.go('triangular.dashboard-general');
         }
     }
 })();

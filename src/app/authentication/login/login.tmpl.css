@@ -1,0 +1,12 @@
+.login-frame md-card {
+  max-width: 400px;
+  margin: auto; }
+.login-frame md-checkbox {
+  margin: 0; }
+.login-frame img {
+  max-height: 100px;
+  width: auto; }
+.login-frame md-toolbar .md-headline {
+  margin: 0; }
+
+/*# sourceMappingURL=login.tmpl.css.map */

@@ -7,6 +7,7 @@
         "TOOLBAR": {
             "SETTINGS": "Settings",
             "PROFILE": "Profile",
+            "EDITOR": "Editor",
             "LOGOUT": "Logout",
             "SIDEBAR_TOGGLE": "Toggle Menu"
         },

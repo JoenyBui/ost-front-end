@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "EDITOR": {
+            "EDITOR-MODULE": "种子模块",
+            "EDITOR-PAGE": "开始页"
+        }
+    },
+    "EDITOR": {
+        "TITLE": "欢迎来到第三角测试页"
+    }
+}
