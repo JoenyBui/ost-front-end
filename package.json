@@ -2,7 +2,7 @@
   "name": "triangular",
   "version": "2.5.0",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "~2.10.1",
     "chalk": "~1.1.1",
     "del": "~2.2.0",
