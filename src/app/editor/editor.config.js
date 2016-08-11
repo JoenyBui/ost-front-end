@@ -10,21 +10,21 @@
         $translatePartialLoaderProvider.addPart('app/editor');
 
         $stateProvider
-        .state('triangular.admin-default.fraction', {
-            url: '/editor/fraction/:problemId',
+        .state('triangular.admin-default.math', {
+            url: '/editor/math/:problemId',
             // url: '/editor/fraction/{problemId:[0-9]}',
             views: {
                 '': {
-                    templateUrl: 'app/editor/fraction/editor-fraction.tmpl.html',
+                    templateUrl: 'app/editor/math/editor-math.tmpl.html',
 
                     // set the controller to load for this page
-                    controller: 'EditorFractionPageController',
+                    controller: 'EditorMathPageController',
                     controllerAs: 'vm'
                 },
                 'belowContent': {
-                    templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+                    templateUrl: 'app/editor/math/fab-button.tmpl.html',
 
-                    controller: 'EditorFractionFabController',
+                    controller: 'EditorMathFabController',
                     controllerAs: 'vm'
                 }
             },
@@ -52,8 +52,8 @@
                 state: 'triangular.admin-default.editor-dashboard',
                 type: 'link'
             }, {
-                name: 'MENU.EDITOR.FRACTION-PAGE',
-                state: 'triangular.admin-default.fraction',
+                name: 'MENU.EDITOR.MATH-PAGE',
+                state: 'triangular.admin-default.math',
                 type: 'link'
             }]
         });

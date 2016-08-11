@@ -4,7 +4,9 @@
             "EDITOR-MODULE": "Editor",
             "EDITOR-DASHBOARD": "Dashboard",
             "EDITOR-PAGE": "Cover Page",
-            "FRACTION-PAGE": "Fraction"
+            "MATH-PAGE": "Math",
+            "READING-PAGE": "Reading",
+            "WRITING-PAGE": "Writing"
         }
     },
     "EDITOR": {

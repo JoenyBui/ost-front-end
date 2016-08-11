@@ -3,28 +3,18 @@
 
         <tri-widget content-padding>
             <md-toolbar md-theme="{{triSkin.elements.content}}">
-                <h2 class="md-toolbar-tools" translate>New Fraction Template</h2>
+                <h2 class="md-toolbar-tools" translate>New Math Template</h2>
             </md-toolbar>
-
 
             <div>
                 <md-input-container class="md-block">
                     <label>Problem Name</label>
-                    <input type='text' ng-model="vm.fraction.name">
+                    <input type='text' ng-model="vm.problem.name">
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label>Domain</label>
-                    <input ng-model="vm.fraction.domain" readonly>
-                </md-input-container>
-
-                <md-input-container class="md-block">
-                    <label>Question Type</label>
-                    <md-select placeholder='Pick Q-Type' ng-model="vm.fraction.qtype">
-                        <md-option ng-repeat="type in vm.qtype_options" value="{{type[1]}}">
-                            {{type[0]}}
-                        </md-option>
-                    </md-select>
+                    <input ng-model="vm.problem.domain" readonly>
                 </md-input-container>
 
             </div>
@@ -34,7 +24,7 @@
 
                 <md-input-container class="md-block">
                     <label>Statement</label>
-                    <textarea ng-model="vm.fraction.stem.statement" rows="5" md-select-on-focus></textarea>
+                    <textarea ng-model="vm.problem.stem.statement" rows="5" md-select-on-focus></textarea>
                 </md-input-container>
             </div>
 
@@ -42,13 +32,13 @@
                 <legend>Define <code>keys</code></legend>
                 <md-input-container class="md-block">
                     <label>Answer</label>
-                    <input ng-model="vm.fraction.keys.answer">
+                    <input ng-model="vm.problem.keys.answer">
                 </md-input-container>
 
 
                 <md-list class="margin-bottom-10">
                     <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_choice()">Add Choice</md-button>
-                    <md-list-item class="md-3-line" ng-repeat="choice in vm.fraction.keys.choices track by $index">
+                    <md-list-item class="md-3-line" ng-repeat="choice in vm.problem.keys.choices track by $index">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Choice {{$index+1}}</label>
                             <input type="text" ng-model="choice">
@@ -69,14 +59,21 @@
 
             </div>
 
-            <md-chips ng-model="vm.fraction.editors">
+            <md-chips ng-model="vm.problem.info.editors">
                 <md-chip-template>
                     <strong>{{$chip}}</strong>
                     <em></em>
                 </md-chip-template>
             </md-chips>
 
-            <md-chips ng-model="vm.fraction.tags">
+            <!--<md-select>-->
+                <!--<md-option ng-selected="u.selected" ng-repeat="type in vm.qtype_options" value="{{}}">-->
+                    <!--<span>{{type[0]}}</span>-->
+                <!--</md-option>-->
+            <!--</md-select>-->
+
+
+            <md-chips ng-model="vm.problem.tags">
                 <md-chip-template>
                     <strong>{{$chip}}</strong>
                     <em></em>
@@ -92,10 +89,11 @@
     </div>
 
     <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
-        <tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}" subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">
+        <tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"
+                    subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">
             <md-content layout-padding palette-background="deep-orange:300" >
                 <label>JSON Output</label>
-                <json-formatter json="vm.fraction" open="1"></json-formatter>
+                <json-formatter json="vm.problem" open="1"></json-formatter>
             </md-content>
         </tri-widget>
         <tri-widget flex>
@@ -109,7 +107,7 @@
                     </tr>
                 </thead>
                 <tbody class="md-caption">
-                    <tr ng-repeat="var in vm.fraction.keys.variables | limitTo:5">
+                    <tr ng-repeat="var in vm.problem.keys.variables | limitTo:5">
                         <!--<td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>-->
                         <td>{{var.name}}</td>
                         <td>{{var.value}}</td>
@@ -123,7 +121,7 @@
     </div>
 
     <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'
-         ng-repeat="chart in vm.fraction.stem.charts">
+         ng-repeat="chart in vm.problem.stem.charts">
         <tri-widget flex>
             <canvas class="chart-pie"
                     chart-data="chart.chart.data"

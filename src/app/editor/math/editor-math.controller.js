@@ -3,13 +3,14 @@
 
     angular
         .module('app.editor')
-        .controller('EditorFractionPageController', EditorFractionPageController);
+        .controller('EditorMathPageController', EditorMathPageController);
 
     /* @ngInject */
-    function EditorFractionPageController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
+    function EditorMathPageController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
+        
         var vm = this;
 
-        vm.fraction = null;
+        vm.problem = null;
         vm.problemId = null;
 
         if ($stateParams.hasOwnProperty('problemId')) {
@@ -17,16 +18,16 @@
 
             djangoAuth.request({
                 method: 'GET',
-                url: 'v1/math/fractions/' + vm.problemId,
+                url: 'v1/math/maths/' + vm.problemId,
                 data: {}
             }).then(function (data) {
-                vm.fraction = data;
+                vm.problem = data;
             }, function (reason) {
                 $log.log(reason);
             });
         } else {
-            // Initialize fraction problem.
-            vm.fraction = {
+            // Initialize problem problem.
+            vm.problem = {
                 name: 'Test Problem',
                 domain: 1004,
                 qtype: 0,
@@ -48,7 +49,7 @@
                 },
                 validation: {},
                 explanation: {},
-                editors:[1],
+                editors:[],
                 tags:['math']
             };
         }
@@ -65,8 +66,8 @@
         vm.submit_job = function () {
             djangoAuth.request({
                 method: 'POST',
-                url: 'v1/math/fractions/',
-                data: vm.fraction
+                url: 'v1/math/maths/',
+                data: vm.problem
             }).then(function(data) {
                 $log.log(data);
             }, function(reason) {
@@ -84,7 +85,7 @@
                     controllerAs: 'vm'
                 })
                 .then(function(answer) {
-                    vm.fraction.keys.variables.push(answer);
+                    vm.problem.keys.variables.push(answer);
                 });
         });
 
@@ -95,10 +96,10 @@
                 controller: 'EditorChartJsPieController',
                 controllerAs: 'vm',
                 locals: {
-                    variables: vm.fraction.keys.variables
+                    variables: vm.problem.keys.variables
                 }
             }).then(function (chart) {
-                vm.fraction.stem.charts.push(chart);
+                vm.problem.stem.charts.push(chart);
             });
         });
     }

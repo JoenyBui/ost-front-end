@@ -3,9 +3,10 @@
 
     angular
         .module('app.editor')
-        .controller('EditorFractionFabController', EditorFractionFabController);
+        .controller('EditorMathFabController', EditorMathFabController);
 
-    function EditorFractionFabController($rootScope) {
+    function EditorMathFabController($rootScope) {
+        
         var vm = this;
 
         vm.fabDirection = 'up';
