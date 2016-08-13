@@ -17,7 +17,7 @@
         vm.selectedItem = null;
         vm.searchText = null;
         vm.editorItems = [];
-        vm.editorsList = [];
+        vm.editorLists = [];
         // vm.transformChip = transformChip;
         // vm.querySearch = querySearch;
 
@@ -79,7 +79,11 @@
             url: 'v1/editor/editors/',
             data: {}
         }).then(function (data) {
-            vm.editorsList = data;
+            vm.editorLists = data.map(function(edi) {
+                edi._lowername = edi.pen_name.toLowerCase();
+
+                return edi;
+            });
         }, function(reason) {
             $log.log(reason);
         });
@@ -102,7 +106,7 @@
         };
 
         vm.querySearch = function (query) {
-            var results = query ? this.editorsList.filter(this.createFilterFor(query)) : [];
+            var results = query ? this.editorLists.filter(this.createFilterFor(query)) : [];
 
             return results;
         };
@@ -122,13 +126,14 @@
         /**
          * Create filter function for a query string
          */
-        function createFilterFor(query) {
+        vm.createFilterFor = function (query) {
             var lowercaseQuery = angular.lowercase(query);
-            return function filterFn(vegetable) {
-                return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-                    (vegetable._lowertype.indexOf(lowercaseQuery) === 0);
+            return function filterFn(editors) {
+                return editors._lowername.indexOf(lowercaseQuery) == 0;
+                // return (editors._lowername.indexOf(lowercaseQuery) === 0) ||
+                //     (editors._lowertype.indexOf(lowercaseQuery) === 0);
             };
-        }
+        };
 
         // add function watches
         $scope.$on('submit_job ', function(ev) {
