@@ -12,6 +12,14 @@
 
         vm.problem = null;
         vm.problemId = null;
+        vm.topicLists = null;
+        vm.autocompleteRequireMatch = true;
+        vm.selectedItem = null;
+        vm.searchText = null;
+        vm.editorItems = [];
+        vm.editorsList = [];
+        // vm.transformChip = transformChip;
+        // vm.querySearch = querySearch;
 
         if ($stateParams.hasOwnProperty('problemId')) {
             vm.problemId = $stateParams.problemId;
@@ -54,28 +62,95 @@
             };
         }
 
+        // Topic
+        djangoAuth.request({
+            method: 'GET',
+            url: 'v1/topic/topics/',
+            data: {}
+        }).then(function (data) {
+            vm.topicLists = data;
+        }, function (reason) {
+            $log.log(reason);
+        });
 
-        // editors:['jbui', 'cdavis'],
+        // Editor
+        djangoAuth.request({
+            method: 'GET',
+            url: 'v1/editor/editors/',
+            data: {}
+        }).then(function (data) {
+            vm.editorsList = data;
+        }, function(reason) {
+            $log.log(reason);
+        });
 
+        // Add in general variables
         vm.qtype_options = [
             ['True or False', 0],
             ['Multiple Choice', 1],
             ['Fill-in-the-Blank', 2]
         ];
 
-        vm.submit_job = function () {
-            djangoAuth.request({
-                method: 'POST',
-                url: 'v1/math/maths/',
-                data: vm.problem
-            }).then(function(data) {
-                $log.log(data);
-            }, function(reason) {
-                $log.log(reason);
-            });
+        vm.transformChip = function(chip) {
+            // If it is an object, it's already a known chip
+            if (angular.isObject(chip)) {
+                return chip;
+            }
+
+            // Otherwise, create a new one
+            return {name: chip, type: 'new'}
         };
 
-        // watches
+        vm.querySearch = function (query) {
+            var results = query ? this.editorsList.filter(this.createFilterFor(query)) : [];
+
+            return results;
+        };
+
+        // vm.submit_job = function () {
+        //     djangoAuth.request({
+        //         method: 'POST',
+        //         url: 'v1/math/maths/',
+        //         data: vm.problem
+        //     }).then(function(data) {
+        //         $log.log(data);
+        //     }, function(reason) {
+        //         $log.log(reason);
+        //     });
+        // };
+
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+            var lowercaseQuery = angular.lowercase(query);
+            return function filterFn(vegetable) {
+                return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
+                    (vegetable._lowertype.indexOf(lowercaseQuery) === 0);
+            };
+        }
+
+        // add function watches
+        $scope.$on('submit_job ', function(ev) {
+            $mdDialog.show({
+                templateUrl: 'app/editor/form/editor-submit.tmpl.html',
+                targetEvent: ev,
+                controller: 'EditorSubmitJobController',
+                controllerAs: 'vm'
+            })
+            .then(function(job) {
+                djangoAuth.request({
+                    method: 'POST',
+                    url: 'v1/math/maths/',
+                    data: vm.problem
+                }).then(function(data) {
+                    $log.log(data);
+                }, function(reason) {
+                    $log.log(reason);
+                });
+
+            })
+        });
 
         $scope.$on('addVariable', function( ev ){
             $mdDialog.show({

@@ -7,14 +7,19 @@
             </md-toolbar>
 
             <div>
-                <md-input-container class="md-block">
-                    <label>Problem Name</label>
-                    <input type='text' ng-model="vm.problem.name">
+                <md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">
+                    <label>Problem ID</label>
+                    <input type='text' ng-model="vm.problem.id" readonly>
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label>Domain</label>
-                    <input ng-model="vm.problem.domain" readonly>
+                    <input ng-model="vm.problem.info.domain" readonly>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Problem Name</label>
+                    <input type='text' ng-model="vm.problem.name">
                 </md-input-container>
 
             </div>
@@ -28,67 +33,36 @@
                 </md-input-container>
             </div>
 
-            <div>
-                <legend>Define <code>keys</code></legend>
-                <md-input-container class="md-block">
-                    <label>Answer</label>
-                    <input ng-model="vm.problem.keys.answer">
-                </md-input-container>
-
-
-                <md-list class="margin-bottom-10">
-                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_choice()">Add Choice</md-button>
-                    <md-list-item class="md-3-line" ng-repeat="choice in vm.problem.keys.choices track by $index">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Choice {{$index+1}}</label>
-                            <input type="text" ng-model="choice">
-                        </md-input-container>
-                    </md-list-item>
-                </md-list>
-
-                <!--<legend>Define <code>validation</code></legend>-->
-                <!--<md-input-container class="md-block">-->
-                    <!--<label></label>-->
-                    <!--2-->
-                    <!--i-->
-                    <!--<textarea rows="5" ng-model="vm.fraction.validation" md-select-on-focus>-->
-
-                    <!--</textarea>-->
-                    <!--&lt;!&ndash;<md-content flex layout-padding></md-content>&ndash;&gt;-->
-                <!--</md-input-container>-->
-
-            </div>
-
-            <md-chips ng-model="vm.problem.info.editors">
+            <md-chips ng-model="vm.editorItems"
+                      md-autocomplete-snap
+                      md-transform-chip="vm.transformChip($chip)"
+                      md-require-match="vm.autocompleteRequireMatch">
+                <md-autocomplete
+                    md-selected-item="vm.selectedItem"
+                    md-search-text="vm.searchText"
+                    md-items="item in vm.querySearch(vm.searchText)"
+                    md-item-text="item.name"
+                    placeholder="Search for editors">
+                    <span md-highlight-text="vm.searchText">{{item.name}}</span>
+                </md-autocomplete>
                 <md-chip-template>
-                    <strong>{{$chip}}</strong>
-                    <em></em>
-                </md-chip-template>
-            </md-chips>
-
-            <!--<md-select>-->
-                <!--<md-option ng-selected="u.selected" ng-repeat="type in vm.qtype_options" value="{{}}">-->
-                    <!--<span>{{type[0]}}</span>-->
-                <!--</md-option>-->
-            <!--</md-select>-->
-
-
-            <md-chips ng-model="vm.problem.tags">
-                <md-chip-template>
-                    <strong>{{$chip}}</strong>
-                    <em></em>
+                    <span>
+                        <strong>{{$chip}}</strong>
+                        <em>({{$chip.type}})</em>
+                    </span>
                 </md-chip-template>
             </md-chips>
 
 
-            <div class="button-toolbar" layout="row" layout-align="end center">
-                <md-button class="md-primary md-raised" ng-disabled="login.$invalid" ng-click="vm.submit_job()">Submit</md-button>
-                <md-button>Cancel</md-button>
-            </div>
+            <!--<md-chips ng-model="vm.problem.tags">-->
+                <!--<md-chip-template>-->
+                    <!--<strong>{{$chip}}</strong>-->
+                    <!--<em></em>-->
+                <!--</md-chip-template>-->
+            <!--</md-chips>-->
+
         </tri-widget>
-    </div>
 
-    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
         <tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"
                     subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">
             <md-content layout-padding palette-background="deep-orange:300" >
@@ -96,7 +70,57 @@
                 <json-formatter json="vm.problem" open="1"></json-formatter>
             </md-content>
         </tri-widget>
-        <tri-widget flex>
+
+    </div>
+
+    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+
+        <tri-widget flex title="Stem" subtitle="Statement" palette-background="blue-grey:1000"
+                    background="primary" content-padding>
+
+            <md-input-container class="md-block">
+                <label>Question Type</label>
+                <md-select ng-model="vm.problem.qtype">
+                    <!--<md-option ng-selected="vm.selected" ng-repeat="type in vm.qtype_options" value="type">-->
+                    <md-option ng-repeat="type in vm.qtype_options" ng-value="type[1]">
+                        <span>{{type[0]}}</span>
+                    </md-option>
+                </md-select>
+
+            </md-input-container>
+
+
+            <!-- Statement Text Area -->
+            <div>
+                <!--<legend>Define <code>stem</code></legend>-->
+
+                <md-input-container class="md-block">
+                    <label>Statement</label>
+                    <textarea ng-model="vm.problem.stem.statement" rows="25" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>
+
+            <legend>Define <code>keys</code></legend>
+            <md-input-container class="md-block">
+                <label>Answer</label>
+                <input ng-model="vm.problem.keys.answer">
+            </md-input-container>
+
+            <md-list class="margin-bottom-10" ng-if="vm.problem.keys.choices">
+                <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_choice()">Add Choice</md-button>
+                <md-list-item class="md-3-line" ng-repeat="choice in vm.problem.keys.choices track by $index">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Choice {{$index+1}}</label>
+                        <input type="text" ng-model="choice">
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+
+        </tri-widget>
+
+        <tri-widget flex title="Keys" subtitle="Variables"
+                    palette-background="blue-grey:1000"
+                    background="primary" content-padding>
             <table class="table">
                 <thead>
                     <tr>
@@ -120,14 +144,43 @@
 
     </div>
 
+    <div>
+        <tri-widget>
+
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="topic in vm.topicLists | filter:query | orderBy: orderList"
+                              ng-click="null">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>Name: {{topic.name}}</h3>
+                        <h4>Key: {{topic.key}}</h4>
+                        <md-divider ng-hide="$last"></md-divider>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </tri-widget>
+    </div>
+
     <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'
          ng-repeat="chart in vm.problem.stem.charts">
-        <tri-widget flex>
+        <tri-widget flex content-padding>
             <canvas class="chart-pie"
                     chart-data="chart.chart.data"
                     chart-labels="chart.chart.labels"
                     chart-legend="true"
                     chart-options="chart.chart.options"></canvas>
+        </tri-widget>
+
+        <tri-widget flex content-padding>
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="topic in vm.topicLists | filter:query | orderBy: orderList"
+                              ng-click="null">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>Name: {{topic.name}}</h3>
+                        <h4>Key: {{topic.key}}</h4>
+                        <md-divider ng-hide="$last"></md-divider>
+                    </div>
+                </md-list-item>
+            </md-list>
         </tri-widget>
     </div>
 </div>

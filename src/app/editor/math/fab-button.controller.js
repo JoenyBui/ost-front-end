@@ -43,5 +43,9 @@
             $rootScope.$broadcast('addVariable', $event);
         };
 
+        vm.submitForm = function ($event) {
+            $rootScope.$broadcast('submit_job', $event);
+        }
+
     }
 })();
