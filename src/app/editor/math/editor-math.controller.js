@@ -12,12 +12,8 @@
 
         vm.problem = null;
         vm.problemId = null;
-        vm.topicLists = null;
         vm.autocompleteRequireMatch = true;
-        vm.selectedItem = null;
-        vm.searchText = null;
-        vm.editorItems = [];
-        vm.editorLists = [];
+
         // vm.transformChip = transformChip;
         // vm.querySearch = querySearch;
 
@@ -62,18 +58,58 @@
             };
         }
 
+        // Add in general variables
+        vm.qtype_options = [
+            ['True or False', 0],
+            ['Multiple Choice', 1],
+            ['Fill-in-the-Blank', 2]
+        ];
+
+        // ====================================================
         // Topic
+        // ====================================================
+        vm.topicSelectedItem = null;
+        vm.topicSearchText = null;
+        vm.topicItems = [];
+        vm.topicLists = [];
+
+
         djangoAuth.request({
             method: 'GET',
             url: 'v1/topic/topics/',
             data: {}
         }).then(function (data) {
-            vm.topicLists = data;
+            vm.topicLists = data.map(function(top) {
+                top._lowername = top.name.toLowerCase();
+                return top;
+            });
         }, function (reason) {
             $log.log(reason);
         });
 
+        vm.querySearchTopic = function (query) {
+            var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
+            return results;
+        };
+
+        /**
+         * Create filter function for a query string
+         */
+        vm.createFilterForTopic = function (query) {
+            var lowercaseQuery = angular.lowercase(query);
+            return function filterFn(topic) {
+                return (topic._lowername.indexOf(lowercaseQuery) === 0) ||
+                    (String(topic.key).indexOf(lowercaseQuery) === 0);
+            };
+        };
+        // ======================================================
         // Editor
+        // ======================================================
+        vm.editorSelectedItem = null;
+        vm.editorSearchText = null;
+        vm.editorItems = [];
+        vm.editorLists = [];
+
         djangoAuth.request({
             method: 'GET',
             url: 'v1/editor/editors/',
@@ -88,13 +124,6 @@
             $log.log(reason);
         });
 
-        // Add in general variables
-        vm.qtype_options = [
-            ['True or False', 0],
-            ['Multiple Choice', 1],
-            ['Fill-in-the-Blank', 2]
-        ];
-
         vm.transformChip = function(chip) {
             // If it is an object, it's already a known chip
             if (angular.isObject(chip)) {
@@ -105,10 +134,19 @@
             return {name: chip, type: 'new'}
         };
 
-        vm.querySearch = function (query) {
-            var results = query ? this.editorLists.filter(this.createFilterFor(query)) : [];
-
+        vm.querySearchEditor = function (query) {
+            var results = query ? this.editorLists.filter(this.createFilterForEditor(query)) : [];
             return results;
+        };
+
+        /**
+         * Create filter function for a query string
+         */
+        vm.createFilterForEditor = function (query) {
+            var lowercaseQuery = angular.lowercase(query);
+            return function filterFn(editors) {
+                return editors._lowername.indexOf(lowercaseQuery) === 0;
+            };
         };
 
         // vm.submit_job = function () {
@@ -123,17 +161,6 @@
         //     });
         // };
 
-        /**
-         * Create filter function for a query string
-         */
-        vm.createFilterFor = function (query) {
-            var lowercaseQuery = angular.lowercase(query);
-            return function filterFn(editors) {
-                return editors._lowername.indexOf(lowercaseQuery) == 0;
-                // return (editors._lowername.indexOf(lowercaseQuery) === 0) ||
-                //     (editors._lowertype.indexOf(lowercaseQuery) === 0);
-            };
-        };
 
         // add function watches
         $scope.$on('submit_job ', function(ev) {
