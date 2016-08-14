@@ -24,14 +24,14 @@
 
             </div>
 
-            <div>
-                <legend>Define <code>stem</code></legend>
+            <!--<div>-->
+                <!--<legend>Define <code>stem</code></legend>-->
 
-                <md-input-container class="md-block">
-                    <label>Statement</label>
-                    <textarea ng-model="vm.problem.stem.statement" rows="5" md-select-on-focus></textarea>
-                </md-input-container>
-            </div>
+                <!--<md-input-container class="md-block">-->
+                    <!--<label>Statement</label>-->
+                    <!--<textarea ng-model="vm.problem.stem.statement" rows="5" md-select-on-focus></textarea>-->
+                <!--</md-input-container>-->
+            <!--</div>-->
             <md-chips ng-model="vm.topicItems"
                       md-autocomplete-snap
                       md-transform-chip="vm.transformChip($chip)"
@@ -99,9 +99,9 @@
 
             <md-input-container class="md-block">
                 <label>Question Type</label>
-                <md-select ng-model="vm.problem.qtype">
+                <md-select ng-model="vm.questionType.selectedItem">
                     <!--<md-option ng-selected="vm.selected" ng-repeat="type in vm.qtype_options" value="type">-->
-                    <md-option ng-repeat="type in vm.qtype_options" ng-value="type[1]">
+                    <md-option ng-repeat="type in vm.questionType.options" ng-value="type[1]">
                         <span>{{type[0]}}</span>
                     </md-option>
                 </md-select>
@@ -119,21 +119,42 @@
                 </md-input-container>
             </div>
 
-            <legend>Define <code>keys</code></legend>
-            <md-input-container class="md-block">
-                <label>Answer</label>
-                <input ng-model="vm.problem.keys.answer">
-            </md-input-container>
+            <div ng-if="vm.questionType.selectedItem == 0">
+                <!-- TRUE OR FALSE -->
 
-            <md-list class="margin-bottom-10" ng-if="vm.problem.keys.choices">
-                <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_choice()">Add Choice</md-button>
-                <md-list-item class="md-3-line" ng-repeat="choice in vm.problem.keys.choices track by $index">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Choice {{$index+1}}</label>
-                        <input type="text" ng-model="choice">
-                    </md-input-container>
-                </md-list-item>
-            </md-list>
+                <md-radio-group ng-model="vm.questionType.tf.answer">
+                    <md-radio-button ng-value="true" class="md-primary">True</md-radio-button>
+                    <md-radio-button ng-value="false">False</md-radio-button>
+                </md-radio-group>
+            </div>
+
+            <div ng-if="vm.questionType.selectedItem == 1">
+                <!-- MULTIPLE CHOICE -->
+
+                <md-input-container class="md-block">
+                    <label>Answer</label>
+                    <input ng-model="vm.questionType.mc.answer">
+                </md-input-container>
+
+                <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_mc_item()">Add Choice</md-button>
+
+                <md-list class="margin-bottom-10" ng-if="vm.questionType.mc.choices">
+                    <md-list-item class="md-3-line" ng-repeat="choice in vm.questionType.mc.choices track by $index">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Choice {{$index+1}}</label>
+                            <input type="text" ng-model="choice">
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+            </div>
+
+            <div ng-if="vm.questionType.selectedItem == 2">
+                <!-- FILL IN THE BLANK -->
+                <md-input-container class="md-block">
+                    <label>Answer</label>
+                    <input ng-model="vm.questionType.fib.answer">
+                </md-input-container>
+            </div>
 
         </tri-widget>
 
