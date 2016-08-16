@@ -24,6 +24,9 @@
             },
             "PIE-CHART": {
                 "TITLE": "Add Pie Chart"
+            },
+            "SUBMIT": {
+                "TITLE": "Submit Job"
             }
         }
     }

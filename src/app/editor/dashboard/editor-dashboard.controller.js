@@ -16,7 +16,7 @@
 
         djangoAuth.request({
             method: 'GET',
-            url: 'v1/problem/problem-base',
+            url: 'v1/problem/problem-base/',
             data:{}
         }).then(function (data) {
             $log.log(data);

@@ -22,36 +22,81 @@
             </md-input-container>
 
             <!--<md-input-container>-->
-                <!--<label translate>EDITOR.DIALOG.VARIABLE.TYPE</label>-->
-                <!--<md-select placeholder="{{'EDITOR.DIALOG.VARIABLE.TYPE' | translate}}" ng-model="vm.item.type">-->
-                    <!--<md-option value="whole" translate>EDITOR.DIALOG.VARIABLE.WHOLE_NUMBER</md-option>-->
-                    <!--<md-option value="real" translate>EDITOR.DIALOG.VARIABLE.REAL_NUMBER</md-option>-->
-                    <!--<md-option value="range" translate>EDITOR.DIALOG.VARIABLE.RANGE</md-option>-->
-                    <!--<md-option value="text" translate>EDITOR.DIALOG.VARIABLE.TEXT</md-option>-->
-                <!--</md-select>-->
+            <!--<label translate>EDITOR.DIALOG.VARIABLE.TYPE</label>-->
+            <!--<md-select placeholder="{{'EDITOR.DIALOG.VARIABLE.TYPE' | translate}}" ng-model="vm.item.type">-->
+            <!--<md-option value="whole" translate>EDITOR.DIALOG.VARIABLE.WHOLE_NUMBER</md-option>-->
+            <!--<md-option value="real" translate>EDITOR.DIALOG.VARIABLE.REAL_NUMBER</md-option>-->
+            <!--<md-option value="range" translate>EDITOR.DIALOG.VARIABLE.RANGE</md-option>-->
+            <!--<md-option value="text" translate>EDITOR.DIALOG.VARIABLE.TEXT</md-option>-->
+            <!--</md-select>-->
             <!--</md-input-container>-->
 
             <md-input-container class="md-block">
                 <label>Variable Type</label>
-                <md-select ng-model="vm.item.type" ng-change="vm.selectChangeType()">
-                    <md-option ng-repeat="v in vm.type_options" ng-value="v.value">
+                <md-select ng-model="vm.variables.selectedItem" ng-change="vm.selectChangeType()">
+                    <md-option ng-repeat="v in vm.variables.options" ng-value="v.value">
                         {{v.text}}
                     </md-option>
                 </md-select>
             </md-input-container>
 
-            <md-input-container>
-                <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
-                <input ng-model="vm.item.value" class="dialog-close" name="task" required/>
-                <div ng-messages="taskForm.task.$error">
-                    <div ng-message when="required">
-                        <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+            <div ng-if="vm.variables.selectedItem == 'whole'">
+                <!-- WHOLE NUMBER -->
+                <md-input-container>
+                    <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                    <input ng-model="vm.item.value" class="dialog-close" name="whole" required/>
+                    <div ng-messages="taskForm.task.$error">
+                        <div ng-message when="required">
+                            <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                        </div>
                     </div>
-                </div>
-            </md-input-container>
+                </md-input-container>
+            </div>
 
+            <div ng-if="vm.variables.selectedItem == 'real'">
+                <!-- REAL NUMBER -->
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'whole_list'">
+                <!-- WHOLE LIST -->
+                <md-list ng-if="vm.variables.whole_list.values">
+                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_wl_item()">Add Itme</md-button>
+
+                    <md-list-item class="md-3-line" ng-repeat="item in vm.variables.whole_list.values track by $index">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                            <input ng-model="item" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'real_list'">
+                <!-- REAL LIST -->
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'range'">
+                <!-- WHOLE RANGE -->
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'xrange'">
+                <!-- REAL RANGE -->
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'text'">
+                <!-- TEXT -->
+            </div>
         </form>
     </md-dialog-content>
+
+    <md-divider></md-divider>
+
     <md-dialog-actions layout="row">
         <span flex></span>
         <md-button ng-click="vm.cancel()">Cancel</md-button>

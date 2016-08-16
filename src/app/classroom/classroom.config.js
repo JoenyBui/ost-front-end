@@ -24,7 +24,7 @@
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+                        templateUrl: 'app/editor/math/fab-button.tmpl.html',
 
                         controller: 'EditorFractionFabController',
                         controllerAs: 'vm'
@@ -82,7 +82,7 @@
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+                        templateUrl: 'app/editor/math/fab-button.tmpl.html',
 
                         controller: 'EditorFractionFabController',
                         controllerAs: 'vm'

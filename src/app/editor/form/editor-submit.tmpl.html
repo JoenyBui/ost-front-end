@@ -1,15 +1,23 @@
-<md-dialog aria-label="Submit Entry" flex="30" flex-xs="100">
+<md-dialog aria-label="Submit Entry" flex="60" flex-xs="100">
     <md-toolbar md-theme="{{triSkin.elements.content}}">
         <div class="md-toolbar-tools">
             <h2>
-                <span translate>EDITOR.DIALOG.VARIABLE.TITLE</span>
+                <span translate>EDITOR.DIALOG.SUBMIT.TITLE</span>
             </h2>
         </div>
     </md-toolbar>
 
+    <tri-widget title-position="top" palette-background="blue-grey:1000" background="primary">
+        <md-content layout-padding>
+            <json-formatter json="vm.job" open="4"></json-formatter>
+        </md-content>
+    </tri-widget>
+
     <md-divider></md-divider>
 
-    <md-dialog-content class="md-dialog-content">
-
+    <md-dialog-content layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.submit()" class="md-primary" ng-disabled="taskForm.$invalid">Submit</md-button>
     </md-dialog-content>
 </md-dialog>

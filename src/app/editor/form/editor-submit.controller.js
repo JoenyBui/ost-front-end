@@ -8,10 +8,19 @@
         .module('app.editor')
         .controller('EditorSubmitJobController', EditorSubmitJobController);
 
-    function EditorSubmitJobController($interval, $mdDialog, job, requestUrl) {
+    function EditorSubmitJobController($interval, $mdDialog, djangoAuth, job, requestUrl) {
         var vm = this;
 
+        vm.job = job;
 
+
+        vm.submit = function () {
+
+        };
+
+        vm.cancel = function () {
+            $mdDialog.cancel();
+        };
     }
 
 })();

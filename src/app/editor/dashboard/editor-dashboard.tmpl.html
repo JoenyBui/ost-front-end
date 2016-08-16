@@ -46,8 +46,14 @@
                       md-rowspan="1"
                       md-colspan="1"
                       ng-repeat="entry in vm.feed">
-            Print
-            {{entry.name}}
+            <md-grid-tile-header>
+                <h3>{{::entry.name}}</h3>
+            </md-grid-tile-header>
+
+            <h3>{{entry.name}}</h3>
+            {{entry.info.domain}}
+            {{entry.info.status}}
+
             <md-grid-tile-footer>
                 <h3>{{::entry.id}}</h3>
             </md-grid-tile-footer>

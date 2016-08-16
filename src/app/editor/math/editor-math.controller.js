@@ -10,60 +10,82 @@
         
         var vm = this;
 
-        vm.problem = null;
         vm.problemId = null;
         vm.autocompleteRequireMatch = true;
 
-        // vm.transformChip = transformChip;
-        // vm.querySearch = querySearch;
+        // Initialize problem problem.
+        vm.problem = {
+            name: 'Test Problem',
+            domain: 1000,
+            stem: {
+                statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
+                figures: [],
+                charts: []
+            },
+            keys: {
+                answer: 0,
+                choices: [
+                    "2/3",
+                    "3/5"
+                ],
+                variables: [
+                    {name: 'numerator', value: 1, type: 'whole'},
+                    {name: 'denominator', value: 2, type: 'whole'}
+                ]
+            }
+        };
 
-        if ($stateParams.hasOwnProperty('problemId')) {
-            vm.problemId = $stateParams.problemId;
+        // ====================================================
+        // Status
+        // ====================================================
+        vm.statusType = {
+            options: [
+                ['Created', 0],
+                ['Draft', 1],
+                ['Submitted', 2],
+                ['Reviewed', 3],
+                ['Published', 4],
+                ['Revised', 5],
+                ['Lock', 6]
+            ],
+            selectedItem: 0
+        };
 
-            djangoAuth.request({
-                method: 'GET',
-                url: 'v1/math/maths/' + vm.problemId,
-                data: {}
-            }).then(function (data) {
-                vm.problem = data;
-            }, function (reason) {
-                $log.log(reason);
-            });
-        } else {
-            // Initialize problem problem.
-            vm.problem = {
-                name: 'Test Problem',
-                domain: 1004,
-                qtype: 0,
-                stem: {
-                    statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
-                    figures: [],
-                    charts: []
-                },
-                keys: {
-                    answer: 0,
-                    choices: [
-                        "2/3",
-                        "3/5"
-                    ],
-                    variables: [
-                        {name: 'numerator', value: 1, type: 'whole'},
-                        {name: 'denominator', value: 2, type: 'whole'}
-                    ]
-                },
-                validation: {},
-                explanation: {},
-                editors:[],
-                tags:['math']
-            };
-        }
+        // ====================================================
+        // Question Type
+        // ====================================================
 
-        // Add in general variables
+        vm.questionType = {
+            options : [
+                ['True or False', 0],
+                ['Multiple Choice', 1],
+                ['Fill-in-the-Blank', 2]
+            ],
+            selectedItem: 0,
+            tf: {
+                answer: false
+            },
+            mc: {
+                answer: null,
+                choices: [null, null, null]
+            },
+            fib: {
+                answer: null
+            }
+        };
         vm.qtype_options = [
             ['True or False', 0],
             ['Multiple Choice', 1],
             ['Fill-in-the-Blank', 2]
         ];
+
+        vm.add_mc_item = function () {
+            vm.questionType.mc.choices.push(null)
+        };
+
+        vm.remove_mc_item = function () {
+
+        };
 
         // ====================================================
         // Topic
@@ -162,13 +184,75 @@
         // };
 
 
+        // Ping existing database if there is something interesting.
+        if ($stateParams.hasOwnProperty('problemId')) {
+            var problemId = $stateParams.problemId;
+
+            if (!(problemId === "")) {
+                vm.problemId = problemId;
+
+                djangoAuth.request({
+                    method: 'GET',
+                    url: 'v1/math/maths/' + vm.problemId + '/',
+                    data: {}
+                }).then(function (data) {
+                    if ('id' in data) {
+                        vm.problem.id = data['id'];
+                    }
+
+                    if ('name' in data) {
+                        vm.problem.name = data['name'];
+                    }
+
+                    if ('domain' in data) {
+                        vm.problem.domain = data['domain']
+                    }
+
+                    if ('stem' in data) {
+                        vm.problem.stem = data['stem'];
+                    }
+
+                    if ('keys' in data) {
+                        vm.problem.keys = data['keys'];
+                    }
+
+                    if ('status' in data) {
+                        vm.statusType.selectedItem = data['status'];
+                    }
+
+                    if ('qtype' in data) {
+                        vm.questionType.selectedItem = data['qtype'];
+                    }
+
+                    if ('topics' in data) {
+                        vm.topicItems = data['topics'];
+                    }
+
+                    if ('editors' in data) {
+                        vm.editorItems = data['editors'];
+                    }
+
+                    // vm.problem = data;
+                }, function (reason) {
+                    $log.log(reason);
+                });
+            }
+        }
+
+
         // add function watches
-        $scope.$on('submit_job ', function(ev) {
+        $scope.$on('submitJob', function(ev) {
+            var job = vm.problem;
+
             $mdDialog.show({
                 templateUrl: 'app/editor/form/editor-submit.tmpl.html',
                 targetEvent: ev,
                 controller: 'EditorSubmitJobController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                locals: {
+                    job: job,
+                    requestUrl: 'v1/math/maths/'
+                }
             })
             .then(function(job) {
                 djangoAuth.request({

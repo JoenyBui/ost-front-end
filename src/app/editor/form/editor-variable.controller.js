@@ -11,32 +11,61 @@
         vm.cancel = cancel;
         vm.hide = hide;
 
-        //vm.name = '';
-        vm.type_options = [
-            {
-                value: 'whole',
-                text: 'Whole Number'
+        vm.variables = {
+            name: 'Var1',
+            options: [
+                {
+                    value: 'whole',
+                    text: 'Whole Number'
+                },
+                {
+                    value: 'real',
+                    text: 'Real Number'
+                },
+                {
+                    value: 'text',
+                    text: 'Text'
+                },
+                {
+                    value: 'whole_list',
+                    text: 'Whole list'
+                },
+                {
+                    value: 'real_list',
+                    text: 'Real list'
+                },
+                {
+                    value: 'range',
+                    text: 'Whole Range'
+                },
+                {
+                    value: 'xrange',
+                    text: 'Real Number Range'
+                }
+            ],
+            whole: {
+                values: null
             },
-            {
-                value: 'real',
-                text: 'Real Number'
+            real: {
+                values: null
             },
-            {
-                value: 'range',
-                text: 'Whole Range'
+            whole_list: {
+                values: [null, null]
             },
-            {
-                value: 'xrange',
-                text: 'Real Number Range'
+            real_list: {
+                values: [null, null]
             },
-            {
-                value: 'text',
-                text: 'Text'
-            }
-        ];
-
-        //vm.type = 'whole';
-
+            range: {
+                values: []
+            },
+            xrange: {
+                values: []
+            },
+            text: {
+                values: null
+            },
+            selectedItem: 'whole'
+        };
 
         vm.item = {
             name: 'Var1',
