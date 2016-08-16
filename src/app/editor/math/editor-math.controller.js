@@ -95,8 +95,7 @@
         vm.topicItems = [];
         vm.topicLists = [];
 
-
-        djangoAuth.request({
+        var promiseTopic = djangoAuth.request({
             method: 'GET',
             url: 'v1/topic/topics/',
             data: {}
@@ -132,16 +131,18 @@
         vm.editorItems = [];
         vm.editorLists = [];
 
-        djangoAuth.request({
+        var promiseEditor = djangoAuth.request({
             method: 'GET',
             url: 'v1/editor/editors/',
             data: {}
         }).then(function (data) {
+
             vm.editorLists = data.map(function(edi) {
                 edi._lowername = edi.pen_name.toLowerCase();
 
                 return edi;
             });
+
         }, function(reason) {
             $log.log(reason);
         });
@@ -225,11 +226,53 @@
                     }
 
                     if ('topics' in data) {
-                        vm.topicItems = data['topics'];
+                        promiseTopic.then(function() {
+                            var topicPk = data['topics'];
+
+                            // TODO: Need to do this in the backend.
+                            for (var index in vm.topicLists) {
+                                var item = vm.topicLists[index];
+
+                                for (var index_pk in topicPk) {
+                                    var pk = topicPk[index_pk];
+
+                                    if (item.id == pk) {
+                                        vm.topicItems.push(item);
+
+                                        // Remove the editor from the pk
+                                        topicPk.splice(topicPk.indexOf(pk), 1);
+
+                                        break;
+                                    }
+
+                                }
+                            }
+                        })
                     }
 
                     if ('editors' in data) {
-                        vm.editorItems = data['editors'];
+                        promiseEditor.then(function() {
+                            var editorPk = data['editors'];
+
+                            // TODO: Need to do this in the backend.
+                            for (var index in vm.editorLists) {
+                                var item = vm.editorLists[index];
+
+                                for (var index_pk in editorPk) {
+                                    var pk = editorPk[index_pk];
+
+                                    if (item.id == pk) {
+                                        vm.editorItems.push(item);
+
+                                        // Remove the editor from the pk
+                                        editorPk.splice(editorPk.indexOf(pk), 1);
+
+                                        break;
+                                    }
+
+                                }
+                            }
+                        })
                     }
 
                     // vm.problem = data;
@@ -238,9 +281,10 @@
                 });
             }
         }
-
-
-        // add function watches
+        
+        /*
+        * Broadcast Function
+        * */
         $scope.$on('submitJob', function(ev) {
             var job = vm.problem;
 
@@ -268,6 +312,7 @@
             })
         });
 
+        // Add Variable
         $scope.$on('addVariable', function( ev ){
             $mdDialog.show({
                     templateUrl: 'app/editor/form/editor-variable.tmpl.html',
@@ -280,6 +325,7 @@
                 });
         });
 
+        // Add Pie Chart
         $scope.$on('addPieChart', function (ev) {
             $mdDialog.show({
                 templateUrl: 'app/editor/form/editor-pie-chart.tmpl.html',
