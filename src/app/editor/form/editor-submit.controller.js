@@ -12,10 +12,15 @@
         var vm = this;
 
         vm.job = job;
-
-
+        vm.requestUrl = requestUrl;
+        
         vm.submit = function () {
+            if (vm.job.id != -1) {
+                vm.requestUrl += vm.job.id + '/';
+            }
 
+            /*Submit Job*/
+            $mdDialog.hide([vm.job, vm.requestUrl]);
         };
 
         vm.cancel = function () {

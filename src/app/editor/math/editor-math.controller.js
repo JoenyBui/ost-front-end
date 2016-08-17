@@ -15,6 +15,7 @@
 
         // Initialize problem problem.
         vm.problem = {
+            id: -1,
             name: 'Test Problem',
             domain: 1000,
             stem: {
@@ -210,11 +211,35 @@
                     }
 
                     if ('stem' in data) {
-                        vm.problem.stem = data['stem'];
+                        if(data['stem'].constructor == Object) {
+                            if ('statement' in data['stem']) {
+                                vm.problem.stem.statement = data['stem']['statement'];
+                            }
+
+                            if ('figures' in data['stem']){
+                                vm.problem.stem.figures = data['stem']['figures'];
+                            }
+
+                            if ('charts' in data['stem']) {
+                                vm.problem.stem.charts = data['stem']['charts'];
+                            }
+                        }
                     }
 
                     if ('keys' in data) {
-                        vm.problem.keys = data['keys'];
+                        if (data['keys'].constructor == Object) {
+                            if ('answer' in data['keys']) {
+                                vm.problem.keys = data['keys']['answer']
+                            }
+
+                            if ('choices' in data['keys']) {
+                                vm.problem.choices = data['keys']['choices']
+                            }
+
+                            if ('variables' in data['keys']) {
+                                vm.problem.variables = data['keys']['variables']
+                            }
+                        }
                     }
 
                     if ('status' in data) {
@@ -286,7 +311,40 @@
         * Broadcast Function
         * */
         $scope.$on('submitJob', function(ev) {
-            var job = vm.problem;
+            var job = angular.copy(vm.problem);
+
+            job.status = vm.statusType.selectedItem;
+
+            job.editors = [];
+            for (var index in vm.editorItems) {
+                var item = vm.editorItems[index];
+                job.editors.push(item.id);
+            }
+
+            job.topics = [];
+            for (var index in vm.topicItems) {
+                var item = vm.topicItems[index];
+                job.topics.push(item.id);
+            }
+
+            job.qtype = vm.questionType.selectedItem;
+
+            job.keys = {};
+            if (job.qtype == 0) {
+                /*True or False*/
+                job.keys.answer = vm.questionType.tf.answer;
+                job.keys.choices = null;
+            }
+            else if (job.qtype == 1) {
+                /*Multiple Choice*/
+                job.keys.answer = vm.questionType.mc.answer;
+                job.keys.choices = vm.questionType.mc.choices;
+            }
+            else if (job.qtype == 2) {
+                /*Fill in the Blank*/
+                job.keys.answer = vm.questionType.fib.answer;
+                job.keys.choices = null;
+            }
 
             $mdDialog.show({
                 templateUrl: 'app/editor/form/editor-submit.tmpl.html',
@@ -298,11 +356,14 @@
                     requestUrl: 'v1/math/maths/'
                 }
             })
-            .then(function(job) {
+            .then(function(args) {
+                var job = args[0];
+                var requestUrl = args[1];
+
                 djangoAuth.request({
                     method: 'POST',
-                    url: 'v1/math/maths/',
-                    data: vm.problem
+                    url: requestUrl,
+                    data: job
                 }).then(function(data) {
                     $log.log(data);
                 }, function(reason) {
