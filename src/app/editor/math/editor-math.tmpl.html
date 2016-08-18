@@ -70,15 +70,15 @@
 
         </tri-widget>
 
-        <tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"
-                    subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">
-            <md-content layout-padding palette-background="deep-orange:300" >
-                <label>JSON Output</label>
-                <json-formatter json="vm.problem" open="2"></json-formatter>
-                <json-formatter json="vm.editorItems" open="2"></json-formatter>
-                <json-formatter json="vm.topicItems" open="2"></json-formatter>
-            </md-content>
-        </tri-widget>
+        <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"-->
+                    <!--subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">-->
+            <!--<md-content layout-padding palette-background="deep-orange:300" >-->
+                <!--<label>JSON Output</label>-->
+                <!--<json-formatter json="vm.problem" open="2"></json-formatter>-->
+                <!--<json-formatter json="vm.editorItems" open="2"></json-formatter>-->
+                <!--<json-formatter json="vm.topicItems" open="2"></json-formatter>-->
+            <!--</md-content>-->
+        <!--</tri-widget>-->
 
     </div>
 
@@ -138,6 +138,10 @@
                             <!--<input type="text" ng-model="choice">-->
                             <input type="text" ng-model="vm.questionType.mc.choices[$index]">
                         </md-input-container>
+                        <!--<em ng-click="vm.remove_mc_item(choice)">X</em>-->
+                        <md-button ng-click="vm.remove_mc_item(choice)" class="md-icon-button" aria-label="Edit Variable">
+                            <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
+                        </md-button>
                     </md-list-item>
                 </md-list>
             </div>
@@ -165,11 +169,16 @@
                     </tr>
                 </thead>
                 <tbody class="md-caption">
-                    <tr ng-repeat="var in vm.problem.keys.variables | limitTo:5">
+                    <tr ng-repeat="var in vm.problem.keys.variables | limitTo:5" class="slide" md-swipe-right="vm.remove_variable(var)">
                         <!--<td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>-->
                         <td>{{var.name}}</td>
                         <td>{{var.value}}</td>
                         <td>{{var.type}}</td>
+                        <td>
+                            <md-button ng-click="vm.editVariable(var, $event)" class="md-icon-button" aria-label="Edit Variable">
+                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                            </md-button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

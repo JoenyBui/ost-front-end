@@ -84,8 +84,20 @@
             vm.questionType.mc.choices.push(null)
         };
 
-        vm.remove_mc_item = function () {
+        vm.remove_mc_item = function (item) {
+            for(var i = vm.questionType.mc.choices.length - 1; i >= 0; i--) {
+                if(vm.questionType.mc.choices[i] === item) {
+                    vm.questionType.mc.choices.splice(i, 1);
+                }
+            }
+        };
 
+        vm.remove_variable = function (variable) {
+            for(var i = vm.problem.keys.variables.length - 1; i >= 0; i--) {
+                if(vm.problem.keys.variables[i] === variable) {
+                    vm.problem.keys.variables.splice(i, 1);
+                }
+            }
         };
 
         // ====================================================
@@ -393,6 +405,10 @@
             })
         });
 
+        vm.editVariables = function (variable) {
+
+        }
+        
         // Add Variable
         $scope.$on('addVariable', function( ev ){
             $mdDialog.show({
