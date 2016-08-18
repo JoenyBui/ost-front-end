@@ -15,12 +15,18 @@
         vm.requestUrl = requestUrl;
         
         vm.submit = function () {
+            // POST Solution
+            var method = 'POST';
+
             if (vm.job.id != -1) {
                 vm.requestUrl += vm.job.id + '/';
+
+                // Update Solution
+                method = 'PUT';
             }
 
             /*Submit Job*/
-            $mdDialog.hide([vm.job, vm.requestUrl]);
+            $mdDialog.hide([vm.job, vm.requestUrl, method]);
         };
 
         vm.cancel = function () {

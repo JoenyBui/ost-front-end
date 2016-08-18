@@ -210,6 +210,10 @@
                         vm.problem.domain = data['domain']
                     }
 
+                    if ('status' in data) {
+                        vm.statusType.selectedItem = data['status'];
+                    }
+
                     if ('stem' in data) {
                         if(data['stem'].constructor == Object) {
                             if ('statement' in data['stem']) {
@@ -229,25 +233,40 @@
                     if ('keys' in data) {
                         if (data['keys'].constructor == Object) {
                             if ('answer' in data['keys']) {
-                                vm.problem.keys = data['keys']['answer']
+                                vm.problem.keys.answer = data['keys']['answer'];
                             }
 
                             if ('choices' in data['keys']) {
-                                vm.problem.choices = data['keys']['choices']
+                                vm.problem.keys.choices = data['keys']['choices'];
                             }
 
                             if ('variables' in data['keys']) {
-                                vm.problem.variables = data['keys']['variables']
+                                vm.problem.keys.variables = data['keys']['variables'];
                             }
                         }
                     }
 
-                    if ('status' in data) {
-                        vm.statusType.selectedItem = data['status'];
-                    }
-
                     if ('qtype' in data) {
                         vm.questionType.selectedItem = data['qtype'];
+
+                        var qtype = data['qtype'];
+
+                        if (qtype == 0) {
+                            /*True or False*/
+                            vm.questionType.tf.answer = vm.problem.keys.answer;
+                            vm.questionType.tf.choices = null;
+                        }
+                        else if (qtype == 1) {
+                            /*Multiple Choice*/
+                            vm.questionType.mc.answer = vm.problem.keys.answer;
+                            vm.questionType.mc.choices = vm.problem.keys.choices;
+                        }
+                        else if (qtype == 2) {
+                            /*Fill in the Blank*/
+                            vm.questionType.fib.answer = vm.problem.keys.answer;
+                            vm.questionType.fib.choices = null;
+
+                        }
                     }
 
                     if ('topics' in data) {
@@ -359,9 +378,10 @@
             .then(function(args) {
                 var job = args[0];
                 var requestUrl = args[1];
+                var method = args[2];
 
                 djangoAuth.request({
-                    method: 'POST',
+                    method: method,
                     url: requestUrl,
                     data: job
                 }).then(function(data) {

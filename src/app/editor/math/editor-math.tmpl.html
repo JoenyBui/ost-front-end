@@ -135,7 +135,8 @@
                     <md-list-item class="md-3-line" ng-repeat="choice in vm.questionType.mc.choices track by $index">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Choice {{$index+1}}</label>
-                            <input type="text" ng-model="choice">
+                            <!--<input type="text" ng-model="choice">-->
+                            <input type="text" ng-model="vm.questionType.mc.choices[$index]">
                         </md-input-container>
                     </md-list-item>
                 </md-list>

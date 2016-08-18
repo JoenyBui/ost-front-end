@@ -44,7 +44,7 @@
                 <!-- WHOLE NUMBER -->
                 <md-input-container>
                     <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
-                    <input ng-model="vm.item.value" class="dialog-close" name="whole" required/>
+                    <input ng-model="vm.variables.whole.values" class="dialog-close" name="whole" required/>
                     <div ng-messages="taskForm.task.$error">
                         <div ng-message when="required">
                             <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
@@ -55,17 +55,39 @@
 
             <div ng-if="vm.variables.selectedItem == 'real'">
                 <!-- REAL NUMBER -->
+                <md-input-container>
+                    <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                    <input ng-model="vm.variables.real.values" class="dialog-close" name="real" required/>
+                    <div ng-messages="taskForm.task.$error">
+                        <div ng-message when="required">
+                            <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div ng-if="vm.variables.selectedItem == 'text'">
+                <!-- TEXT -->
+                <md-input-container>
+                    <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                    <input ng-model="vm.variables.text.values" class="dialog-close" name="real" required/>
+                    <div ng-messages="taskForm.task.$error">
+                        <div ng-message when="required">
+                            <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                        </div>
+                    </div>
+                </md-input-container>
             </div>
 
             <div ng-if="vm.variables.selectedItem == 'whole_list'">
                 <!-- WHOLE LIST -->
                 <md-list ng-if="vm.variables.whole_list.values">
-                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_wl_item()">Add Itme</md-button>
+                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_wl_item()">Add Item</md-button>
 
                     <md-list-item class="md-3-line" ng-repeat="item in vm.variables.whole_list.values track by $index">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
-                            <input ng-model="item" class="dialog-close" required/>
+                            <input ng-model="vm.variables.whole_list.values[$index]" class="dialog-close" required/>
                             <div ng-messages="taskForm.task.$error">
                                 <div ng-message when="required">
                                     <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
@@ -79,18 +101,110 @@
 
             <div ng-if="vm.variables.selectedItem == 'real_list'">
                 <!-- REAL LIST -->
+                <md-list ng-if="vm.variables.whole_list.values">
+                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_rl_item()">Add Item</md-button>
+
+                    <md-list-item class="md-3-line" ng-repeat="item in vm.variables.whole_list.values track by $index">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>EDITOR.DIALOG.VARIABLE.VALUE</label>
+                            <input ng-model="vm.variables.real_list.values[$index]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+
             </div>
 
             <div ng-if="vm.variables.selectedItem == 'range'">
                 <!-- WHOLE RANGE -->
+                <md-list>
+                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_rl_item()">Add Item</md-button>
+
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Min</label>
+                            <input ng-model="vm.variables.range.values[0]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Max</label>
+                            <input ng-model="vm.variables.range.values[1]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Increment</label>
+                            <input ng-model="vm.variables.range.values[2]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                    </md-list-item>
+                </md-list>
             </div>
 
             <div ng-if="vm.variables.selectedItem == 'xrange'">
                 <!-- REAL RANGE -->
-            </div>
+                <md-list>
+                    <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_rl_item()">Add Item</md-button>
 
-            <div ng-if="vm.variables.selectedItem == 'text'">
-                <!-- TEXT -->
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Min</label>
+                            <input ng-model="vm.variables.xrange.values[0]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Max</label>
+                            <input ng-model="vm.variables.xrange.values[1]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-list-item>
+
+                    <md-list-item class="md-3-line">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate>Increment</label>
+                            <input ng-model="vm.variables.xrange.values[2]" class="dialog-close" required/>
+                            <div ng-messages="taskForm.task.$error">
+                                <div ng-message when="required">
+                                    <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                    </md-list-item>
+                </md-list>
             </div>
         </form>
     </md-dialog-content>

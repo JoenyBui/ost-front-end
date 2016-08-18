@@ -56,10 +56,10 @@
                 values: [null, null]
             },
             range: {
-                values: []
+                values: [0, 10, 1]
             },
             xrange: {
-                values: []
+                values: [0, 1, 0.1]
             },
             text: {
                 values: null
@@ -73,27 +73,47 @@
             type: 'whole'
         };
 
-        /////////////////////////
-
         vm.selectChangeType = function () {
+            vm.item.type = vm.variables.selectedItem;
+        };
+
+        vm.add_wl_item = function () {
+            vm.variables.whole_list.values.push(null);
+        };
+
+        vm.remove_wl_item = function () {
+
+        };
+
+        vm.add_rl_item = function () {
+            vm.variables.real_list.values.push(null);
+        };
+
+        vm.remove_rl_item = function () {
 
         };
 
         function hide() {
             if (vm.item.type == 'whole') {
-                vm.item.value = parseInt(vm.item.value);
+                vm.item.value = parseInt(vm.variables.whole.values);
             }
             else if (vm.item.type == 'real') {
-                vm.item.value = parseFloat(vm.item.value);
+                vm.item.value = parseFloat(vm.variables.real.values);
             }
-            else if(vm.item.type == 'range') {
-                //TODO: Check if the range format is correct.
+            else if(vm.item.type == 'text') {
+                vm.item.value = vm.variables.text.values;
+            }
+            else if (vm.item.type == 'whole_list') {
+                vm.item.value = vm.variables.whole_list.values;
+            }
+            else if (vm.item.type == 'real_list') {
+                vm.item.value = vm.variables.real_list.values;
+            }
+            else if (vm.item.type == 'range') {
+                vm.item.value = vm.variables.range.values;
             }
             else if (vm.item.type == 'xrange') {
-                //TODO: Check if the xrange format is correct.
-            }
-            else {
-                //TODO: Check if text looks clean.
+                vm.item.value = vm.variables.xrange.values;
             }
 
             $mdDialog.hide(vm.item);
