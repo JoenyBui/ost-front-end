@@ -14,7 +14,7 @@
 
         vm.feed = [];
 
-        djangoAuth.request({
+        var promiseProblem = djangoAuth.request({
             method: 'GET',
             url: 'v1/problem/problem-base/',
             data:{}
@@ -22,9 +22,7 @@
             $log.log(data);
             
             for (var key in data) {
-                vm.feed.push(
-                    data[key]
-                )
+                vm.feed.push(data[key]);
             }
         }, function (reason) {
             $log.log(reason);
@@ -33,7 +31,7 @@
         vm.openEntry = openEntry;
 
 
-        function openEntry(day, entry, $event) {
+        function openEntry(entry, $event) {
             $mdDialog.show({
                 controller: 'EditorDashboardDialogController',
                 controllerAs: 'vm',
@@ -42,8 +40,7 @@
                 focusOnOpen: false,
                 targetEvent: $event,
                 locals: {
-                    day: day,
-                    entry: entry
+                    problem: entry
                 }
             });
         }
