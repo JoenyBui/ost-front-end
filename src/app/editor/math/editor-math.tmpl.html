@@ -69,20 +69,9 @@
             </md-input-container>
 
         </tri-widget>
-
-        <!--<tri-widget flex title="{{'DASHBOARDS.DRAGGABLE.TITLE' | translate}}"-->
-                    <!--subtitle="{{'DASHBOARDS.DRAGGABLE.SUBTITLE4' | translate}}" title-position="top" palette-background="blue-grey:1000" background="primary">-->
-            <!--<md-content layout-padding palette-background="deep-orange:300" >-->
-                <!--<label>JSON Output</label>-->
-                <!--<json-formatter json="vm.problem" open="2"></json-formatter>-->
-                <!--<json-formatter json="vm.editorItems" open="2"></json-formatter>-->
-                <!--<json-formatter json="vm.topicItems" open="2"></json-formatter>-->
-            <!--</md-content>-->
-        <!--</tri-widget>-->
-
     </div>
 
-    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+    <div layout="row" layout-xs="column" layout-margin>
 
         <tri-widget flex title="Question" subtitle="Statement" palette-background="blue-grey:1000"
                     background="primary" content-padding>
@@ -112,7 +101,7 @@
                 </md-input-container>
             </div>
 
-            <div ng-if="vm.questionType.selectedItem == 0">
+            <div ng-if="vm.questionType.selectedItem == 2">
                 <!-- TRUE OR FALSE -->
 
                 <md-radio-group ng-model="vm.questionType.tf.answer">
@@ -121,7 +110,7 @@
                 </md-radio-group>
             </div>
 
-            <div ng-if="vm.questionType.selectedItem == 1">
+            <div ng-if="vm.questionType.selectedItem == 3">
                 <!-- MULTIPLE CHOICE -->
 
                 <md-input-container class="md-block">
@@ -146,7 +135,7 @@
                 </md-list>
             </div>
 
-            <div ng-if="vm.questionType.selectedItem == 2">
+            <div ng-if="vm.questionType.selectedItem == 1">
                 <!-- FILL IN THE BLANK -->
                 <md-input-container class="md-block">
                     <label>Answer</label>
@@ -166,6 +155,8 @@
                         <th>Name</th>
                         <th>Value</th>
                         <th>Type</th>
+                        <th>Edit</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody class="md-caption">
@@ -175,8 +166,13 @@
                         <td>{{var.value}}</td>
                         <td>{{var.type}}</td>
                         <td>
-                            <md-button ng-click="vm.editVariable(var, $event)" class="md-icon-button" aria-label="Edit Variable">
-                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                            <md-button ng-click="vm.editVariable(var)" class="md-icon-button" aria-label="Edit Variable">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                            </md-button>
+                        </td>
+                        <td>
+                            <md-button ng-click="vm.removeVariable(var)" class="md-icon-button" aria-label="Edit Variable">
+                                <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
                             </md-button>
                         </td>
                     </tr>

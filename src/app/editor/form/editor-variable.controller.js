@@ -6,10 +6,8 @@
         .controller('EditorVariableDialogController', EditorVariableDialogController);
 
     /* @ngInject */
-    function EditorVariableDialogController($state, $mdDialog) {
+    function EditorVariableDialogController($state, $mdDialog, variable) {
         var vm = this;
-        vm.cancel = cancel;
-        vm.hide = hide;
 
         vm.variables = {
             name: 'Var1',
@@ -67,14 +65,42 @@
             selectedItem: 'whole'
         };
 
-        vm.item = {
-            name: 'Var1',
-            value: 1,
-            type: 'whole'
-        };
+        if (variable == null) {
+            vm.item = {
+                name: 'Var1',
+                value: 1,
+                type: 'whole'
+            };  
+        }
+        else {
+            vm.item = variable;
+        }
 
+        // Set variable.
+        vm.variables.selectedItem = vm.item.type;
+        vm.variables.name = vm.item.name;
+
+        if (vm.item.type == 'whole') {
+            vm.variables.whole.values = vm.item.value;
+        } else if (vm.item.type == 'real') {
+            vm.variables.real.values = vm.item.value;
+        } else if (vm.item.type == 'whole_list') {
+            vm.variables.whole_list.values = vm.item.value;
+        } else if (vm.item.type == 'real_list') {
+            vm.variables.real_list.values = vm.item.value;
+        } else if (vm.item.type == 'range') {
+            vm.variables.range.values = vm.item.value;
+        } else if (vm.item.type == 'xrange') {
+            vm.variables.xrange.values = vm.item.value;
+        } else if (vm.item.type == 'text') {
+            vm.variables.text.values = vm.item.value;
+        }
+        
         vm.selectChangeType = function () {
-            vm.item.type = vm.variables.selectedItem;
+            /*
+            On combobox select change.
+            */
+            // vm.item.type = vm.variables.selectedItem;
         };
 
         vm.add_wl_item = function () {
@@ -93,7 +119,11 @@
 
         };
 
-        function hide() {
+        vm.hide = function() {
+            // Store to item and pass back to main form.
+            vm.item.name = vm.variables.name;
+            vm.item.type = vm.variables.selectedItem;
+
             if (vm.item.type == 'whole') {
                 vm.item.value = parseInt(vm.variables.whole.values);
             }
@@ -116,10 +146,14 @@
                 vm.item.value = vm.variables.xrange.values;
             }
 
-            $mdDialog.hide(vm.item);
+            $mdDialog.hide(vm.item);  
         }
 
-        function cancel() {
+        vm.cancel = function() {
+            /*
+            Cancel form
+
+            */
             $mdDialog.cancel();
         }
     }

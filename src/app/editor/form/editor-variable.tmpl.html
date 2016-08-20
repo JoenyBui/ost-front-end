@@ -13,7 +13,7 @@
         <form name="taskForm" novalidate layout="column">
             <md-input-container>
                 <label translate>EDITOR.DIALOG.VARIABLE.NAME</label>
-                <input ng-model="vm.item.name" class="dialog-close" name="task" required/>
+                <input ng-model="vm.variables.name" class="dialog-close" name="task" required/>
                 <div ng-messages="taskForm.task.$error">
                     <div ng-message when="required">
                         <span translate>MENU.TODO.DIALOG.TASKFORM.PLEASE_ENTER</span>

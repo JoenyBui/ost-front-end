@@ -10,6 +10,15 @@
         
         var vm = this;
 
+        var UNASSIGNED = 0;
+        var FILL_IN_THE_BLANK = 1;
+        var TRUE_OF_FALSE = 2;
+        var MULTIPLE_CHOICE = 3;
+        var PROBLEM_SET = 4;
+        var SHORT_ANSWER = 5;
+        var MULTIPLE_ANSWER = 6;
+        var WORD_PROBLEM = 7;
+
         vm.problemId = null;
         vm.autocompleteRequireMatch = true;
 
@@ -58,9 +67,9 @@
 
         vm.questionType = {
             options : [
-                ['True or False', 0],
-                ['Multiple Choice', 1],
-                ['Fill-in-the-Blank', 2]
+                ['Fill-in-the-Blank', FILL_IN_THE_BLANK],
+                ['True or False', TRUE_OF_FALSE],
+                ['Multiple Choice', MULTIPLE_CHOICE]
             ],
             selectedItem: 0,
             tf: {
@@ -75,9 +84,9 @@
             }
         };
         vm.qtype_options = [
-            ['True or False', 0],
-            ['Multiple Choice', 1],
-            ['Fill-in-the-Blank', 2]
+            ['Fill-in-the-Blank', FILL_IN_THE_BLANK],
+            ['True or False', TRUE_OF_FALSE],
+            ['Multiple Choice', MULTIPLE_CHOICE]
         ];
 
         vm.add_mc_item = function () {
@@ -92,7 +101,24 @@
             }
         };
 
-        vm.remove_variable = function (variable) {
+        vm.editVariable = function (variable) {
+            $mdDialog.show({
+                    templateUrl: 'app/editor/form/editor-variable.tmpl.html',
+                    // targetEvent: ev,
+                    controller: 'EditorVariableDialogController',
+                    controllerAs: 'vm',
+                    locals: {
+                        variable: variable
+                    }
+                })
+                .then(function(answer) {
+                    // Broadcast the update with some toast.
+                    // vm.problem.keys.variables.push(answer);
+                });
+
+        }
+
+        vm.removeVariable = function (variable) {
             for(var i = vm.problem.keys.variables.length - 1; i >= 0; i--) {
                 if(vm.problem.keys.variables[i] === variable) {
                     vm.problem.keys.variables.splice(i, 1);
@@ -185,18 +211,6 @@
             };
         };
 
-        // vm.submit_job = function () {
-        //     djangoAuth.request({
-        //         method: 'POST',
-        //         url: 'v1/math/maths/',
-        //         data: vm.problem
-        //     }).then(function(data) {
-        //         $log.log(data);
-        //     }, function(reason) {
-        //         $log.log(reason);
-        //     });
-        // };
-
 
         // Ping existing database if there is something interesting.
         if ($stateParams.hasOwnProperty('problemId')) {
@@ -263,17 +277,17 @@
 
                         var qtype = data['qtype'];
 
-                        if (qtype == 0) {
+                        if (qtype == TRUE_OF_FALSE) {
                             /*True or False*/
                             vm.questionType.tf.answer = vm.problem.keys.answer;
                             vm.questionType.tf.choices = null;
                         }
-                        else if (qtype == 1) {
+                        else if (qtype == MULTIPLE_CHOICE) {
                             /*Multiple Choice*/
                             vm.questionType.mc.answer = vm.problem.keys.answer;
                             vm.questionType.mc.choices = vm.problem.keys.choices;
                         }
-                        else if (qtype == 2) {
+                        else if (qtype == FILL_IN_THE_BLANK) {
                             /*Fill in the Blank*/
                             vm.questionType.fib.answer = vm.problem.keys.answer;
                             vm.questionType.fib.choices = null;
@@ -360,18 +374,18 @@
 
             job.qtype = vm.questionType.selectedItem;
 
-            job.keys = {};
-            if (job.qtype == 0) {
+            // job.keys = {};
+            if (job.qtype == TRUE_OF_FALSE) {
                 /*True or False*/
                 job.keys.answer = vm.questionType.tf.answer;
                 job.keys.choices = null;
             }
-            else if (job.qtype == 1) {
+            else if (job.qtype == MULTIPLE_CHOICE) {
                 /*Multiple Choice*/
                 job.keys.answer = vm.questionType.mc.answer;
                 job.keys.choices = vm.questionType.mc.choices;
             }
-            else if (job.qtype == 2) {
+            else if (job.qtype == FILL_IN_THE_BLANK) {
                 /*Fill in the Blank*/
                 job.keys.answer = vm.questionType.fib.answer;
                 job.keys.choices = null;
@@ -405,17 +419,16 @@
             })
         });
 
-        vm.editVariables = function (variable) {
-
-        }
-        
         // Add Variable
         $scope.$on('addVariable', function( ev ){
             $mdDialog.show({
                     templateUrl: 'app/editor/form/editor-variable.tmpl.html',
                     targetEvent: ev,
                     controller: 'EditorVariableDialogController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    locals: {
+                        variable: null
+                    }
                 })
                 .then(function(answer) {
                     vm.problem.keys.variables.push(answer);
