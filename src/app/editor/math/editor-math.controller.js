@@ -103,20 +103,19 @@
 
         vm.editVariable = function (variable) {
             $mdDialog.show({
-                    templateUrl: 'app/editor/form/editor-variable.tmpl.html',
-                    // targetEvent: ev,
-                    controller: 'EditorVariableDialogController',
-                    controllerAs: 'vm',
-                    locals: {
-                        variable: variable
-                    }
-                })
-                .then(function(answer) {
-                    // Broadcast the update with some toast.
-                    // vm.problem.keys.variables.push(answer);
-                });
-
-        }
+                templateUrl: 'app/editor/form/editor-variable.tmpl.html',
+                // targetEvent: ev,
+                controller: 'EditorVariableDialogController',
+                controllerAs: 'vm',
+                locals: {
+                    variable: variable
+                }
+            })
+            .then(function (answer) {
+                // Broadcast the update with some toast.
+                // vm.problem.keys.variables.push(answer);
+            });
+        };
 
         vm.removeVariable = function (variable) {
             for(var i = vm.problem.keys.variables.length - 1; i >= 0; i--) {
