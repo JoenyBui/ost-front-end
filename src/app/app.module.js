@@ -25,7 +25,7 @@
             'ngFileUpload',
             'ui.codemirror',
 
-
+            'app.components',
             'app.editor',
             'app.classroom',
             'app.authentication',

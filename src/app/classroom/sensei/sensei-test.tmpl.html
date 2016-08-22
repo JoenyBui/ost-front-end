@@ -14,7 +14,7 @@
     </div>
 
     <div layout="row" layout-xs="column" layout-margin>
-        <tri-widget content-padding>
+        <tri-widget content-padding title="Search for Problems">
             <md-toolbar class="md-hue-1">
                 <div class="md-toolbar-tools">
                     <md-input-container md-theme="input" flex>
@@ -28,21 +28,10 @@
         </tri-widget>
     </div>
 
-    <div layout="row" layout-xs="column" layout-margin>
-        <tri-widget content-padding>
 
-            <md-content>
-                <md-list flex>
-                    <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
-
-                    <md-list-item class="md-3-line" ng-repeat="item in vm.problemInfo" ng-click="null">
-                        <md-whiteframe class="md-whiteframe-z1">
-                            <h3>{{item.stem}}</h3>
-                        </md-whiteframe>
-                    </md-list-item>
-
-                </md-list>
-            </md-content>
-        </tri-widget>
+    <div layout="column" layout-xs="column" layout-margin ng-repeat="item in vm.problemInfo track by $index">
+        <ost-problem title="Problem {{$index + 1}}"
+                     item="item"
+                     layout-gt-md="100" layout-xs="100"></ost-problem>
     </div>
 </div>
