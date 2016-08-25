@@ -9,7 +9,7 @@
         .controller('SenseiTestController', SenseiTestController);
 
     /* @ngInject */
-    function SenseiTestController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
+    function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, djangoAuth) {
         var vm = this;
 
         vm.test = {
@@ -87,6 +87,8 @@
                 data: {}
             }).then(function (data) {
                 vm.results = data.results;
+
+                $mdSidenav('right').toggle();
             }, function (reason) {
                 console.log(reason);
             });
@@ -120,12 +122,30 @@
         /**
          * Create filter function for a query string
          */
-        function createFilterFor(query) {
+        vm.createFilterFor = function (query) {
             var lowercaseQuery = angular.lowercase(query);
 
             return function filterFn(state) {
                 return (state.value.indexOf(lowercaseQuery) === 0);
             };
-        }
+        };
+
+        vm.add_check_item = function () {
+            for (var index in vm.results) {
+                var item = vm.results[index];
+
+                if ('selected' in item) {
+                    vm.test.problems.push(item.id);
+
+                    if (!(item.id in vm.problemInfo)) {
+                        vm.problemInfo[item.id] = item.data;
+                    }
+
+                }
+            }
+            
+            $mdSidenav('right').toggle();
+        };
+
     }
 })();

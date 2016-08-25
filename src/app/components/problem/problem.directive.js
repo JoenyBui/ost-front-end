@@ -19,7 +19,9 @@
                 subtitle: '@',
                 columns: '=',
                 contents: '=',
-                item: '='
+                item: '=',
+                flex: '@',
+                flexXs: '@'
             },
             bindToController: true,
             link: link,

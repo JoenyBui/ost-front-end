@@ -1,8 +1,14 @@
-<tri-widget flex
-            title="{{vm.title}}"
-            subtitle="{{::vm.subtitle}}"
-            content-padding>
-    <div>
+<!--<tri-widget flex-->
+            <!--title="{{vm.title}}"-->
+            <!--subtitle="{{::vm.subtitle}}"-->
+            <!--content-padding>-->
+    <!--<div>-->
+<!--<md-card flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">-->
+<md-card flex="vm.flex" flex-xs="vm.flexXs">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <h2 class="md-toolbar-tools" translate>{{vm.title}}</h2>
+    </md-toolbar>
+    <md-card-content>
         <p>
             {{::vm.item.stem}}
         </p>
@@ -26,6 +32,8 @@
                 <md-radio-button value="{{$index}}">{{choice}}</md-radio-button>
             </md-radio-group>
         </div>
+    </md-card-content>
+</md-card>
 
-    </div>
-</tri-widget>
+    <!--</div>-->
+<!--</tri-widget>-->
