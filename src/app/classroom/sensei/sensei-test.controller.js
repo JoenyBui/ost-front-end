@@ -131,6 +131,8 @@
         };
 
         vm.add_check_item = function () {
+            var dataChanged = false;
+
             for (var index in vm.results) {
                 var item = vm.results[index];
 
@@ -139,11 +141,26 @@
 
                     if (!(item.id in vm.problemInfo)) {
                         vm.problemInfo[item.id] = item.data;
+
+                        dataChanged = true;
                     }
 
                 }
             }
-            
+
+            if (dataChanged) {
+                djangoAuth.request({
+                    method: 'PUT',
+                    url: 'v1/classroom/exam-problems/' + vm.test.id + '/',
+                    data: vm.test
+                }).then(function (data) {
+
+                }, function (reason) {
+
+                });
+            }
+
+
             $mdSidenav('right').toggle();
         };
 
