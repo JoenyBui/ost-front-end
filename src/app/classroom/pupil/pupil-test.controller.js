@@ -79,15 +79,37 @@
         // watches
 
         $scope.$on('submitTest', function( ev ){
+            var testAnswers = {
+                "exam": vm.test.id,
+                "student": 1,
+                "answers": {}
+            };
+
+            for (var key in vm.problemInfo) {
+                var item = vm.problemInfo[key];
+
+                testAnswers.answers[key] = item.answer;
+            }
+
             $mdDialog.show({
                 templateUrl: 'app/classroom/pupil/submit-test-dialog.tmpl.html',
                 targetEvent: ev,
                 controller: 'SubmitTestDialogController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                locals: {
+                    test: testAnswers
+                }
             })
-            .then(function(answer) {
-                //TODO: Return answer and grade
-                vm.todos.push(answer);
+            .then(function(test) {
+                djangoAuth.request({
+                    method: 'POST',
+                    url: 'v1/classroom/exam-answers/',
+                    data: test
+                }).then(function(data) {
+                    $log.log(data);
+                }, function(reason) {
+                    $log.log(reason);
+                });
             });
         });
     }

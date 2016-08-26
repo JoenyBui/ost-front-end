@@ -6,21 +6,15 @@
         .controller('SubmitTestDialogController', SubmitTestDialogController);
 
     /* @ngInject */
-    function SubmitTestDialogController($state, $mdDialog) {
+    function SubmitTestDialogController($state, $mdDialog, test) {
         var vm = this;
         vm.cancel = cancel;
         vm.hide = hide;
 
-        vm.item = {
-            description: '',
-            priority: '',
-            selected: false
-        };
-
-        /////////////////////////
+        vm.test = test;
 
         function hide() {
-            $mdDialog.hide(vm.item);
+            $mdDialog.hide(vm.test);
         }
 
         function cancel() {
