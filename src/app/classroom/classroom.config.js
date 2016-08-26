@@ -82,9 +82,9 @@
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/math/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/fab-button.tmpl.html',
 
-                        controller: 'EditorFractionFabController',
+                        controller: 'PupilFabController',
                         controllerAs: 'vm'
                     }
                 },
@@ -96,12 +96,18 @@
                 }
             })
             .state('triangular.admin-default.pupil-test', {
-                url: '/classroom/pupil/test',
+                url: '/classroom/pupil/test/:testId',
                 views: {
                     '': {
                         templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html',
 
                         controller: 'PupilTestController',
+                        controllerAs: 'vm'
+                    },
+                    'belowContent': {
+                        templateUrl: 'app/classroom/pupil/fab-button.tmpl.html',
+
+                        controller: 'PupilFabController',
                         controllerAs: 'vm'
                     }
                 },
