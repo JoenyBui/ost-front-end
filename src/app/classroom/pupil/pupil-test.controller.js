@@ -88,7 +88,7 @@
             for (var key in vm.problemInfo) {
                 var item = vm.problemInfo[key];
 
-                testAnswers.answers[key] = item.answer;
+                testAnswers.answers[parseInt(key)] = item.answer;
             }
 
             $mdDialog.show({

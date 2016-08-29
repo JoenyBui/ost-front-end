@@ -61,3 +61,11 @@
         </md-grid-tile>
     </md-grid-list>
 </md-list-item>
+
+<md-content>
+    <md-virtual-repeat-container id="vertical-container">
+        <div md-virtual-repeat="item in vm.dynamicItems" md-on-demand class="repeated-item" flex>
+            {{item}}
+        </div>
+    </md-virtual-repeat-container>
+</md-content>
