@@ -9,7 +9,7 @@
         .controller('EditorDashboardController', EditorDashboardController);
     
     /* @ngInject */
-    function EditorDashboardController($mdDialog, $log, $timeout, djangoAuth) {
+    function EditorDashboardController($scope, $mdDialog, $log, $timeout, djangoAuth) {
         var vm = this;
 
         vm.feed = [];
@@ -99,5 +99,57 @@
         };
 
         this.dynamicItems = new DynamicItems();
+
+
+        // Add Variable
+        $scope.$on('addMath', function( ev ){
+            $mdDialog.show({
+                templateUrl: 'app/editor/dashboard/add-math.tmpl.html',
+                targetEvent: ev,
+                controller: 'AddMathDialogController',
+                controllerAs: 'vm',
+                locals: {
+                    variable: null
+                }
+            })
+            .then(function(answer) {
+                vm.problem.keys.variables.push(answer);
+            });
+        });
+
+
+        // Add Variable
+        $scope.$on('addReading', function( ev ){
+            $mdDialog.show({
+                templateUrl: 'app/editor/dashboard/add-reading.tmpl.html',
+                targetEvent: ev,
+                controller: 'AddReadingDialogController',
+                controllerAs: 'vm',
+                locals: {
+                    variable: null
+                }
+            })
+            .then(function(answer) {
+                vm.problem.keys.variables.push(answer);
+            });
+        });
+
+
+        // Add Variable
+        $scope.$on('addWriting', function( ev ){
+            $mdDialog.show({
+                templateUrl: 'app/editor/dashboard/add-writing.tmpl.html',
+                targetEvent: ev,
+                controller: 'AddWritingDialogController',
+                controllerAs: 'vm',
+                locals: {
+                    variable: null
+                }
+            })
+            .then(function(answer) {
+                vm.problem.keys.variables.push(answer);
+            });
+        });
+
     }
 })();

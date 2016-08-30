@@ -11,14 +11,13 @@
 
         vm.fabDirection = 'up';
         vm.fabStatus = true;
-        vm.fabAnimation = 'md-fling';
-
+        vm.fabAnimation = 'md-scale';
 
         vm.addChoice = function ($event) {
             $rootScope.$broadcast('addChoice', $event);
         };
 
-        vm.addFile = function ($event) {;
+        vm.addFile = function ($event) {
             $rootScope.$broadcast('addFile', $event);
         };
 

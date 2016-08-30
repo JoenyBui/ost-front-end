@@ -28,6 +28,17 @@
             "SUBMIT": {
                 "TITLE": "Submit Job"
             }
+        },
+        "DASHBOARD": {
+            "READING": {
+                "TITLE": "Add New Reading Problem"
+            },
+            "MATH": {
+                "TITLE": "Add New Math Problem"
+            },
+            "WRITING": {
+                "TITLE": "Add New Writing Problem"
+            }
         }
     }
 }

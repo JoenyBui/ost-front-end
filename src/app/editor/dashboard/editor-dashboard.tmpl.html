@@ -43,16 +43,13 @@
 <md-list-item>
     <md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">
         <md-grid-tile ng-click="vm.openEntry(entry, $event)"
+                      class="md-whiteframe-3dp"
                       md-rowspan="1"
                       md-colspan="1"
                       ng-repeat="entry in vm.feed">
 
-            <md-grid-tile-header>
-                <h3>{{::entry.name}}</h3>
-            </md-grid-tile-header>
-
             <h3>{{entry.name}}</h3>
-            {{entry.info.domain}}
+            <h4>{{entry.info.domain}}</h4>
             {{entry.info.status}}
 
             <md-grid-tile-footer>
