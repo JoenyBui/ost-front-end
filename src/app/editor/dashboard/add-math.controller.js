@@ -6,15 +6,25 @@
         .module('app.editor')
         .controller('AddMathDialogController', AddMathDialogController);
 
-    function AddMathDialogController($rootScope, $log, djangoAuth) {
+    function AddMathDialogController($rootScope, $mdDialog, $state, $log, djangoAuth) {
         var vm = this;
 
         vm.problem = {
-            id: -1,
             name: '',
+            status: 0,
+            editors: [],
+            topics: [1],
             domain: 1000,
-            stem: {},
-            keys: {}
+            stem: {
+                "statement": "",
+                "figures": [],
+                "charts": []
+            },
+            keys: {
+                "variables": [],
+                "choices": [],
+                "answer": null
+            }
         };
 
         // ====================================================
@@ -101,6 +111,43 @@
             return function filterFn(editors) {
                 return editors._lowername.indexOf(lowercaseQuery) === 0;
             };
+        };
+
+        vm.createNewProblem = function () {
+            var job = angular.copy(vm.problem);
+
+            job.editors = [];
+            for (var index in vm.editorItems) {
+                var item = vm.editorItems[index];
+                job.editors.push(item.id);
+            }
+
+            job.topics = [];
+            for (var index in vm.topicItems) {
+                var item = vm.topicItems[index];
+                job.topics.push(item.id);
+            }
+
+            var addItem = djangoAuth.request({
+                method: 'POST',
+                url: 'v1/math/maths/',
+                data: job
+            }).then(function (data) {
+                $state.go(
+                    'triangular.admin-default.math', {
+                        'problemId': data.id
+                    });
+
+                $mdDialog.hide()
+            }, function (reason) {
+                $log.log(reason);
+
+                $mdDialog.hide();
+            });
+        };
+
+        vm.cancel = function () {
+            $mdDialog.hide();
         };
     }
 })();
