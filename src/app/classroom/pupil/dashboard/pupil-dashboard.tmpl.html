@@ -1,18 +1,24 @@
-<div class="dashboard-container" layout="column">
-    <tri-widget flex content-padding>
-        <md-toolbar md-theme="{{triSkin.elements.content}}">
-            <h2 class="md-toolbar-tools" translate>New Math Template</h2>
-        </md-toolbar>
+<md-content>
+    <md-list flex>
+        <md-list-item ng-repeat="item in vm.tests" ng-click="vm.openTest(item)">
+            <p>{{item.name}}</p>
 
-        <md-list flex>
-            <md-list-item class="md-3-line" ng-repeat="topic in vm.topicLists | filter:query | orderBy: orderList"
-                          ng-click="null">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Name: {{topic.name}}</h3>
-                    <h4>Key: {{topic.key}}</h4>
-                    <md-divider ng-hide="$last"></md-divider>
-                </div>
-            </md-list-item>
-        </md-list>
-    </tri-widget>
-</div>
+            <md-menu>
+                <md-button ng-click="$mdOpenMenu()" aria-label="open menu">
+                    <md-icon md-font-icon="zmdi zmdi-more-vert" class="md-primary"></md-icon>
+                </md-button>
+
+                <md-menu-content>
+                    <md-menu-item ng-repeat="item in ::vm.menu.items">
+                        <md-button ng-click="item.click($event)">
+                            <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
+                            <span translate>{{::item.title}}</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>
