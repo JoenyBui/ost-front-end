@@ -1,0 +1,65 @@
+<md-dialog aria-label="Add Variable" flex="60" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span translate>EDITOR.DASHBOARD.MATH.TITLE</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-divider></md-divider>
+
+    <div layout="column" layout-xs="column" layout-margin="">
+
+        <md-input-container class="md-block">
+            <label>Problem Name</label>
+            <input type='text' ng-model="vm.problem.name">
+        </md-input-container>
+
+        <md-chips ng-model="vm.topicItems"
+                  md-autocomplete-snap
+                  md-transform-chip="vm.transformChip($chip)"
+                  md-require-match="vm.autocompleteRequireMatch">
+            <md-autocomplete
+                    md-selected-item="vm.topicSelectedItem"
+                    md-search-text="vm.topicSearchText"
+                    md-items="item in vm.querySearchTopic(vm.topicSearchText)"
+                    md-item-text="item.name"
+                    placeholder="Search for topics">
+                <span md-highlight-text="vm.topicSearchText">{{item.name}} ({{item.key}})</span>
+            </md-autocomplete>
+            <md-chip-template>
+                        <span>
+                            <strong>{{$chip.name}}</strong>
+                            <em>({{$chip.key}})</em>
+                        </span>
+            </md-chip-template>
+        </md-chips>
+
+        <md-chips ng-model="vm.editorItems"
+                  md-autocomplete-snap
+                  md-transform-chip="vm.transformChip($chip)"
+                  md-require-match="vm.autocompleteRequireMatch">
+            <md-autocomplete
+                    md-selected-item="vm.editorSelectedItem"
+                    md-search-text="vm.editorSearchText"
+                    md-items="item in vm.querySearchEditor(vm.editorSearchText)"
+                    md-item-text="item.pen_name"
+                    placeholder="Search for editors">
+                <span md-highlight-text="vm.editorSearchText">{{item.pen_name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+                        <span>
+                            <strong>{{$chip.pen_name}}</strong>
+                        </span>
+            </md-chip-template>
+        </md-chips>
+    </div>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.createNewProblem()" class="md-primary" ng-disabled="taskForm.$invalid">Create Problem</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

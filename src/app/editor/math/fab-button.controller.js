@@ -11,37 +11,36 @@
 
         vm.fabDirection = 'up';
         vm.fabStatus = true;
-        vm.fabAnimation = 'md-fling';
+        vm.fabAnimation = 'md-scale';
 
-
-        vm.add_choice = function ($event) {
-            this.fraction.keys.choices.push("1/2");
+        vm.addChoice = function ($event) {
+            $rootScope.$broadcast('addChoice', $event);
         };
 
-        vm.add_file = function ($event) {
-            console.log('Add File');
+        vm.addFile = function ($event) {
             $rootScope.$broadcast('addFile', $event);
         };
 
-        vm.add_line_chart = function ($event) {
-            console.log('Add Line Chart');
+        vm.addLineChart = function ($event) {
             $rootScope.$broadcast('addLineChart', $event);
         };
 
-        vm.add_image = function ($event) {
-            console.log('Add Image');
+        vm.addImage = function ($event) {
             $rootScope.$broadcast('addImage', $event);
 
         };
 
-        vm.add_pie_chart = function ($event) {
-            console.log('Add Pie Chart');
+        vm.addPieChart = function ($event) {
             $rootScope.$broadcast('addPieChart', $event);
         };
 
-        vm.add_variable = function ($event) {
+        vm.addVariable = function ($event) {
             $rootScope.$broadcast('addVariable', $event);
         };
+
+        vm.submitJob = function ($event) {
+            $rootScope.$broadcast('submitJob', $event);
+        }
 
     }
 })();

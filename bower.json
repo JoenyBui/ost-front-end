@@ -36,7 +36,8 @@
     "d3": "^3.5.16",
     "angular-ui-codemirror": "^0.3.0",
     "material-design-icons": "^2.2.0",
-    "json-formatter": "^0.5.0"
+    "json-formatter": "^0.5.0",
+    "restangular": "^1.5.2"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8"

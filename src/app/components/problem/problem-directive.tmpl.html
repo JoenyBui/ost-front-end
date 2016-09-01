@@ -1,0 +1,39 @@
+<!--<tri-widget flex-->
+            <!--title="{{vm.title}}"-->
+            <!--subtitle="{{::vm.subtitle}}"-->
+            <!--content-padding>-->
+    <!--<div>-->
+<!--<md-card flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">-->
+<md-card flex="vm.flex" flex-xs="vm.flexXs">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <h2 class="md-toolbar-tools" translate>{{vm.title}}</h2>
+    </md-toolbar>
+    <md-card-content>
+        <p>
+            {{::vm.item.stem}}
+        </p>
+
+        <div ng-if="vm.item.qtype == vm.FILL_IN_THE_BLANK">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Answer</label>
+                <input ng-model="vm.item.answer">
+            </md-input-container>
+        </div>
+
+        <div ng-if="vm.item.qtype == vm.TRUE_OF_FALSE">
+            <md-radio-group ng-model="vm.item.answer">
+                <md-radio-button ng-value="true">True</md-radio-button>
+                <md-radio-button ng-value="false">False</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div ng-if="vm.item.qtype == vm.MULTIPLE_CHOICE">
+            <md-radio-group ng-model="vm.item.answer" ng-repeat="choice in vm.item.choices track by $index">
+                <md-radio-button ng-value="{{$index}}">{{choice}}</md-radio-button>
+            </md-radio-group>
+        </div>
+    </md-card-content>
+</md-card>
+
+    <!--</div>-->
+<!--</tri-widget>-->

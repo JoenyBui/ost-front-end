@@ -1,0 +1,138 @@
+<div class="todo-container">
+    <div layout-fill layout="row" layout-align="center center">
+        <md-card flex="80" flex-xs="90" class="margin-top-20 margin-bottom-20">
+            <md-toolbar>
+                <!--<div class="md-toolbar-tools">-->
+                    <!--<md-button ng-click="showSearch = !showSearch" aria-label="Back">-->
+                    <!--<ng-md-icon icon="arrow_back"></ng-md-icon>-->
+                    <!--</md-button>-->
+                    <!--&lt;!&ndash;<h3 flex="10">&ndash;&gt;-->
+                    <!--Back-->
+                    <!--</h3>-->
+                <form class="md-toolbar-tools" id="search" ng-submit="vm.searchTextChange(vm.searchText)">
+                    <!--<md-input-container md-theme="input" flex>-->
+                    <md-input-container  flex>
+                        <label>&nbsp;</label>
+                        <input type='text' ng-model="vm.searchText" placeholder="enter search" autofocus>
+                    </md-input-container>
+
+                    <md-button aria-label="Search" ng-click="vm.searchTextChange(vm.searchText)">
+                        <md-icon md-font-icon="zmdi zmdi-search alert-error"></md-icon>
+                    </md-button>
+                </form>
+                <!--</div>-->
+
+            </md-toolbar>
+        </md-card>
+    </div>
+
+    <div class="dashboard-container overlay-10 padded-content-page" layout="column">
+        <div layout-fill layout="row" layout-align="center center">
+            <md-card flex="80" flex-xs="90" class="margin-top-20 margin-bottom-20">
+                <md-toolbar md-theme="{{triSkin.elements.content}}">
+                    <h2 class="md-toolbar-tools" translate>Test</h2>
+                </md-toolbar>
+
+            <!--<tri-widget content-padding flex title="Test" subtitle="Info">-->
+                <md-card-content class="overflow-auto">
+                <md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">
+                    <label>Problem ID</label>
+                    <input type='text' ng-model="vm.test.id" readonly>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Problem Name</label>
+                    <input type='text' ng-model="vm.test.name">
+                </md-input-container>
+                </md-card-content>
+                <!--<md-list>-->
+                <!--<md-list-item class="md-2-line" ng-repeat="item in vm.results">-->
+                <!--<md-checkbox ng-model="item.done"></md-checkbox>-->
+                <!--<div class="md-list-item-text">-->
+                <!--<h3>ID: {{item.id}}</h3>-->
+                <!--<p>Name: {{item.info.name}}</p>-->
+                <!--</div>-->
+                <!--<md-divider></md-divider>-->
+                <!--</md-list-item>-->
+                <!--</md-list>-->
+
+                <!--<md-autocomplete-->
+                <!--class="margin-bottom-20"-->
+                <!--ng-disabled="vm.isDisabled"-->
+                <!--md-no-cache="vm.noCache"-->
+                <!--md-selected-item="selectedItem"-->
+                <!--md-search-text-change="vm.searchTextChange(vm.searchText)"-->
+                <!--md-search-text="vm.searchText"-->
+                <!--md-selected-item-change="vm.selectedItemChange(item)"-->
+                <!--md-items="item in vm.querySearch(vm.searchText)"-->
+                <!--md-item-text="item.display"-->
+                <!--md-min-length="0"-->
+                <!--placeholder="Search problem instance">-->
+
+                <!--<md-item-template>-->
+                <!--<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>-->
+                <!--</md-item-template>-->
+
+                <!--<md-not-found>-->
+                <!--No matches found.-->
+                <!--</md-not-found>-->
+                <!--</md-autocomplete>-->
+            <!--</tri-widget>-->
+            </md-card>
+        </div>
+
+        <!--<div layout="row" layout-xs="column" layout-margin>-->
+        <!--<tri-widget content-padding title="Search for Problems">-->
+        <!--<md-toolbar class="md-hue-1">-->
+        <!--<div class="md-toolbar-tools">-->
+        <!--<md-input-container md-theme="input" flex>-->
+        <!--&lt;!&ndash;<labe>$nbsp;</labe>&ndash;&gt;-->
+        <!--<input ng-model="" placeholder="enter search">-->
+        <!--</md-input-container>-->
+
+        <!--<md-button aria-label="Search"><md-icon icon="search"></md-icon></md-button>-->
+        <!--</div>-->
+        <!--</md-toolbar>-->
+        <!--</tri-widget>-->
+        <!--</div>-->
+
+        <div layout-fill layout="column" layout-xs="column"
+             ng-repeat="(key, item) in vm.problemInfo track by $index">
+            <ost-problem title="Problem {{key}}"
+                         item="item" layout-margin layout-align="center center"
+                         flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">
+            </ost-problem>
+        </div>
+    </div>
+
+</div>
+
+<!-- right sidebar -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Searched Problem Instance</h1>
+    </md-toolbar>
+
+    <md-content class="md-padding">
+        <!--<p>This is the right sidebar</p>-->
+
+        <md-list flex>
+            <md-list-item class="md-2-line" ng-repeat="item in vm.results">
+                <md-checkbox ng-model="item.selected"></md-checkbox>
+                <div class="md-list-item-text">
+                    <h3>ID: {{item.id}}</h3>
+                    <p>Name: {{item.info.name}}</p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+
+        <md-divider></md-divider>
+
+        <div class="button-toolbar" layout="row" layout-align="start center">
+            <md-button class="md-accent" ng-click="vm.add_check_item()">Add Problem</md-button>
+        </div>
+    </md-content>
+
+
+</md-sidenav>

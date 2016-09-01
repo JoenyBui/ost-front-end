@@ -24,8 +24,9 @@
             angularDragula(angular),
             'ngFileUpload',
             'ui.codemirror',
+            'restangular',
 
-
+            'app.components',
             'app.editor',
             'app.classroom',
             'app.authentication',
@@ -57,13 +58,33 @@
             $cookiesProvider.defaults.path = 'http://localhost:3000/';
             $cookiesProvider.defaults.domain = 'localhost';
 
+            
         }])
-        .run(function (djangoAuth, API_CONFIG) {
+        .config(function (RestangularProvider) {
+            RestangularProvider.setBaseUrl('http://127.0.0.1:8000/');
+        })
+        .run(function (djangoAuth, Restangular, API_CONFIG) {
             djangoAuth.initialize(API_CONFIG.url, false)
                 .then(function(data) {
                     console.log('djangoAuth.initialize: success');
                 }, function(reason) {
                     console.log('djangoAuth.initialize: failed');
                 });
+
+            var baseAccounts = Restangular.all('rest-auth/user');
+
+            baseAccounts.getList().then(function (accounts) {
+                var allAccounts = accounts;
+
+            }, function(reason) {
+                console.log(reason);
+            });
+
+            Restangular.all('v1/problem/problem-base/').getList().then(function (problem) {
+                var problem = problem;
+            }, function (reason) {
+                console.log(reason);
+            })
+
         });
 })();

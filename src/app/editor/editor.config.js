@@ -37,9 +37,19 @@
         })
         .state('triangular.admin-default.editor-dashboard', {
             url: '/editor/dashboard',
-            templateUrl: 'app/editor/dashboard/editor-dashboard.tmpl.html',
-            controller: 'EditorDashboardController',
-            controllerAs: 'vm'
+            views: {
+                '': {
+                    templateUrl: 'app/editor/dashboard/editor-dashboard.tmpl.html',
+                    controller: 'EditorDashboardController',
+                    controllerAs: 'vm'
+
+                },
+                'belowContent': {
+                    templateUrl: 'app/editor/dashboard/fab-button.tmpl.html',
+                    controller: 'EditorDashboardFabController',
+                    controllerAs: 'vm'
+                }
+            },
         });
 
         triMenuProvider.addMenu({

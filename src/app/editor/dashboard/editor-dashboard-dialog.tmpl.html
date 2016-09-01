@@ -1,15 +1,28 @@
-<md-dialog aria-label="{{vm.currentEntry.name}}">
-    <md-dialog-content class="md-dialog-content extras-image-dialog">
-        <img ng-src="{{vm.currentImage.urlFull}}" alt="{{vm.currentImage.title}}">
-    </md-dialog-content>
+<md-dialog aria-label="{{vm.currentProblem.name}}" flex="60" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Problem {{vm.currentProblem.id}} | {{vm.currentProblem.name}}</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <tri-widget title-position="top" palette-background="blue-grey:1000" background="primary">
+        <md-content layout-padding>
+            <json-formatter json="vm.currentProblem" open="4"></json-formatter>
+        </md-content>
+    </tri-widget>
+
     <md-dialog-actions layout="row">
-        {{vm.currentImage.title}}
+        <md-button ng-click="vm.open()" class="md-primary" aria-label="Open">
+            Open
+        </md-button>
         <span flex></span>
-        <md-button ng-click="vm.prev()" class="md-icon-button" aria-label="Close">
-            <md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>
-        </md-button>
-        <md-button ng-click="vm.next()" class="md-icon-button" aria-label="Close">
-            <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
-        </md-button>
+        <!--<md-button ng-click="vm.prev()" class="md-icon-button" aria-label="Left">-->
+            <!--<md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>-->
+        <!--</md-button>-->
+        <!--<md-button ng-click="vm.next()" class="md-icon-button" aria-label="Right">-->
+            <!--<md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>-->
+        <!--</md-button>-->
     </md-dialog-actions>
 </md-dialog>

@@ -1,0 +1,9 @@
+<div class="todo-container" layout="column">
+    <div layout-fill layout="column" layout-xs="column"
+         ng-repeat="key in vm.randomKeys track by $index">
+        <ost-problem title="Problem {{$index + 1}}"
+                     item="vm.problemInfo[key]" layout-margin layout-align="center center"
+                     flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">
+        </ost-problem>
+    </div>
+</div>

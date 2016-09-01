@@ -17,16 +17,16 @@
                 url: '/classroom/sensei',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-dashboard.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/dashboard/sensei-dashboard.tmpl.html',
 
                         // set the controller to load for this page
                         controller: 'SenseiDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/dashboard/fab-button.tmpl.html',
 
-                        controller: 'EditorFractionFabController',
+                        controller: 'SenseiDashboardFabController',
                         controllerAs: 'vm'
                     }
                 },
@@ -41,7 +41,7 @@
                 url: '/classroom/sensei/test/:testId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/test/sensei-test.tmpl.html',
 
                         controller: 'SenseiTestController',
                         controllerAs: 'vm'
@@ -58,7 +58,7 @@
                 url: '/classroom/sensei/problem/:problemId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/problem/sensei-problem.tmpl.html',
 
                         controller: 'SenseiProblemController',
                         controllerAs: 'vm'
@@ -75,16 +75,16 @@
                 url: '/classroom/pupil',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/pupil/pupil-dashboard.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/dashboard/pupil-dashboard.tmpl.html',
 
                         // set the controller to load for this page
                         controller: 'PupilDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/fraction/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/dashboard/fab-button.tmpl.html',
 
-                        controller: 'EditorFractionFabController',
+                        controller: 'PupilDashboardFabController',
                         controllerAs: 'vm'
                     }
                 },
@@ -96,12 +96,18 @@
                 }
             })
             .state('triangular.admin-default.pupil-test', {
-                url: '/classroom/pupil/test',
+                url: '/classroom/pupil/test/:testId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/test/pupil-test.tmpl.html',
 
                         controller: 'PupilTestController',
+                        controllerAs: 'vm'
+                    },
+                    'belowContent': {
+                        templateUrl: 'app/classroom/pupil/test/fab-button.tmpl.html',
+
+                        controller: 'PupilTestFabController',
                         controllerAs: 'vm'
                     }
                 },

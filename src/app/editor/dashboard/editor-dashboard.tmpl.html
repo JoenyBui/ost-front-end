@@ -42,15 +42,27 @@
 
 <md-list-item>
     <md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">
-        <md-grid-tile ng-click="vm.openEntry(day, entry, $event)"
+        <md-grid-tile ng-click="vm.openEntry(entry, $event)"
+                      class="md-whiteframe-3dp"
                       md-rowspan="1"
                       md-colspan="1"
                       ng-repeat="entry in vm.feed">
-            Print
-            {{entry.name}}
+
+            <h3>{{entry.name}}</h3>
+            <h4>{{entry.info.domain}}</h4>
+            {{entry.info.status}}
+
             <md-grid-tile-footer>
                 <h3>{{::entry.id}}</h3>
             </md-grid-tile-footer>
         </md-grid-tile>
     </md-grid-list>
 </md-list-item>
+
+<md-content>
+    <md-virtual-repeat-container id="vertical-container">
+        <div md-virtual-repeat="item in vm.dynamicItems" md-on-demand class="repeated-item" flex>
+            {{item}}
+        </div>
+    </md-virtual-repeat-container>
+</md-content>

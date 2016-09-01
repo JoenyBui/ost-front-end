@@ -5,26 +5,31 @@
     'use strict';
 
     angular
-        .module('app.examples.extras')
+        .module('app.editor')
         .controller('EditorDashboardDialogController', EditorDashboardDialogController);
 
     /* @ngInject */
-    function EditorDashboardDialogController($mdDialog, day, entry) {
+    function EditorDashboardDialogController($mdDialog, $state, $stateParams, problem) {
         var vm = this;
-        vm.currentEntry = entry;
-        vm.next = next;
-        vm.prev = prev;
 
-        function next() {
-            var index = day.entries.indexOf(vm.currentEntry );
+        vm.currentProblem = problem;
+
+        vm.open = function () {
+            $state.go('triangular.admin-default.math', {'problemId': this.currentProblem.id});
+
+            $mdDialog.hide();
+        };
+
+        vm.next = function () {
+            var index = day.entries.indexOf(vm.currentEntry);
             index = index + 1 < day.entries.length ? index + 1 : 0;
             vm.currentEntry = day.entries[index];
-        }
+        };
 
-        function prev() {
-            var index = day.entries.indexOf(vm.currentEntry );
-            index = index - 1 < 0 ? day.entries.length -1 : index - 1;
+        vm.prev = function () {
+            var index = day.entries.indexOf(vm.currentEntry);
+            index = index - 1 < 0 ? day.entries.length - 1 : index - 1;
             vm.currentEntry = day.entries[index];
-        }
+        };
     }
 })();

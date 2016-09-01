@@ -9,13 +9,13 @@
     function translateConfig(triSettingsProvider, triRouteProvider, APP_LANGUAGES) {
         var now = new Date();
         // set app name & logo (used in loader, sidemenu, footer, login pages, etc)
-        triSettingsProvider.setName('OST');
-        triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + ' oxygenna.com');
+        triSettingsProvider.setName('Agora');
+        triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + ' agora.com');
         triSettingsProvider.setLogo('assets/images/logo.png');
         // set current version of app (shown in footer)
         triSettingsProvider.setVersion('0.0.1');
         // set the document title that appears on the browser tab
-        triRouteProvider.setTitle('Open Standardize Testing');
+        triRouteProvider.setTitle('Agora');
         triRouteProvider.setSeparator('|');
 
         // setup available languages in triangular
