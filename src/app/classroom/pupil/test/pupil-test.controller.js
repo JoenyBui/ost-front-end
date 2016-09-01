@@ -92,7 +92,7 @@
             }
 
             $mdDialog.show({
-                templateUrl: 'app/classroom/pupil/submit-test-dialog.tmpl.html',
+                templateUrl: 'app/classroom/pupil/test/submit-test-dialog.tmpl.html',
                 targetEvent: ev,
                 controller: 'SubmitTestDialogController',
                 controllerAs: 'vm',

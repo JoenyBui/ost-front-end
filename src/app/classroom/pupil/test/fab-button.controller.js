@@ -6,10 +6,10 @@
 
     angular
         .module('app.classroom')
-        .controller('PupilFabController', PupilFabController);
+        .controller('PupilTestFabController', PupilTestFabController);
 
     /* @ngInject */
-    function PupilFabController($rootScope) {
+    function PupilTestFabController($rootScope) {
         var vm = this;
 
         vm.submitTest = function ($event) {

@@ -75,16 +75,16 @@
                 url: '/classroom/pupil',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/pupil/pupil-dashboard.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/dashboard/pupil-dashboard.tmpl.html',
 
                         // set the controller to load for this page
                         controller: 'PupilDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/classroom/pupil/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/dashboard/fab-button.tmpl.html',
 
-                        controller: 'PupilFabController',
+                        controller: 'PupilDashboardFabController',
                         controllerAs: 'vm'
                     }
                 },
@@ -99,15 +99,15 @@
                 url: '/classroom/pupil/test/:testId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/pupil/pupil-test.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/test/pupil-test.tmpl.html',
 
                         controller: 'PupilTestController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/classroom/pupil/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/pupil/test/fab-button.tmpl.html',
 
-                        controller: 'PupilFabController',
+                        controller: 'PupilTestFabController',
                         controllerAs: 'vm'
                     }
                 },
