@@ -41,7 +41,7 @@
                 url: '/classroom/sensei/test/:testId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-test.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/test/sensei-test.tmpl.html',
 
                         controller: 'SenseiTestController',
                         controllerAs: 'vm'
@@ -58,7 +58,7 @@
                 url: '/classroom/sensei/problem/:problemId',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-problem.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/problem/sensei-problem.tmpl.html',
 
                         controller: 'SenseiProblemController',
                         controllerAs: 'vm'
