@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.examples.extras')
+        .module('app.editor')
         .controller('EditorDashboardDialogController', EditorDashboardDialogController);
 
     /* @ngInject */

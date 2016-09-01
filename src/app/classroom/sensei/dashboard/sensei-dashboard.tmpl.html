@@ -1,0 +1,38 @@
+    <md-content>
+        <md-list flex>
+            <md-list-item ng-repeat="item in vm.tests" ng-click="vm.openTest(item)">
+                <p>{{item.name}}</p>
+
+
+                <!--<md-menu>-->
+                    <!--<md-button class="widget-button md-icon-button" ng-click="$mdOpenMenu()" aria-label="open menu">-->
+                        <!--<md-icon md-font-icon="{{::vm.menu.icon}}"></md-icon>-->
+                    <!--</md-button>-->
+                    <!--<md-menu-content>-->
+                        <!--<md-menu-item ng-repeat="item in ::vm.menu.items">-->
+                            <!--<md-button ng-click="item.click($event)">-->
+                                <!--<md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>-->
+                                <!--<span translate>{{::item.title}}</span>-->
+                            <!--</md-button>-->
+                        <!--</md-menu-item>-->
+                    <!--</md-menu-content>-->
+                <!--</md-menu>-->
+                <md-menu>
+                    <md-button ng-click="$mdOpenMenu()" aria-label="open menu">
+                        <md-icon md-font-icon="zmdi zmdi-more-vert" class="md-primary"></md-icon>
+                    </md-button>
+
+                    <md-menu-content>
+                        <md-menu-item ng-repeat="item in ::vm.menu.items">
+                        <md-button ng-click="item.click($event)">
+                        <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
+                        <span translate>{{::item.title}}</span>
+                        </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>

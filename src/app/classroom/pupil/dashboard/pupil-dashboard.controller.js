@@ -12,6 +12,6 @@
     function PupilDashboardController($scope, $log, $mdDialog, djangoAuth) {
         var vm = this;
 
-
+        
     }
 })();

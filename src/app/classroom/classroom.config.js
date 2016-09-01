@@ -17,16 +17,16 @@
                 url: '/classroom/sensei',
                 views: {
                     '': {
-                        templateUrl: 'app/classroom/sensei/sensei-dashboard.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/dashboard/sensei-dashboard.tmpl.html',
 
                         // set the controller to load for this page
                         controller: 'SenseiDashboardController',
                         controllerAs: 'vm'
                     },
                     'belowContent': {
-                        templateUrl: 'app/editor/math/fab-button.tmpl.html',
+                        templateUrl: 'app/classroom/sensei/dashboard/fab-button.tmpl.html',
 
-                        controller: 'EditorFractionFabController',
+                        controller: 'SenseiDashboardFabController',
                         controllerAs: 'vm'
                     }
                 },

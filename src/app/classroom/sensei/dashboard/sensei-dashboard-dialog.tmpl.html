@@ -1,0 +1,22 @@
+<md-dialog aria-label="{{vm.test.name}}" flex="60" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Test {{vm.test.id}} | {{vm.test.name}}</span>
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <tri-widget title-position="top" palette-background="blue-grey:1000" background="primary">
+        <md-content layout-padding>
+            <json-formatter json="vm.test" open="4"></json-formatter>
+        </md-content>
+    </tri-widget>
+
+    <md-dialog-actions layout="row">
+        <md-button ng-click="vm.open()" class="md-primary" aria-label="Open">
+            Open
+        </md-button>
+        <span flex></span>
+    </md-dialog-actions>
+</md-dialog>
