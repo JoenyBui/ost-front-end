@@ -15,6 +15,8 @@ gulp.task('build', ['clean'], function () {
     gulp.start('buildapp');
 });
 
+// Added for HEROKU
+
 gulp.task('serveprod', function() {
     connect.server({
         root: ['src'],
@@ -23,6 +25,7 @@ gulp.task('serveprod', function() {
     });
 });
 
+var less = require('gulp-less');
 
 gulp.task('compile', function () {
     return gulp.src('./less/*.less')
