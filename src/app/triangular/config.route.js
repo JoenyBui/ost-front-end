@@ -12,13 +12,19 @@
             abstract: true,
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             controller: 'DefaultLayoutController',
-            controllerAs: 'layoutController'
+            controllerAs: 'layoutController',
+            data: {
+                requireLogin: true
+            }
         })
         .state('triangular-no-scroll', {
             abstract: true,
             templateUrl: 'app/triangular/layouts/default/default-no-scroll.tmpl.html',
             controller: 'DefaultLayoutController',
-            controllerAs: 'layoutController'
+            controllerAs: 'layoutController',
+            data: {
+                requireLogin: true
+            }
         })
         .state('triangular.admin-default', {
             abstract: true,
@@ -44,6 +50,9 @@
                 belowContent: {
                     template: '<div ui-view="belowContent"></div>'
                 }
+            },
+            data: {
+                requireLogin: true
             }
         })
         .state('triangular.admin-default-no-scroll', {
@@ -67,6 +76,9 @@
                 content: {
                     template: '<div flex ui-view layout="column" class="overflow-hidden"></div>'
                 }
+            },
+            data: {
+                requireLogin: true
             }
         });
     }

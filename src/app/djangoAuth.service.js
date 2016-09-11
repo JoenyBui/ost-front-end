@@ -126,6 +126,7 @@
                     $rootScope.$broadcast('djangoAuth.logged_in', data);
                 }, function(reason) {
                     console.log(reason);
+                    throw(reason);
                 });
             },
             'logout': function(){
@@ -236,6 +237,7 @@
             'initialize': function(url, sessions){
                 this.API_URL = url;
                 this.use_session = sessions;
+                
                 return this.authenticationStatus();
             }
         };
