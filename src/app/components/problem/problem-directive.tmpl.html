@@ -9,9 +9,11 @@
         <h2 class="md-toolbar-tools" translate>{{vm.title}}</h2>
     </md-toolbar>
     <md-card-content>
-        <p>
-            {{::vm.item.stem}}
-        </p>
+        <!--<p>-->
+            <!--{{::vm.item.stem}}-->
+        <!--</p>-->
+
+        <p ng-bind-html="vm.item.stem"></p>
 
         <div ng-if="vm.item.qtype == vm.FILL_IN_THE_BLANK">
             <md-input-container class="md-block" flex-gt-sm>
