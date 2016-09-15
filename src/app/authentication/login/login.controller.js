@@ -43,7 +43,7 @@
                 }, function(reason) {
                     $mdToast.show(
                         $mdToast.simple()
-                            .content('Unable to log in with provided credientials')
+                            .content('Unable to log in with provided credentials')
                             .position('bottom right')
                             .hideDelay(5000)
 

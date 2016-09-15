@@ -10,8 +10,9 @@
 
     function djangoAuth($q, $http, $cookies, $rootScope, $log) {
         // AngularJS will instantiate a singleton by calling "new" on this function.
+        var vm = this;
 
-        var service = {
+        vm.service = {
             /* START CUSTOMIZATION HERE */
             // Change this to point to your Django REST Auth API
             // e.g. /api/rest-auth  (DO NOT INCLUDE ENDING SLASH)
@@ -20,6 +21,14 @@
             // Set use_session to true to use Django sessions to store security token.
             // Set use_session to false to store the security token locally and transmit it as a custom header.
             'use_session': true,
+
+            'user': {
+                'username': '',
+                'avatar': 'assets/images/avatars/avatar-5.png',
+                'email': '',
+                'first_name': '',
+                'last_name': ''
+            },
 
             /* END OF CUSTOMIZATION */
             'authenticated': null,
@@ -167,7 +176,7 @@
             'profile': function(){
                 return this.request({
                     'method': "GET",
-                    'url': "/rest-auth/user/"
+                    'url': "/core/profile/"
                 });
             },
             'updateProfile': function(data){
@@ -222,6 +231,23 @@
                     // the API to get the authentication status.
                     this.authPromise.then(function(){
                         da.authenticated = true;
+
+                        vm.service.profile()
+                            .then(function (data) {
+                                da.user['username'] = data['username'];
+                                da.user['email'] = data['email'];
+                                da.user['first_name'] = data['first_name'];
+                                da.user['last_name'] = data['last_name'];
+
+                                da.user["bio"] = data["bio"];
+                                da.user["location"] = data['location'];
+                                da.user['birth_date'] = data['birth_date'];
+                                da.user['website'] = data['website'];
+                                da.user['twitter'] = data['twitter'];
+                                da.user['avatar'] = data['avatar'];
+                            }
+                        );
+
                         getAuthStatus.resolve();
                     },function(){
                         da.authenticated = false;
@@ -242,6 +268,6 @@
             }
         };
 
-        return service;
+        return vm.service;
     }
 })();
