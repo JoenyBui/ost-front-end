@@ -21,10 +21,10 @@
                         <!--</div>-->
                     <!--</md-input-container>-->
                     <md-input-container class="md-block">
-                        <label for="username" translate>LOGIN.EMAIL.LABEL</label>
+                        <label for="username" translate>LOGIN.USERNAME.LABEL</label>
                         <input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>
-                        <div ng-messages="login.email.$error" ng-if="login.email.$dirty">
-                            <div ng-message when="required"><span translate>LOGIN.EMAIL.PLEASE_ENTER</span></div>
+                        <div ng-messages="login.username.$error" ng-if="login.username.$dirty">
+                            <div ng-message when="required"><span translate>LOGIN.USERNAME.PLEASE_ENTER</span></div>
                         </div>
                     </md-input-container>
 
@@ -52,17 +52,17 @@
 
                     <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/signup" translate="LOGIN.SIGNUP_LINK" aria-label="{{'LOGIN.SIGNUP_LINK' | translate}}"></md-button>
 
-                    <div class="social-login">
-                        <md-divider></md-divider>
+                    <!--<div class="social-login">-->
+                        <!--<md-divider></md-divider>-->
 
-                        <div class="text-center margin-20" translate>LOGIN.SOCIAL.OR</div>
+                        <!--<div class="text-center margin-20" translate>LOGIN.SOCIAL.OR</div>-->
 
-                        <div layout="row" layout-align="space-between center"  layout-margin>
-                            <md-button href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">
-                                <md-icon md-font-icon="{{::social.icon}}"></md-icon>
-                            </md-button>
-                        </div>
-                    </div>
+                        <!--<div layout="row" layout-align="space-between center"  layout-margin>-->
+                            <!--<md-button href="#" ng-repeat="social in ::vm.socialLogins" class="md-icon-button" ng-style="{ 'background-color': social.color }" aria-label="{{social.icon}}">-->
+                                <!--<md-icon md-font-icon="{{::social.icon}}"></md-icon>-->
+                            <!--</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </form>
             </md-content>
         </md-card>

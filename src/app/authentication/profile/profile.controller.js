@@ -42,7 +42,6 @@
 
         vm.user = djangoAuth.user;
         vm.password = {
-            current: '',
             password: '',
             confirm: ''
         };
@@ -53,35 +52,54 @@
                 url: '/core/profile/',
                 data: vm.user
             }).then(function (data) {
-
                 $mdToast.show(
                     $mdToast.simple()
                         .content('Profile Updated!')
                         .position('bottom right')
                         .hideDelay(5000)
-
                 );
             }, function (reason) {
-
                 $mdToast.show(
                     $mdToast.simple()
                         .content('Profile Failed!')
                         .position('bottom right')
                         .hideDelay(5000)
-
                 );
             })
         };
 
         vm.updateEditor = function () {
-
+            /*
+            * Update Editor
+            * */
         };
 
         vm.updatePassword = function () {
+            /*
+            * Update password.
+            * */
+            djangoAuth.changePassword(
+                vm.password.password,
+                vm.password.confirm
+            ).then(function (data) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Password Updated!')
+                        .position('bottom right')
+                        .hideDelay(5000)
+                );
+            }, function (reason) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Password Failed!')
+                        .position('bottom right')
+                        .hideDelay(5000)
+                );
 
+            })
         };
 
-        vm.updateNotification = function () {
+        vm.updateSettings = function () {
             
         };
         

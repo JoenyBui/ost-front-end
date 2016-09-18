@@ -13,11 +13,11 @@
             <md-content class="md-padding">
                 <form name="signup">
                     <md-input-container class="md-block">
-                        <label for="name" translate>SIGNUP.NAME.LABEL</label>
-                        <input id="name" label="name" name="name" type="text" ng-model="vm.user.name" required/>
-                        <div ng-messages="signup.name.$error" ng-if="signup.name.$dirty">
+                        <label for="username" translate>SIGNUP.USERNAME.LABEL</label>
+                        <input id="username" label="username" name="username" type="text" ng-model="vm.user.username" required/>
+                        <div ng-messages="signup.username.$error" ng-if="signup.username.$dirty">
                             <div ng-message when="required">
-                                <span translate>SIGNUP.NAME.PLEASE_ENTER</span>
+                                <span translate>SIGNUP.USERNAME.PLEASE_ENTER</span>
                             </div>
                         </div>
                     </md-input-container>

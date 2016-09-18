@@ -153,12 +153,11 @@
                     $rootScope.$broadcast("djangoAuth.logged_out");
                 });
             },
-            'changePassword': function(old_password, password1,password2){
+            'changePassword': function(password1, password2){
                 return this.request({
                     'method': "POST",
                     'url': "/rest-auth/password/change/",
                     'data':{
-                        'old_password':old_password,
                         'new_password1':password1,
                         'new_password2':password2
                     }
