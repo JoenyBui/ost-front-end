@@ -138,6 +138,9 @@
                     throw(reason);
                 });
             },
+            'logged_in': function (data) {
+                $log.log(data);
+            },
             'logout': function(){
                 var djangoAuth = this;
                 return this.request({

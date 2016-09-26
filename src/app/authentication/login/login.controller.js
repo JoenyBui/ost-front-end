@@ -33,6 +33,8 @@
             password: ''
         };
 
+        djangoAuth.logout();
+        
         function loginClick() {
             djangoAuth.login(vm.user.username, vm.user.password)
                 .then(function(data) {

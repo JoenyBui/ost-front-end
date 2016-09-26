@@ -30,6 +30,7 @@
             'app.editor',
             'app.classroom',
             'app.authentication',
+            'app.home',
             // 'seed-module',
             // uncomment above to activate the example seed module
             'app.examples'

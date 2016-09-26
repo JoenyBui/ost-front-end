@@ -15,10 +15,12 @@
         * 3.) When I attempt to make a request that requires a login, e.g. my session has expired whilst I’m attempting to post something.
         */
 
-        // TODO: Fix the state change to progressively check authentication.
-        if (GLOBAL_SETTINGS.debug == false) {
-            $rootScope.$on("$stateChangeStart",
-                function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on("$stateChangeStart",
+            function (event, toState, toParams, fromState, fromParams) {
+                if (GLOBAL_SETTINGS.debug == false) {
+
+                    // TODO: Fix the state change to progressively check authentication.
+
                     var requireLogin = toState.data.requireLogin;
 
                     // if (djangoAuth.authenticated == null) {
@@ -37,7 +39,7 @@
 
                     // Pass through
                 }
-            );
-        }
+            }
+        );
     }
 })();

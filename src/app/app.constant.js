@@ -13,7 +13,7 @@
             'accounts': 'rest-auth/'
         })
         .constant('GLOBAL_SETTINGS', {
-            'debug': true
+            'debug': false
         })
         // create a constant for languages so they can be added to both triangular & translate
         .constant('APP_LANGUAGES', [{
