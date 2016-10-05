@@ -27,13 +27,14 @@
             'restangular',
 
             'app.components',
+            'app.home',
             'app.editor',
             'app.classroom',
-            'app.authentication',
-            'app.home',
+            'app.authentication'
+
             // 'seed-module',
             // uncomment above to activate the example seed module
-            'app.examples'
+            // 'app.examples'
         ])
         .config(['$cookiesProvider', function($cookiesProvider) {
             $cookiesProvider.defaults.path = 'http://localhost:3000/';
@@ -43,28 +44,28 @@
             RestangularProvider.setBaseUrl('http://127.0.0.1:8000/');
         })
         .run(function (djangoAuth, Restangular, API_CONFIG) {
-            djangoAuth.initialize(API_CONFIG.url, false)
+            return djangoAuth.initialize(API_CONFIG.url, false)
                 .then(function(data) {
                     console.log('djangoAuth.initialize: success');
                 }, function(reason) {
                     console.log('djangoAuth.initialize: failed');
                 });
 
-            var baseAccounts = Restangular.all('rest-auth/user');
+            // var baseAccounts = Restangular.all('rest-auth/user');
 
-            baseAccounts.getList().then(function (accounts) {
-                var allAccounts = accounts;
+            // baseAccounts.getList().then(function (accounts) {
+            //     var allAccounts = accounts;
+            //
+            // }, function(reason) {
+            //     console.log(reason);
+            // });
 
-            }, function(reason) {
-                console.log(reason);
-            });
-
-            Restangular.all('v1/problem/problem-base/').getList().then(function (problem) {
-                var problem = problem;
-            }, function (reason) {
-                console.log(reason);
-                
-            })
+            // Restangular.all('v1/problem/problem-base/').getList().then(function (problem) {
+            //     var problem = problem;
+            // }, function (reason) {
+            //     console.log(reason);
+            //
+            // })
 
         });
 })();

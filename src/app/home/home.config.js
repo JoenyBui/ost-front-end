@@ -11,6 +11,7 @@
 
     /* @ngInject */
     function moduleConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
+        $translatePartialLoaderProvider.addPart('app/home');
 
         $stateProvider
             .state('home', {
@@ -36,7 +37,28 @@
                         controllerAs: 'vm'
                     }
                 }
+            })
+            .state('triangular.admin-default.home', {
+                url: '/dashboard',
+                views: {
+                    '': {
+                        templateUrl: 'app/home/dashboard/home-dashboard.tmpl.html',
+                        controller: 'HomeDashboardController',
+                        controllerAs: 'vm'
+
+                    }
+                }
             });
+
+
+        triMenuProvider.addMenu({
+            name: 'MENU.HOME.DASHBOARD',
+            state: 'triangular.admin-default.home',
+            icon: 'zmdi zmdi-home',
+            type: 'link',
+            priority: 1.1
+
+        });
     }
 
 })();

@@ -50,11 +50,16 @@
                     controllerAs: 'vm'
                 }
             },
+            resolve: {
+                'authenticationStatus': function (djangoAuth) {
+                    return djangoAuth.authenticationStatus()
+                }
+            }
         });
 
         triMenuProvider.addMenu({
             name: 'MENU.EDITOR.EDITOR-MODULE',
-            icon: 'zmdi zmdi-grade',
+            icon: 'zmdi zmdi-face',
             type: 'dropdown',
             priority: 1.1,
             children: [{
