@@ -134,12 +134,11 @@
                         // this will set the expiration to 12 months
                         var exp = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
 
-                        $cookies.put(
-                            'token',
-                            data.key,
-                            {expires: exp}
-                        );
+                        $cookies.put('token', data.key, {expires: exp} );
                     }
+
+                    djangoAuth.setProfile();
+
                     djangoAuth.authenticated = true;
                     $rootScope.$broadcast('djangoAuth.logged_in', data);
                 }, function(reason) {
@@ -216,6 +215,25 @@
                     }
                 });
             },
+            'setProfile': function () {
+                var da = this;
+
+                return vm.service.profile()
+                    .then(function (data) {
+                        da.user['username'] = data['username'];
+                        da.user['email'] = data['email'];
+                        da.user['first_name'] = data['first_name'];
+                        da.user['last_name'] = data['last_name'];
+
+                        da.user["bio"] = data["bio"];
+                        da.user["location"] = data['location'];
+                        da.user['birth_date'] = data['birth_date'];
+                        da.user['website'] = data['website'];
+                        da.user['twitter'] = data['twitter'];
+                        da.user['avatar'] = data['avatar'];
+
+                    });
+            },
             'authenticationStatus': function(restrict, force){
                 // Set restrict to true to reject the promise if not logged in
                 // Set to false or omit to resolve when status is known
@@ -236,6 +254,8 @@
                         getAuthStatus.reject("User is not logged in.");
                     }else{
                         getAuthStatus.resolve();
+
+                        da.setProfile();
                     }
                 }else{
                     // There isn't a stored value, or we're forcing a request back to
@@ -243,21 +263,7 @@
                     this.authPromise.then(function(){
                         da.authenticated = true;
 
-                        vm.service.profile()
-                            .then(function (data) {
-                                da.user['username'] = data['username'];
-                                da.user['email'] = data['email'];
-                                da.user['first_name'] = data['first_name'];
-                                da.user['last_name'] = data['last_name'];
-
-                                da.user["bio"] = data["bio"];
-                                da.user["location"] = data['location'];
-                                da.user['birth_date'] = data['birth_date'];
-                                da.user['website'] = data['website'];
-                                da.user['twitter'] = data['twitter'];
-                                da.user['avatar'] = data['avatar'];
-                            }
-                        );
+                        da.setProfile();
 
                         getAuthStatus.resolve();
                     },function(){
@@ -284,18 +290,18 @@
                     var da = this;
                     vm.service.profile()
                         .then(function (data) {
-
-                                da.user['username'] = data['username'];
-                                da.user['email'] = data['email'];
-                                da.user['first_name'] = data['first_name'];
-                                da.user['last_name'] = data['last_name'];
-
-                                da.user["bio"] = data["bio"];
-                                da.user["location"] = data['location'];
-                                da.user['birth_date'] = data['birth_date'];
-                                da.user['website'] = data['website'];
-                                da.user['twitter'] = data['twitter'];
-                                da.user['avatar'] = data['avatar'];
+                            da.setProfile(data);
+                                // da.user['username'] = data['username'];
+                                // da.user['email'] = data['email'];
+                                // da.user['first_name'] = data['first_name'];
+                                // da.user['last_name'] = data['last_name'];
+                                //
+                                // da.user["bio"] = data["bio"];
+                                // da.user["location"] = data['location'];
+                                // da.user['birth_date'] = data['birth_date'];
+                                // da.user['website'] = data['website'];
+                                // da.user['twitter'] = data['twitter'];
+                                // da.user['avatar'] = data['avatar'];
 
                             }, function (reason) {
                                 delete $http.defaults.headers.common.Authorization;
