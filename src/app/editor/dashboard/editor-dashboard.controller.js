@@ -9,7 +9,7 @@
         .controller('EditorDashboardController', EditorDashboardController);
     
     /* @ngInject */
-    function EditorDashboardController($scope, $mdDialog, $log, $timeout, djangoAuth) {
+    function EditorDashboardController($scope, $mdDialog, $log, $timeout, $state, djangoAuth) {
         var vm = this;
 
         vm.feed = [];
@@ -100,6 +100,30 @@
 
         this.dynamicItems = new DynamicItems();
 
+
+        vm.selectedIndex = undefined;
+        vm.selectIndex = function (index) {
+            if (vm.selectedIndex !== index) {
+                vm.selectedIndex = index;
+            }
+            else {
+                vm.selectedIndex = undefined;
+            }
+        };
+
+        /*
+        * Open WhAM Item.
+        * */
+        vm.openItem = function (index) {
+            var item = vm.feed[index];
+            var problemId = item.id;
+
+            $state.go(
+                'triangular.admin-default.math', {
+                    'problemId': problemId
+                }
+            )
+        };
 
         // Add Variable
         $scope.$on('addMath', function( ev ){
