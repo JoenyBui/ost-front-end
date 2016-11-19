@@ -8,6 +8,7 @@
     "del": "~2.2.0",
     "eslint": "^1.10.3",
     "eslint-plugin-angular": "^0.15.0",
+    "graceful-fs": "^4.1.10",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "~1.1.1",
     "gulp-angular-templatecache": "~1.8.0",
