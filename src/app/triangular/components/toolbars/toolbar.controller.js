@@ -6,7 +6,9 @@
         .controller('DefaultToolbarController', DefaultToolbarController);
 
     /* @ngInject */
-    function DefaultToolbarController($scope, $rootScope, $mdMedia, $translate, $state, $element, $filter, $mdUtil, $mdSidenav, $mdToast, $timeout, $document, triBreadcrumbsService, triSettings, triLayout) {
+    function DefaultToolbarController($scope, $rootScope, $mdMedia, $translate, $state, $element,
+                                      $filter, $mdUtil, $mdSidenav, $mdToast, $timeout, $document,
+                                      triBreadcrumbsService, triSettings, triLayout, djangoAuth) {
         var vm = this;
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
         vm.emailNew = false;
@@ -18,6 +20,12 @@
         vm.isFullScreen = false;
         vm.fullScreenIcon = 'zmdi zmdi-fullscreen';
         vm.toggleFullScreen = toggleFullScreen;
+
+        vm.user = djangoAuth['user'];
+
+        // vm.avatar = djangoAuth['user']['avatar'];
+        // vm.username = djangoAuth['user']['username'];
+
 
         // initToolbar();
 

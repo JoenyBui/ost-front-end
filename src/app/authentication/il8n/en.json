@@ -14,6 +14,11 @@
     },
     "LOGIN": {
         "TITLE": "Login",
+        "USERNAME": {
+            "LABEL": "username",
+            "PLEASE_ENTER": "Please enter your username.",
+            "PLEASE_VALID": "Please enter a valid username."
+        },
         "EMAIL": {
             "LABEL": "email",
             "PLEASE_ENTER": "Please enter your email address.",
@@ -36,6 +41,10 @@
     },
     "SIGNUP": {
         "TITLE": "Sign up",
+        "USERNAME": {
+            "LABEL": "username",
+            "PLEASE_ENTER": "Please enter your username"
+        },
         "NAME": {
             "LABEL": "name",
             "PLEASE_ENTER": "Please enter your name"
@@ -94,9 +103,13 @@
     },
     "PROFILE": {
         "TITLE": "Profile",
-        "NAME": {
-            "LABEL": "name",
-            "PLEASE_ENTER": "Please enter your name"
+        "FIRST_NAME": {
+            "LABEL": "first name",
+            "PLEASE_ENTER": "Please enter your first name"
+        },
+        "LAST_NAME": {
+            "LABEL": "last name",
+            "PLEASE_ENTER": "Please enter your last name"
         },
         "EMAIL": {
             "LABEL": "email",

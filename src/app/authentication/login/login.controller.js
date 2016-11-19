@@ -33,8 +33,8 @@
             password: ''
         };
 
-        ////////////////
-
+        djangoAuth.logout();
+        
         function loginClick() {
             djangoAuth.login(vm.user.username, vm.user.password)
                 .then(function(data) {
@@ -43,7 +43,7 @@
                 }, function(reason) {
                     $mdToast.show(
                         $mdToast.simple()
-                            .content('Unable to log in with provided credientials')
+                            .content('Unable to log in with provided credentials. ' + reason.get('detail'))
                             .position('bottom right')
                             .hideDelay(5000)
 

@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "EDITOR": {
+            "EDITOR-MODULE": "Semente Do Módulo",
+            "EDITOR-PAGE": "Página Inicial"
+        }
+    },
+    "EDITOR": {
+        "TITLE": "Bem-vindo à página de teste triangular"
+    }
+}

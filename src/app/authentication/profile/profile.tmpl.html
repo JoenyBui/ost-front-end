@@ -1,9 +1,9 @@
 <div class="full-image-background mb-bg-01 padding-20 padding-top-200 overlay-gradient-30" layout="row" layout-align="start center">
     <div class="margin-right-20">
-        <img src="assets/images/avatars/avatar-5.png" alt="girl-avatar" class="make-round" width="100"/>
+        <img ng-src="assets/images/avatars/{{vm.user.avatar}}.png" alt="girl-avatar" class="make-round" width="100"/>
     </div>
     <div class="text-light">
-        <h3 class="font-weight-600 margin-bottom-0 text-light">Christos / Profile</h3>
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{ vm.user.username }}/ Profile</h3>
         <p class="font-weight-300 margin-top-0">Edit your name, avatar etc</p>
      </div>
 </div>
@@ -15,10 +15,17 @@
                 <md-content class="md-padding">
                     <form name="profile">
                         <md-input-container class="md-block">
-                            <label for="name" translate>PROFILE.NAME.LABEL</label>
-                            <input id="name" label="name" name="name" type="text" ng-model="vm.user.name" required/>
-                            <div ng-messages="profile.name.$error">
-                                <div ng-message when="required"><span translate>PROFILE.NAME.PLEASE_ENTER</span></div>
+                            <label for="first_name" translate>PROFILE.FIRST_NAME.LABEL</label>
+                            <input id="first_name" label="first_name" name="first_name" type="text" ng-model="vm.user.first_name" required/>
+                            <div ng-messages="profile.first_name.$error">
+                                <div ng-message when="required"><span translate>PROFILE.FIRST_NAME.PLEASE_ENTER</span></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label for="last_name" translate>PROFILE.LAST_NAME.LABEL</label>
+                            <input id="last_name" label="last_name" name="last_name" type="text" ng-model="vm.user.last_name" required/>
+                            <div ng-messages="profile.last_name.$error">
+                                <div ng-message when="required"><span translate>PROFILE.LAST_NAME.PLEASE_ENTER</span></div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
@@ -54,7 +61,10 @@
                             <textarea id="bio" label="bio" name="bio" ng-model="vm.user.bio"/>
                         </md-input-container>
 
-                        <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                        <md-button class="md-raised md-primary margin-left-0"
+                                   ng-disabled="profile.$invalid"
+                                   translate="PROFILE.BUTTON"
+                                   ng-click="vm.updateProfile()"></md-button>
                     </form>
                 </md-content>
             </md-tab>
@@ -65,6 +75,11 @@
                             <label for="pen-name" translate>PROFILE.PASSWORD.CURRENT</label>
                             <input id="pen-name" label="pen-name" name="pen-name" type="text" ng-model="vm.user.current"/>
                         </md-input-container>
+
+                        <md-button class="md-raised md-primary margin-left-0"
+                                   ng-disabled="profile.$invalid"
+                                   translate="PROFILE.BUTTON"
+                                   ng-click="vm.updateEditor()"></md-button>
                     </form>
                 </md-content>
             </md-tab>
@@ -72,23 +87,21 @@
                 <md-content class="md-padding">
                     <form name="password">
                         <md-input-container class="md-block">
-                            <label for="old-password" translate>PROFILE.PASSWORD.CURRENT</label>
-                            <input id="old-password" label="old-password" name="old-password" type="text" ng-model="vm.user.current"/>
-                        </md-input-container>
-
-                        <md-input-container class="md-block">
                             <label for="password" translate>PROFILE.PASSWORD.LABEL</label>
-                            <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="password.confirm" ng-minlength="8" required/>
+                            <input id="password" label="password" name="password" type="password" ng-model="vm.password.password" tri-same-password="password.confirm" ng-minlength="8" required/>
                             <div ng-messages="password.password.$error" ng-include="'app/examples/authentication/signup/password.messages.html'"></div>
                         </md-input-container>
 
                         <md-input-container class="md-block">
                             <label for="confirm" translate>PROFILE.PASSWORD_CONFIRM.LABEL</label>
-                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="password.password" ng-minlength="8" required/>
+                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.password.confirm" tri-same-password="password.password" ng-minlength="8" required/>
                             <div ng-messages="password.confirm.$error" ng-include="'app/examples/authentication/signup/password.messages.html'"></div>
                         </md-input-container>
 
-                        <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                        <md-button class="md-raised md-primary margin-left-0"
+                                   ng-disabled="profile.$invalid"
+                                   translate="PROFILE.BUTTON"
+                                   ng-click="vm.updatePassword()"></md-button>
 
                     </form>
                 </md-content>
@@ -105,7 +118,10 @@
                             </md-list-item>
                         </div>
                     </md-list>
-                    <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                    <md-button class="md-raised md-primary margin-left-0"
+                               ng-disabled="profile.$invalid"
+                               translate="PROFILE.BUTTON"
+                               ng-click="vm.updateSettings()"></md-button>
                 </md-content>
             </md-tab>
         </md-tabs>

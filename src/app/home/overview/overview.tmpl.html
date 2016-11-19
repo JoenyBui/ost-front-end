@@ -1,0 +1,31 @@
+<!--<div class="full-image-background mb-bg-fb-05" layout="row" layout-fill>-->
+<div class="home" layout="column">
+
+    <div class="dashboard-social-header padding-20 padding-top-100 overlay-gradient-30" layout="row" layout-align="start center" style="background: url(assets/images/backgrounds/material-backgrounds/mb-bg-02.jpg) no-repeat; background-size: cover;">
+        <div class="margin-right-20">
+        <img src="assets/images/avatars/avatar-5.png" alt="girl-avatar" class="make-round" width="100"/>
+    </div>
+
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">Christos Varoufakis</h3>
+        <p class="font-weight-300 margin-top-0 margin-bottom-0">Web Designer, Eroticist and Spy</p>
+        <p class="margin-top-0"><md-icon md-font-icon="zmdi zmdi-pin color-inherit"></md-icon> Athens, Greece</p>
+    </div>
+
+    </div>
+        <div class="animate-wrapper" flex layout="row">
+        <div id="ui-login" class="login-frame" ui-view flex layout="column"></div>
+    </div>
+
+    <tri-widget palette-background="amber:800" >
+        <jk-carousel data="vm.arrayData" item-template-url="'app/home/overview/item-template.html'" max-width="700" max-height="400" >
+        </jk-carousel>
+    </tri-widget>
+
+    <tri-widget title="DASHBOARDS.SALES.SALES" subtitle="{{vm.dateRange.start | amDateFormat:'MMMM Do YYYY'}} - {{vm.dateRange.end | amDateFormat:'MMMM Do YYYY'}}" palette-background="triCyan:800" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
+        <canvas height="300" class="chart-line" chart-data="vm.chartLineData.data" chart-labels="vm.chartLineData.labels" chart-series="vm.chartLineData.series" chart-options="vm.chartLineData.options" chart-colours="vm.chartLineData.colors"></canvas>
+    </tri-widget>
+
+</div>
+
+<!--</div>-->

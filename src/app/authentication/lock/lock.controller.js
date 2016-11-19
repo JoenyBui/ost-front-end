@@ -6,22 +6,28 @@
         .controller('LockController', LockController);
 
     /* @ngInject */
-    function LockController($state, triSettings) {
+    function LockController($state, triSettings, djangoAuth) {
         var vm = this;
-        vm.loginClick = loginClick;
-        vm.user = {
-            name: 'Morris Onions',
-            email: 'info@oxygenna.com',
-            password: ''
-        };
+        vm.user = djangoAuth.user;
+        vm.password = '';
+
         vm.triSettings = triSettings;
 
-        ////////////////
-
         // controller to handle login check
-        function loginClick() {
-            // user logged in ok so goto the dashboard
-            $state.go('triangular.admin-default.dashboard-general');
+        vm.loginClick = function() {
+            djangoAuth.login(vm.user.username, vm.password)
+                .then(function (data) {
+                    // user logged in ok so goto the dashboard
+                    $state.go('triangular.admin-default.dashboard-general');
+                }, function (reason) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Unable to log in with provided credentials')
+                            .position('bottom right')
+                            .hideDelay(5000)
+
+                    );
+                });
         }
     }
 })();

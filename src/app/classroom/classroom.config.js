@@ -121,7 +121,7 @@
 
         triMenuProvider.addMenu({
             name: 'MENU.CLASSROOM.TITLE',
-            icon: 'zmdi zmdi-grade',
+            icon: 'zmdi zmdi-accounts-outline',
             type: 'dropdown',
             priority: 1.1,
             children: [{

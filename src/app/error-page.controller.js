@@ -7,11 +7,7 @@
     function ErrorPageController($state) {
         var vm = this;
 
-        vm.goHome = goHome;
-
-        /////////
-
-        function goHome() {
+        vm.goHome = function() {
             $state.go('triangular.dashboard-analytics');
         }
     }

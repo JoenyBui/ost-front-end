@@ -7,7 +7,7 @@
                 </div>
                 <div layout="row" layout-align="center center">
                     <h1 class="md-headline">
-                        <span translate>LOCK.TITLE</span> {{vm.user.name}}
+                        <span translate>LOCK.TITLE</span> {{vm.user.username}}
                     </h1>
                 </div>
             </md-toolbar>
@@ -18,7 +18,7 @@
                 <form name="lock">
                     <md-input-container class="md-block">
                         <label for="password" translate>LOCK.PASSWORD.LABEL</label>
-                        <input label="password" name="password" type="password" ng-model="vm.user.password" required/>
+                        <input label="password" name="password" type="password" ng-model="vm.password" required/>
                         <div ng-messages for="lock.password.$error" ng-if="lock.password.$dirty">
                             <div ng-message when="required"><span translate>LOCK.PASSWORD.PLEASE_ENTER</span></div>
                         </div>
