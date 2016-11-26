@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "EDITOR": {
+            "EDITOR-MODULE": "Graines De Module",
+            "EDITOR-PAGE": "Page De Démarrage"
+        }
+    },
+    "EDITOR": {
+        "TITLE": "Bienvenue à la forme triangulaire de la page de test"
+    }
+}
