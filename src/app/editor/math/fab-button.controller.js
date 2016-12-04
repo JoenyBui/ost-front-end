@@ -13,6 +13,10 @@
         vm.fabStatus = true;
         vm.fabAnimation = 'md-scale';
 
+        vm.save = function ($event) {
+            $rootScope.$broadcast('save', $event);
+        };
+
         vm.addChoice = function ($event) {
             $rootScope.$broadcast('addChoice', $event);
         };

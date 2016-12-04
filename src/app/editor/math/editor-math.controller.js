@@ -362,6 +362,10 @@
         /*
         * Broadcast Function
         * */
+        $scope.$on('save', function (ev) {
+
+        });
+        
         $scope.$on('submitJob', function(ev) {
             var job = angular.copy(vm.problem);
 
