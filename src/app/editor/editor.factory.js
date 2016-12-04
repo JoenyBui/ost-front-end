@@ -6,7 +6,7 @@
 
     angular
         .module('app')
-        .factory('Wham', whamFactory);
+        .factory('Editor', editorFactory);
 
     /**
      *

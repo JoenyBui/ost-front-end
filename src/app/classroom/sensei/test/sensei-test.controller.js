@@ -12,6 +12,10 @@
     function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, djangoAuth) {
         var vm = this;
 
+        $scope.$on('search', function ($event) {
+            $log.log("Here");
+        });
+
         vm.test = {
             id: -1,
             name: "",

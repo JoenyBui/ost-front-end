@@ -45,6 +45,12 @@
 
                         controller: 'SenseiTestController',
                         controllerAs: 'vm'
+                    },
+                    'belowContent': {
+                        templateUrl: 'app/classroom/sensei/test/fab-button.tmpl.html',
+
+                        controller: 'SenseiTestFabController',
+                        controllerAs: 'vm'
                     }
                 },
                 data: {
