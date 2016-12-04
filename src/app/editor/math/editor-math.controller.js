@@ -6,9 +6,13 @@
         .controller('EditorMathPageController', EditorMathPageController);
 
     /* @ngInject */
-    function EditorMathPageController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
+    function EditorMathPageController($scope, $log, $mdDialog, $stateParams, $mdExpansionPanel, djangoAuth) {
         
         var vm = this;
+
+        $mdExpansionPanel().waitFor('base').then(function (instance) {
+            instance.expand();
+        });
 
         var UNASSIGNED = 0;
         var FILL_IN_THE_BLANK = 1;
@@ -18,6 +22,10 @@
         var SHORT_ANSWER = 5;
         var MULTIPLE_ANSWER = 6;
         var WORD_PROBLEM = 7;
+
+        $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
+            instance.expand();
+        })
 
         vm.problemId = null;
         vm.autocompleteRequireMatch = true;
