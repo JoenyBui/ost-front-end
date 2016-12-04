@@ -25,6 +25,7 @@
             'ngFileUpload',
             'ui.codemirror',
             'restangular',
+            'material.components.expansionPanels',
 
             'app.components',
             'app.home',

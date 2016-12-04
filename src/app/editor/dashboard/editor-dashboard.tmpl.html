@@ -1,117 +1,39 @@
-<!--<md-content class="extras-gallery-container">-->
-    <!--<md-list>-->
-        <!--<div ng-repeat="day in ::vm.feed">-->
-            <!--<md-subheader>{{day.date | amCalendar}}</md-subheader>-->
-            <!--<md-list-item>-->
-                <!--<md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">-->
-                    <!--<md-grid-tile ng-click="vm.openEntry(day, entry, $event)"-->
-                                  <!--md-rowspan="1"-->
-                                  <!--md-colspan="1"-->
-                                  <!--ng-repeat="entry in ::day.entries">-->
-                        <!--{{entry.name}}-->
-                        <!--<md-grid-tile-footer>-->
-                            <!--<h3>{{::entry.id}}</h3>-->
-                        <!--</md-grid-tile-footer>-->
-                    <!--</md-grid-tile>-->
-                <!--</md-grid-list>-->
-            <!--</md-list-item>-->
-        <!--</div>-->
-    <!--</md-list>-->
-<!--</md-content>-->
+<md-expansion-panel-group md-component-id="panelGroup" multiple>
+    <div ng-repeat="input in vm.feed">
+        <md-expansion-panel md-component-id="input.id">
 
-<!--<md-content class="extras-gallery-container">-->
-    <!--<md-list>-->
-        <!--<div ng-repeat="obj in ::vm.feed">-->
-            <!--<md-subheader>{{obj.id}}</md-subheader>-->
-            <!--<md-list-item>-->
-                <!--<md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">-->
-                    <!--<md-grid-tile ng-click="vm.openEntry(day, entry, $event)"-->
-                                  <!--md-rowspan="1"-->
-                                  <!--md-colspan="1"-->
-                                  <!--ng-repeat="entry in ::day.entries">-->
-                        <!--{{entry.name}}-->
-                        <!--<md-grid-tile-footer>-->
-                            <!--<h3>{{::entry.id}}</h3>-->
-                        <!--</md-grid-tile-footer>-->
-                    <!--</md-grid-tile>-->
-                <!--</md-grid-list>-->
-            <!--</md-list-item>-->
-        <!--</div>-->
-    <!--</md-list>-->
-<!--</md-content>-->
-<md-content layout="row" flex layout-align="center" layout-fill>
-    <div flex="70" class="content" ui-view>
-        <md-item ng-repeat="input in vm.feed" class="item"
-                 ng-class="{ 'selected-item': $index == vm.selectedIndex}">
-            <md-item-content class="user tile md-whiteframe-z1"
-                             ng-class="{ 'selected md-whiteframe-z2': $index == vm.selectedIndex}"
-                             layout="column">
+            <md-expansion-panel-collapsed>
+                <div class="md-title">{{ input.name }}</div>
+                <div class="md-summary">{{ input.modified }}</div>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-collapsed>
 
-                <div layout="row" layout-fill ng-click="vm.selectIndex($index)" class="folded">
 
-                    <div class="md-tile-left">
-                        <md-checkbox class="face"></md-checkbox>
-                    </div>
-                    <div class="md-tile-content" layout="column" layout-align="center start">
-                        <div layout="row">
-                            <div layout="column">
-                                <h5>Problem ID: {{ input.id }}</h5>
-                            </div>
-                            <div layout="column" layout-align="right">
-                                <h4>Modified: {{ input.modified }}</h4>
-                            </div>
-                        </div>
-                        <p ng-hide="$index == vm.selectedIndex">
-                            <span>{{ input.name }}</span>
-                        </p>
-                    </div>
+            <md-expansion-panel-expanded>
 
-                    <span flex></span>
-                    <div class="md-tile-right">
-                        <md-button class="face">
-                            <md-icon md-font-icon="zmdi zmdi-more-vert" class="md-primary"></md-icon>
-                        </md-button>
-                    </div>
-                </div>
-                <md-divider layout-fill ng-show="$index == vm.selectedIndex"></md-divider>
-                <div layout="column" layout-fill class="expanded">
-                    <!--{{ input.data }}-->
+                <md-expansion-panel-header>
+                    <div class="md-title">{{ input.name }}</div>
+                    <div class="md-summary">Primary Key {{ input.id }}</div>
+                    <md-expansion-panel-icon></md-expansion-panel-icon>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
                     <json-formatter json="input" open="1"></json-formatter>
-                    <md-divider></md-divider>
-                    <div layout="row">
-                        <md-button class="md-raised md-primary" ng-click="vm.openItem($index)">Open</md-button>
-                    </div>
-                </div>
-            </md-item-content>
-            <md-divider class="divider-inset" ng-if="!$last"></md-divider>
-        </md-item>
+
+                    <h4>Content</h4>
+                    <p>Put content in here</p>
+                </md-expansion-panel-content>
+
+                <md-expansion-panel-footer>
+                    <div flex></div>
+
+                    <md-button class="md-raised md-primary" ng-click="vm.openItem($index)">Open</md-button>
+                    <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+                </md-expansion-panel-footer>
+
+            </md-expansion-panel-expanded>
+
+        </md-expansion-panel>
+
     </div>
-</md-content>
-
-
-<!--<md-list-item>-->
-    <!--<md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">-->
-        <!--<md-grid-tile ng-click="vm.openEntry(entry, $event)"-->
-                      <!--class="md-whiteframe-3dp"-->
-                      <!--md-rowspan="1"-->
-                      <!--md-colspan="1"-->
-                      <!--ng-repeat="entry in vm.feed">-->
-
-            <!--<h3>{{entry.name}}</h3>-->
-            <!--<h4>{{entry.info.domain}}</h4>-->
-            <!--{{entry.info.status}}-->
-
-            <!--<md-grid-tile-footer>-->
-                <!--<h3>{{::entry.id}}</h3>-->
-            <!--</md-grid-tile-footer>-->
-        <!--</md-grid-tile>-->
-    <!--</md-grid-list>-->
-<!--</md-list-item>-->
-
-<!--<md-content>-->
-    <!--<md-virtual-repeat-container id="vertical-container">-->
-        <!--<div md-virtual-repeat="item in vm.dynamicItems" md-on-demand class="repeated-item" flex>-->
-            <!--{{item}}-->
-        <!--</div>-->
-    <!--</md-virtual-repeat-container>-->
-<!--</md-content>-->
+</md-expansion-panel-group>

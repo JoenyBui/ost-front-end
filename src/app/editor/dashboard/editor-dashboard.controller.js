@@ -9,8 +9,12 @@
         .controller('EditorDashboardController', EditorDashboardController);
     
     /* @ngInject */
-    function EditorDashboardController($scope, $mdDialog, $log, $timeout, $state, djangoAuth) {
+    function EditorDashboardController($scope, $mdDialog, $log, $timeout, $state, $mdExpansionPanel, $mdExpansionPanelGroup, djangoAuth) {
         var vm = this;
+
+        $mdExpansionPanel().waitFor('base').then(function (instance) {
+            instance.expand();
+        });
 
         vm.feed = [];
 

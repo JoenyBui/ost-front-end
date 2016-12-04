@@ -9,8 +9,8 @@
         .constant('API_CONFIG', {
             // set a constant for the API we are connecting to
             /*'url': 'http://127.0.0.1:8000/',*/
-            // 'url': '//127.0.0.1:8000/',
-            'url': 'https://api.mywaterbuffalo.com/',
+            'url': '//127.0.0.1:8000/',
+            // 'url': 'https://api.mywaterbuffalo.com/',
             'accounts': 'rest-auth/'
         })
         .constant('GLOBAL_SETTINGS', {

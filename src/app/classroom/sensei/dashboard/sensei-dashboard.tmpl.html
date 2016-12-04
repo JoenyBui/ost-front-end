@@ -1,38 +1,91 @@
-    <md-content>
-        <md-list flex>
-            <md-list-item ng-repeat="item in vm.tests" ng-click="vm.openTest(item)">
-                <p>{{item.name}}</p>
+
+<!--<md-content>-->
+    <!--<md-list flex>-->
+        <!--<md-list-item ng-repeat="item in vm.tests" ng-click="vm.openTest(item)">-->
+            <!--<p>{{item.name}}</p>-->
 
 
-                <!--<md-menu>-->
-                    <!--<md-button class="widget-button md-icon-button" ng-click="$mdOpenMenu()" aria-label="open menu">-->
-                        <!--<md-icon md-font-icon="{{::vm.menu.icon}}"></md-icon>-->
+            <!--&lt;!&ndash;<md-menu>&ndash;&gt;-->
+                <!--&lt;!&ndash;<md-button class="widget-button md-icon-button" ng-click="$mdOpenMenu()" aria-label="open menu">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<md-icon md-font-icon="{{::vm.menu.icon}}"></md-icon>&ndash;&gt;-->
+                <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+                <!--&lt;!&ndash;<md-menu-content>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<md-menu-item ng-repeat="item in ::vm.menu.items">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<md-button ng-click="item.click($event)">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span translate>{{::item.title}}</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</md-menu-item>&ndash;&gt;-->
+                <!--&lt;!&ndash;</md-menu-content>&ndash;&gt;-->
+            <!--&lt;!&ndash;</md-menu>&ndash;&gt;-->
+            <!--<md-menu>-->
+                <!--<md-button ng-click="$mdOpenMenu()" aria-label="open menu">-->
+                    <!--<md-icon md-font-icon="zmdi zmdi-more-vert" class="md-primary"></md-icon>-->
+                <!--</md-button>-->
+
+                <!--<md-menu-content>-->
+                    <!--<md-menu-item ng-repeat="item in ::vm.menu.items">-->
+                    <!--<md-button ng-click="item.click($event)">-->
+                    <!--<md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>-->
+                    <!--<span translate>{{::item.title}}</span>-->
                     <!--</md-button>-->
-                    <!--<md-menu-content>-->
-                        <!--<md-menu-item ng-repeat="item in ::vm.menu.items">-->
-                            <!--<md-button ng-click="item.click($event)">-->
-                                <!--<md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>-->
-                                <!--<span translate>{{::item.title}}</span>-->
-                            <!--</md-button>-->
-                        <!--</md-menu-item>-->
-                    <!--</md-menu-content>-->
-                <!--</md-menu>-->
-                <md-menu>
-                    <md-button ng-click="$mdOpenMenu()" aria-label="open menu">
-                        <md-icon md-font-icon="zmdi zmdi-more-vert" class="md-primary"></md-icon>
-                    </md-button>
+                    <!--</md-menu-item>-->
+                <!--</md-menu-content>-->
+            <!--</md-menu>-->
 
-                    <md-menu-content>
-                        <md-menu-item ng-repeat="item in ::vm.menu.items">
-                        <md-button ng-click="item.click($event)">
-                        <md-icon ng-if="::item.icon" md-font-icon="{{::item.icon}}"></md-icon>
-                        <span translate>{{::item.title}}</span>
-                        </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
+            <!--<md-divider></md-divider>-->
+        <!--</md-list-item>-->
+    <!--</md-list>-->
+<!--</md-content>-->
+<md-expansion-panel md-component-id="panelOne">
 
-                <md-divider></md-divider>
-            </md-list-item>
-        </md-list>
-    </md-content>
+    <md-expansion-panel-collapsed>
+        <div class="md-title">Title</div>
+        <div class="md-summary">Summary</div>
+        <md-expansion-panel-icon></md-expansion-panel-icon>
+    </md-expansion-panel-collapsed>
+
+
+    <md-expansion-panel-expanded>
+
+        <md-expansion-panel-header>
+            <div class="md-title">Expanded Title</div>
+            <div class="md-summary">Expanded Summary</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+        </md-expansion-panel-header>
+
+        <md-expansion-panel-content>
+            <h4>Content</h4>
+            <p>Put content in here</p>
+        </md-expansion-panel-content>
+
+        <md-expansion-panel-footer>
+            <div flex></div>
+            <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+        </md-expansion-panel-footer>
+
+    </md-expansion-panel-expanded>
+
+</md-expansion-panel>
+<!--<md-content>-->
+
+    <!--<md-expansion-panel-group md-component-id="panelGroup" multiple>-->
+        <!--<md-expansion-panel md-component-id="panelOne">-->
+            <!--<md-expansion-panel-collapsed></md-expansion-panel-collapsed>-->
+            <!--<md-expansion-panel-expanded>-->
+                <!--<md-expansion-panel-header></md-expansion-panel-header>-->
+                <!--<md-expansion-panel-content></md-expansion-panel-content>-->
+                <!--<md-expansion-panel-footer></md-expansion-panel-footer>-->
+            <!--</md-expansion-panel-expanded>-->
+        <!--</md-expansion-panel>-->
+
+        <!--<md-expansion-panel md-component-id="panelTwo">-->
+            <!--<md-expansion-panel-collapsed></md-expansion-panel-collapsed>-->
+            <!--<md-expansion-panel-expanded>-->
+                <!--<md-expansion-panel-header></md-expansion-panel-header>-->
+                <!--<md-expansion-panel-content></md-expansion-panel-content>-->
+                <!--<md-expansion-panel-footer></md-expansion-panel-footer>-->
+            <!--</md-expansion-panel-expanded>-->
+        <!--</md-expansion-panel>-->
+    <!--</md-expansion-panel-group>-->
+<!--</md-content>-->

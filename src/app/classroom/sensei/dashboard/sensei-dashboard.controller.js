@@ -9,8 +9,48 @@
         .controller('SenseiDashboardController', SenseiDashboardController);
 
     /* @ngInject */
-    function SenseiDashboardController($scope, $log, $mdDialog, $timeout, djangoAuth) {
+    function SenseiDashboardController($scope, $log, $mdDialog, $timeout, $mdExpansionPanel, djangoAuth) {
         var vm =this;
+
+        // $mdExpansionPanelGroup().waitFor('panelGroup').then(function (instance) {
+        //     instance.register('panelOne', {
+        //         templateUrl: 'templateOne.html',
+        //         controller: 'TemplateOneController',
+        //         controllerAs: 'vm'
+        //     });
+        //
+        //     instance.register('panelTwo', {
+        //         templateUrl: 'templateTwo.html',
+        //         controller: 'TemplateTwoController',
+        //         controllerAs: 'vm'
+        //     });
+        // });
+        // $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
+        //     instance.expand();
+        //     instance.collapse({animation: false});
+        //     instance.remove();
+        //     instance.isOpen();
+        // });
+        //
+        $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
+            instance.isOpen();
+        });
+
+        $scope.addPanelOne = function () {
+            $mdExpansionPanelGroup('panelGroup').add('panelOne', {localParam: 'some data'});
+        };
+
+        $scope.addPanelTwo = function () {
+            $mdExpansionPanelGroup('panelGroup').add('panelTwo');
+        };
+
+        $scope.removePanelOne = function () {
+            $mdExpansionPanelGroup('panelGroup').remove('panelOne');
+        };
+
+        $scope.removeAll = function () {
+            $mdExpansionPanelGroup('panelGroup').removeAll({animation: false});
+        };
 
         vm.tests = [];
 
