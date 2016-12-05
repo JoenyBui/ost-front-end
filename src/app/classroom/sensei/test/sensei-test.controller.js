@@ -13,7 +13,14 @@
         var vm = this;
 
         $scope.$on('search', function ($event) {
-            $log.log("Here");
+            $mdDialog.show({
+                controller: 'SenseiTestSearchDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/classroom/sensei/test/sensei-test.search-dialog.tmpl.html',
+                clickOutsideToClose: true,
+                focusOnOpen: false,
+                targetEvent: $event
+            })
         });
 
         vm.test = {
