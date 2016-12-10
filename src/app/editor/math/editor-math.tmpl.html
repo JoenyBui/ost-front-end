@@ -120,7 +120,7 @@
 
                     <md-input-container class="md-block">
                         <label>Question Type</label>
-                        <md-select ng-model="vm.questionType.selectedItem">
+                        <md-select ng-model="vm.problem.qtype">
                             <!--<md-option ng-selected="vm.selected" ng-repeat="type in vm.qtype_options" value="type">-->
                             <md-option ng-repeat="type in vm.questionType.options" ng-value="type[1]">
                             <span>
@@ -143,7 +143,7 @@
                         </md-input-container>
                     </div>
 
-                    <div ng-if="vm.questionType.selectedItem == 2">
+                    <div ng-if="vm.problem.qtype == 2">
                         <!-- TRUE OR FALSE -->
 
                         <md-radio-group ng-model="vm.questionType.tf.answer">
@@ -152,7 +152,7 @@
                         </md-radio-group>
                     </div>
 
-                    <div ng-if="vm.questionType.selectedItem == 3">
+                    <div ng-if="vm.problem.qtype == 3">
                         <!-- MULTIPLE CHOICE -->
 
                         <md-input-container class="md-block">
@@ -180,7 +180,7 @@
                         </md-list>
                     </div>
 
-                    <div ng-if="vm.questionType.selectedItem == 1">
+                    <div ng-if="vm.problem.qtype == 1">
                         <!-- FILL IN THE BLANK -->
                         <md-input-container class="md-block">
                             <label>Answer</label>

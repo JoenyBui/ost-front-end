@@ -77,6 +77,22 @@
                     }
                 }
             })
+            .state('triangular.admin-default.sensei-settings', {
+                url: '/classroom/sensei/settings',
+                views: {
+                    '': {
+                        templateUrl: 'app/classroom/sensei/settings/sensei.settings.tmpl.html',
+                        controller: 'SenseiSettingController',
+                        controllerAs: 'vm'
+
+                    }
+                },
+                resolve: {
+                    'authenticationStatus': function (djangoAuth) {
+                        return djangoAuth.authenticationStatus()
+                    }
+                }
+            })
             .state('triangular.admin-default.pupil-dashboard', {
                 url: '/classroom/pupil',
                 views: {
@@ -123,6 +139,22 @@
                         innerContentClass: 'overlay-gradient-20'
                     }
                 }
+            })
+            .state('triangular.admin-default.pupil-settings', {
+                url: '/classroom/pupil/settings',
+                views: {
+                    '': {
+                        templateUrl: 'app/classroom/pupil/settings/pupil.settings.tmpl.html',
+                        controller: 'PupilSettingController',
+                        controllerAs: 'vm'
+
+                    }
+                },
+                resolve: {
+                    'authenticationStatus': function (djangoAuth) {
+                        return djangoAuth.authenticationStatus()
+                    }
+                }
             });
 
         triMenuProvider.addMenu({
@@ -139,13 +171,9 @@
                     type: 'link',
                     state: 'triangular.admin-default.sensei-dashboard'
                 }, {
-                    name: 'MENU.CLASSROOM.SENSEI.TEST',
+                    name: 'MENU.CLASSROOM.SENSEI.SETTINGS',
                     type: 'link',
-                    state: 'triangular.admin-default.sensei-test'
-                }, {
-                    name: 'MENU.CLASSROOM.SENSEI.PROBLEM',
-                    type: 'link',
-                    state: 'triangular.admin-default.sensei-problem'
+                    state: 'triangular.admin-default.sensei-settings'
                 }]
             }, {
                 name: 'MENU.CLASSROOM.PUPIL.TITLE',
@@ -156,9 +184,9 @@
                     type: 'link',
                     state: 'triangular.admin-default.pupil-dashboard'
                 }, {
-                    name: 'MENU.CLASSROOM.PUPIL.TEST',
+                    name: 'MENU.CLASSROOM.PUPIL.SETTINGS',
                     type: 'link',
-                    state: 'triangular.admin-default.pupil-test'
+                    state: 'triangular.admin-default.pupil-settings'
                 }]
             }]
         });

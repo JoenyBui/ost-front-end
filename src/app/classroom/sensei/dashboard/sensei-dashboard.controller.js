@@ -12,26 +12,6 @@
     function SenseiDashboardController($scope, $log, $mdDialog, $timeout, $mdExpansionPanel, djangoAuth) {
         var vm =this;
 
-        // $mdExpansionPanelGroup().waitFor('panelGroup').then(function (instance) {
-        //     instance.register('panelOne', {
-        //         templateUrl: 'templateOne.html',
-        //         controller: 'TemplateOneController',
-        //         controllerAs: 'vm'
-        //     });
-        //
-        //     instance.register('panelTwo', {
-        //         templateUrl: 'templateTwo.html',
-        //         controller: 'TemplateTwoController',
-        //         controllerAs: 'vm'
-        //     });
-        // });
-        // $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
-        //     instance.expand();
-        //     instance.collapse({animation: false});
-        //     instance.remove();
-        //     instance.isOpen();
-        // });
-        //
         $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
             instance.isOpen();
         });
@@ -71,6 +51,21 @@
                 title: 'Delete Test'
             }
         ]};
+
+        $scope.$on('addTest', function( ev ){
+            $mdDialog.show({
+                templateUrl: 'app/classroom/sensei/dashboard/add-test.tmpl.html',
+                targetEvent: ev,
+                controller: 'AddTestDialogController',
+                controllerAs: 'vm',
+                locals: {
+                    variable: null
+                }
+            })
+                .then(function(answer) {
+                    vm.problem.keys.variables.push(answer);
+                });
+        });
 
         vm.openTest = function (item, $event) {
             $mdDialog.show({
