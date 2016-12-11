@@ -32,10 +32,7 @@
             $log.log(reason);
         });
 
-        vm.openEntry = openEntry;
-
-
-        function openEntry(entry, $event) {
+        vm.openEntry = function openEntry(entry, $event) {
             $mdDialog.show({
                 controller: 'EditorDashboardDialogController',
                 controllerAs: 'vm',
@@ -47,7 +44,7 @@
                     problem: entry
                 }
             });
-        }
+        };
 
         var DynamicItems = function() {
             /**

@@ -9,7 +9,7 @@
         .controller('SenseiDashboardController', SenseiDashboardController);
 
     /* @ngInject */
-    function SenseiDashboardController($scope, $log, $mdDialog, $timeout, $mdExpansionPanel, djangoAuth) {
+    function SenseiDashboardController($scope, $log, $mdDialog, $timeout, $state, $mdExpansionPanel, djangoAuth) {
         var vm =this;
 
         $mdExpansionPanel().waitFor('panelOne').then(function (instance) {
@@ -52,6 +52,10 @@
             }
         ]};
 
+        /**
+         * Add new test.
+         *
+         * */
         $scope.$on('addTest', function( ev ){
             $mdDialog.show({
                 templateUrl: 'app/classroom/sensei/dashboard/add-test.tmpl.html',
@@ -61,24 +65,35 @@
                 locals: {
                     variable: null
                 }
-            })
-                .then(function(answer) {
-                    vm.problem.keys.variables.push(answer);
-                });
+            });
         });
 
-        vm.openTest = function (item, $event) {
-            $mdDialog.show({
-                controller: 'SenseiDashboardDialogController',
-                controllerAs: 'vm',
-                templateUrl: 'app/classroom/sensei/dashboard/sensei-dashboard-dialog.tmpl.html',
-                clickOutsideToClose: true,
-                focusOnOpen: false,
-                targetEvent: $event,
-                locals: {
-                    test: item
+        /**
+         * Open the following test.
+         *
+         * */
+        vm.openTest = function (index) {
+            var item = vm.tests[index];
+            var testId = item.id;
+
+            $state.go(
+                'triangular.admin-default.sensei-test', {
+                    'testId': testId
                 }
-            });
+            );
         };
+        // vm.openTest = function (item, $event) {
+        //     $mdDialog.show({
+        //         controller: 'SenseiDashboardDialogController',
+        //         controllerAs: 'vm',
+        //         templateUrl: 'app/classroom/sensei/dashboard/sensei-dashboard-dialog.tmpl.html',
+        //         clickOutsideToClose: true,
+        //         focusOnOpen: false,
+        //         targetEvent: $event,
+        //         locals: {
+        //             test: item
+        //         }
+        //     });
+        // };
     }
 })();
