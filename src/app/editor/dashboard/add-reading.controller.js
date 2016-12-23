@@ -6,7 +6,11 @@
         .module('app.editor')
         .controller('AddReadingDialogController', AddReadingDialogController);
 
-    function AddReadingDialogController($rootScope) {
+    function AddReadingDialogController($rootScope, $mdDialog, djangoAuth) {
         var vm = this;
+
+        vm.cancel = function () {
+            $mdDialog.hide();
+        };
     }
 })();

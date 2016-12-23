@@ -1,9 +1,11 @@
 <md-dialog aria-label="Add Test" flex="80" flex-lg="80">
     <md-toolbar md-theme="{{triSkin.elements.content}}">
         <div class="md-toolbar-tools">
-            <h2>
-                <span translate>Add New Test</span>
-            </h2>
+            <h2><span translate>Add New Test</span></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+            </md-button>
         </div>
     </md-toolbar>
 
