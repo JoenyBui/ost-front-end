@@ -6,16 +6,40 @@
         "TITLE": "Sensei",
         "DASHBOARD": "Dashboard",
         "TEST": "Test",
-        "PROBLEM": "Problem"
+        "PROBLEM": "Problem",
+        "SETTINGS": "Settings"
       },
       "PUPIL": {
         "TITLE": "Pupil",
         "DASHBOARD": "Dashboard",
-        "TEST": "Test"
+        "TEST": "Test",
+        "SETTINGS": "Settings"
       }
     }
   },
   "CLASSROOM": {
-    "TITLE": "Classroom time."
+    "TITLE": "Classroom",
+    "SENSEI": {
+      "SETTINGS": {
+        "PROFILE": {
+          "NAME": {
+            "LABEL": "Pen Name",
+            "PLEASE_VALID": "Please enter a pen name."
+          }
+        },
+        "BUTTON": "Update Sensei Settings"
+      }
+    },
+    "PUPIL": {
+      "SETTINGS": {
+        "PROFILE": {
+          "NAME": {
+            "LABEL": "Pen Name",
+            "PLEASE_VALID": "Please enter a pen name."
+          }
+        },
+        "BUTTON": "Update Pupil Settings"
+      }
+    }
   }
 }

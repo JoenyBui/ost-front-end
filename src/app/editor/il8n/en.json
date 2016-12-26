@@ -4,6 +4,7 @@
             "EDITOR-MODULE": "Editor",
             "EDITOR-DASHBOARD": "Dashboard",
             "EDITOR-PAGE": "Cover Page",
+            "SETTINGS": "Settings",
             "MATH-PAGE": "Math",
             "READING-PAGE": "Reading",
             "WRITING-PAGE": "Writing"
@@ -39,6 +40,16 @@
             "WRITING": {
                 "TITLE": "Add New Writing Problem"
             }
+        },
+        "SETTINGS": {
+            "PROFILE": {
+                "NAME:": {
+                    "LABEL": "Please enter Pen Name",
+                    "PLEASE_ENTER": "Please enter your pen name.",
+                    "PLEASE_VALID": "Please enter a valid pen name."
+                }
+            },
+            "BUTTON": "Update Editor Settings"
         }
     }
 }

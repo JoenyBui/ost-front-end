@@ -1,9 +1,11 @@
 <md-dialog aria-label="Add Variable" flex="60" flex-xs="100">
     <md-toolbar md-theme="{{triSkin.elements.content}}">
         <div class="md-toolbar-tools">
-            <h2>
-                <span translate>EDITOR.DASHBOARD.WRITING.TITLE</span>
-            </h2>
+            <h2><span translate>EDITOR.DASHBOARD.WRITING.TITLE</span></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+            </md-button>
         </div>
     </md-toolbar>
 

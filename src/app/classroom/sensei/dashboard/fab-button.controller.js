@@ -16,16 +16,9 @@
         vm.fabAnimation = 'md-scale';
 
 
-        vm.addMath = function ($event) {
-            $rootScope.$broadcast('addMath', $event);
+        vm.addTest = function ($event) {
+            $rootScope.$broadcast('addTest', $event);
         };
 
-        vm.addReading = function ($event) {
-            $rootScope.$broadcast('addReading', $event);
-        };
-
-        vm.addWriting = function ($event) {
-            $rootScope.$broadcast('addWriting', $event);
-        };
     }
 })();

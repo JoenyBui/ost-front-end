@@ -1,212 +1,321 @@
-<div class="dashboard-container overlay-10 padded-content-page" layout="column">
-    <div layout="row" layout-xs="column" layout-margin="">
+<!--<div class="dashboard-container overlay-10 padded-content-page" layout="column">-->
+    <!--<div layout="row" layout-xs="column" layout-margin="">-->
+<div class="padded-content-age" layout-margin="">
 
-        <tri-widget content-padding flex title="Problem" subtitle="Information" >
+<md-expansion-panel-group md-component-id="panelGroup">
+    <md-expansion-panel md-component-id="base">
+        <md-expansion-panel-collapsed>
+            <div class="md-title">Problem</div>
+            <div class="md-summary">General Information</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+        </md-expansion-panel-collapsed>
 
-            <!--<div>-->
-            <!--<md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">-->
-                <!--<label>Problem ID</label>-->
-                <!--<input type='text' ng-model="vm.problem.id" readonly>-->
-            <!--</md-input-container>-->
+        <md-expansion-panel-expanded>
 
-            <md-input-container class="md-block">
-                <label>Problem Name</label>
-                <input type='text' ng-model="vm.problem.name">
-            </md-input-container>
+            <md-expansion-panel-header>
+                <div class="md-title">Problem</div>
+                <div class="md-summary">General Information</div>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-header>
 
-            <!--</div>-->
+            <md-expansion-panel-content>
 
-            <md-chips ng-model="vm.topicItems"
-                      md-autocomplete-snap
-                      md-transform-chip="vm.transformChip($chip)"
-                      md-require-match="vm.autocompleteRequireMatch">
-                <md-autocomplete
-                        md-selected-item="vm.topicSelectedItem"
-                        md-search-text="vm.topicSearchText"
-                        md-items="item in vm.querySearchTopic(vm.topicSearchText)"
-                        md-item-text="item.name"
-                        placeholder="Search for topics">
-                    <span md-highlight-text="vm.topicSearchText">{{item.name}} ({{item.key}})</span>
-                </md-autocomplete>
-                <md-chip-template>
+                <tri-widget content-padding flex title="Problem" subtitle="Information">
+
+                    <!--<div>-->
+                    <!--<md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">-->
+                    <!--<label>Problem ID</label>-->
+                    <!--<input type='text' ng-model="vm.problem.id" readonly>-->
+                    <!--</md-input-container>-->
+
+                    <md-input-container class="md-block">
+                        <label>Problem Name</label>
+                        <input type='text' ng-model="vm.problem.name">
+                    </md-input-container>
+
+                    <!--</div>-->
+
+                    <md-chips ng-model="vm.topicItems"
+                              md-autocomplete-snap
+                              md-transform-chip="vm.transformChip($chip)"
+                              md-require-match="vm.autocompleteRequireMatch">
+                        <md-autocomplete
+                                md-selected-item="vm.topicSelectedItem"
+                                md-search-text="vm.topicSearchText"
+                                md-items="item in vm.querySearchTopic(vm.topicSearchText)"
+                                md-item-text="item.name"
+                                placeholder="Search for topics">
+                            <span md-highlight-text="vm.topicSearchText">{{item.name}} ({{item.key}})</span>
+                        </md-autocomplete>
+                        <md-chip-template>
                     <span>
                         <strong>{{$chip.name}}</strong>
                         <em>({{$chip.key}})</em>
                     </span>
-                </md-chip-template>
-            </md-chips>
+                        </md-chip-template>
+                    </md-chips>
 
-            <md-chips ng-model="vm.editorItems"
-                      md-autocomplete-snap
-                      md-transform-chip="vm.transformChip($chip)"
-                      md-require-match="vm.autocompleteRequireMatch">
-                <md-autocomplete
-                    md-selected-item="vm.editorSelectedItem"
-                    md-search-text="vm.editorSearchText"
-                    md-items="item in vm.querySearchEditor(vm.editorSearchText)"
-                    md-item-text="item.pen_name"
-                    placeholder="Search for editors">
-                    <span md-highlight-text="vm.editorSearchText">{{item.pen_name}}</span>
-                </md-autocomplete>
-                <md-chip-template>
+                    <md-chips ng-model="vm.editorItems"
+                              md-autocomplete-snap
+                              md-transform-chip="vm.transformChip($chip)"
+                              md-require-match="vm.autocompleteRequireMatch">
+                        <md-autocomplete
+                                md-selected-item="vm.editorSelectedItem"
+                                md-search-text="vm.editorSearchText"
+                                md-items="item in vm.querySearchEditor(vm.editorSearchText)"
+                                md-item-text="item.pen_name"
+                                placeholder="Search for editors">
+                            <span md-highlight-text="vm.editorSearchText">{{item.pen_name}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
                     <span>
                         <strong>{{$chip.pen_name}}</strong>
                     </span>
-                </md-chip-template>
-            </md-chips>
+                        </md-chip-template>
+                    </md-chips>
 
-            <md-input-container class="md-block">
-                <label>Status</label>
-                <md-select ng-model="vm.statusType.selectedItem">
-                    <md-option ng-repeat="type in vm.statusType.options" ng-value="type[1]">
+                    <md-input-container class="md-block">
+                        <label>Status</label>
+                        <md-select ng-model="vm.statusType.selectedItem">
+                            <md-option ng-repeat="type in vm.statusType.options" ng-value="type[1]">
                         <span>
                             <strong>{{type[0]}}</strong>
                             <em>({{type[1]}})</em>
                         </span>
-                    </md-option>
-                </md-select>
+                            </md-option>
+                        </md-select>
 
-            </md-input-container>
+                    </md-input-container>
 
-        </tri-widget>
-    </div>
+                </tri-widget>
+                <!--</div>-->
+            </md-expansion-panel-content>
 
-    <div layout="row" layout-xs="column" layout-margin>
+            <md-expansion-panel-footer>
+                <div flex></div>
+                <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+            </md-expansion-panel-footer>
 
-        <tri-widget flex title="Question" subtitle="Statement" palette-background="blue-grey:1000"
-                    background="primary" content-padding>
+        </md-expansion-panel-expanded>
+    </md-expansion-panel>
 
-            <md-input-container class="md-block">
-                <label>Question Type</label>
-                <md-select ng-model="vm.questionType.selectedItem">
-                    <!--<md-option ng-selected="vm.selected" ng-repeat="type in vm.qtype_options" value="type">-->
-                    <md-option ng-repeat="type in vm.questionType.options" ng-value="type[1]">
-                        <span>
-                            <strong>{{type[0]}}</strong>
-                            <em>({{type[1]}})</em>
-                        </span>
-                    </md-option>
-                </md-select>
+    <md-expansion-panel md-component-id="question">
+        <md-expansion-panel-collapsed>
+            <div class="md-title">Question</div>
+            <div class="md-summary">Statement</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+        </md-expansion-panel-collapsed>
 
-            </md-input-container>
+        <md-expansion-panel-expanded>
+
+            <md-expansion-panel-header>
+                <div class="md-title">Question</div>
+                <div class="md-summary">Statement</div>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-header>
+
+            <md-expansion-panel-content>
+                <tri-widget flex title="Question" subtitle="Statement" palette-background="blue-grey:1000"
+                            background="primary" content-padding>
+
+                    <md-input-container class="md-block">
+                        <label>Question Type</label>
+                        <md-select ng-model="vm.problem.qtype">
+                            <!--<md-option ng-selected="vm.selected" ng-repeat="type in vm.qtype_options" value="type">-->
+                            <md-option ng-repeat="type in vm.questionType.options" ng-value="type[1]">
+                            <span>
+                                <strong>{{type[0]}}</strong>
+                                <em>({{type[1]}})</em>
+                            </span>
+                            </md-option>
+                        </md-select>
+
+                    </md-input-container>
 
 
-            <!-- Statement Text Area -->
-            <div>
-                <!--<legend>Define <code>stem</code></legend>-->
+                    <!-- Statement Text Area -->
+                    <div>
+                        <!--<legend>Define <code>stem</code></legend>-->
 
-                <md-input-container class="md-block">
-                    <label>Statement</label>
-                    <textarea ng-model="vm.problem.stem.statement" rows="25" md-select-on-focus></textarea>
-                </md-input-container>
-            </div>
-
-            <div ng-if="vm.questionType.selectedItem == 2">
-                <!-- TRUE OR FALSE -->
-
-                <md-radio-group ng-model="vm.questionType.tf.answer">
-                    <md-radio-button ng-value="true" class="md-primary">True</md-radio-button>
-                    <md-radio-button ng-value="false">False</md-radio-button>
-                </md-radio-group>
-            </div>
-
-            <div ng-if="vm.questionType.selectedItem == 3">
-                <!-- MULTIPLE CHOICE -->
-
-                <md-input-container class="md-block">
-                    <label>Answer</label>
-                    <input ng-model="vm.questionType.mc.answer">
-                </md-input-container>
-
-                <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_mc_item()">Add Choice</md-button>
-
-                <md-list class="margin-bottom-10" ng-if="vm.questionType.mc.choices">
-                    <md-list-item class="md-3-line" ng-repeat="choice in vm.questionType.mc.choices track by $index">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Choice {{$index+1}}</label>
-                            <!--<input type="text" ng-model="choice">-->
-                            <input type="text" ng-model="vm.questionType.mc.choices[$index]">
+                        <md-input-container class="md-block">
+                            <label>Statement</label>
+                            <textarea ng-model="vm.problem.stem.statement" rows="25" md-select-on-focus></textarea>
                         </md-input-container>
-                        <!--<em ng-click="vm.remove_mc_item(choice)">X</em>-->
-                        <md-button ng-click="vm.remove_mc_item(choice)" class="md-icon-button" aria-label="Edit Variable">
-                            <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
+                    </div>
+
+                    <div ng-if="vm.problem.qtype == 2">
+                        <!-- TRUE OR FALSE -->
+
+                        <md-radio-group ng-model="vm.questionType.tf.answer">
+                            <md-radio-button ng-value="true" class="md-primary">True</md-radio-button>
+                            <md-radio-button ng-value="false">False</md-radio-button>
+                        </md-radio-group>
+                    </div>
+
+                    <div ng-if="vm.problem.qtype == 3">
+                        <!-- MULTIPLE CHOICE -->
+
+                        <md-input-container class="md-block">
+                            <label>Answer</label>
+                            <input ng-model="vm.questionType.mc.answer">
+                        </md-input-container>
+
+                        <md-button class="md-raised" aria-label="raised button" ng-click="vm.add_mc_item()">Add Choice
                         </md-button>
-                    </md-list-item>
-                </md-list>
-            </div>
 
-            <div ng-if="vm.questionType.selectedItem == 1">
-                <!-- FILL IN THE BLANK -->
-                <md-input-container class="md-block">
-                    <label>Answer</label>
-                    <input ng-model="vm.questionType.fib.answer">
-                </md-input-container>
-            </div>
+                        <md-list class="margin-bottom-10" ng-if="vm.questionType.mc.choices">
+                            <md-list-item class="md-3-line"
+                                          ng-repeat="choice in vm.questionType.mc.choices track by $index">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Choice {{$index+1}}</label>
+                                    <!--<input type="text" ng-model="choice">-->
+                                    <input type="text" ng-model="vm.questionType.mc.choices[$index]">
+                                </md-input-container>
+                                <!--<em ng-click="vm.remove_mc_item(choice)">X</em>-->
+                                <md-button ng-click="vm.remove_mc_item(choice)" class="md-icon-button"
+                                           aria-label="Edit Variable">
+                                    <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </div>
 
-        </tri-widget>
+                    <div ng-if="vm.problem.qtype == 1">
+                        <!-- FILL IN THE BLANK -->
+                        <md-input-container class="md-block">
+                            <label>Answer</label>
+                            <input ng-model="vm.questionType.fib.answer">
+                        </md-input-container>
+                    </div>
 
-        <tri-widget flex title="Keys" subtitle="Variables"
-                    palette-background="blue-grey:1000"
-                    background="primary" content-padding>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <!--<th ng-repeat="header in ::referrals.header | limitTo:3">{{::header}}</th>-->
-                        <th>Name</th>
-                        <th>Value</th>
-                        <th>Type</th>
-                        <th>Edit</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody class="md-caption">
-                    <tr ng-repeat="var in vm.problem.keys.variables | limitTo:5" class="slide" md-swipe-right="vm.remove_variable(var)">
-                        <!--<td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>-->
-                        <td>{{var.name}}</td>
-                        <td>{{var.value}}</td>
-                        <td>{{var.type}}</td>
-                        <td>
-                            <md-button ng-click="vm.editVariable(var)" class="md-icon-button" aria-label="Edit Variable">
-                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
-                            </md-button>
-                        </td>
-                        <td>
-                            <md-button ng-click="vm.removeVariable(var)" class="md-icon-button" aria-label="Edit Variable">
-                                <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
-                            </md-button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                </tri-widget>
+            </md-expansion-panel-content>
 
-        </tri-widget>
+            <md-expansion-panel-footer>
+                <div flex></div>
+                <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+            </md-expansion-panel-footer>
 
-    </div>
+        </md-expansion-panel-expanded>
+    </md-expansion-panel>
 
-    <!--<div>-->
+    <md-expansion-panel md-component-id="keys">
+        <md-expansion-panel-collapsed>
+            <div class="md-title">Keys</div>
+            <div class="md-summary">Variables</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+        </md-expansion-panel-collapsed>
+
+        <md-expansion-panel-expanded>
+
+            <md-expansion-panel-header>
+                <div class="md-title">Keys</div>
+                <div class="md-summary">Variables</div>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-header>
+
+            <md-expansion-panel-content>
+
+                <tri-widget flex title="Keys" subtitle="Variables"
+                            palette-background="blue-grey:1000"
+                            background="primary" content-padding>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <!--<th ng-repeat="header in ::referrals.header | limitTo:3">{{::header}}</th>-->
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Type</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody class="md-caption">
+                        <tr ng-repeat="var in vm.problem.keys.variables | limitTo:5" class="slide"
+                            md-swipe-right="vm.remove_variable(var)">
+                            <!--<td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>-->
+                            <td>{{var.name}}</td>
+                            <td>{{var.value}}</td>
+                            <td>{{var.type}}</td>
+                            <td>
+                                <md-button ng-click="vm.editVariable(var)" class="md-icon-button" aria-label="Edit Variable">
+                                    <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                </md-button>
+                            </td>
+                            <td>
+                                <md-button ng-click="vm.removeVariable(var)" class="md-icon-button" aria-label="Edit Variable">
+                                    <md-icon md-font-icon="zmdi zmdi-close alert-error"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </tri-widget>
+        </md-expansion-panel-content>
+
+        <md-expansion-panel-footer>
+            <div flex></div>
+            <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+        </md-expansion-panel-footer>
+
+        </md-expansion-panel-expanded>
+    </md-expansion-panel>
+        <!--</div>-->
+
+        <!--<div>-->
         <!--<tri-widget>-->
 
-            <!--<md-list flex>-->
-                <!--<md-list-item class="md-3-line" ng-repeat="topic in vm.topicLists | filter:query | orderBy: orderList"-->
-                              <!--ng-click="null">-->
-                    <!--<div class="md-list-item-text" layout="column">-->
-                        <!--<h3>Name: {{topic.name}}</h3>-->
-                        <!--<h4>Key: {{topic.key}}</h4>-->
-                        <!--<md-divider ng-hide="$last"></md-divider>-->
-                    <!--</div>-->
-                <!--</md-list-item>-->
-            <!--</md-list>-->
+        <!--<md-list flex>-->
+        <!--<md-list-item class="md-3-line" ng-repeat="se (2)topic in vm.topicLists | filter:query | orderBy: orderList"-->
+        <!--ng-click="null">-->
+        <!--<div class="md-list-item-text" layout="column">-->
+        <!--<h3>Name: {{topic.name}}</h3>-->
+        <!--<h4>Key: {{topic.key}}</h4>-->
+        <!--<md-divider ng-hide="$last"></md-divider>-->
+        <!--</div>-->
+        <!--</md-list-item>-->
+        <!--</md-list>-->
         <!--</tri-widget>-->
-    <!--</div>-->
+        <!--</div>-->
+    <md-expansion-panel md-component-id="misc">
+        <md-expansion-panel-collapsed>
+            <div class="md-title">Miscellaneous</div>
+            <div class="md-summary">Summary</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+        </md-expansion-panel-collapsed>
 
-    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'
-         ng-repeat="chart in vm.problem.stem.charts">
-        <tri-widget flex content-padding>
-            <canvas class="chart-pie"
-                    chart-data="chart.chart.data"
-                    chart-labels="chart.chart.labels"
-                    chart-legend="true"
-                    chart-options="chart.chart.options"></canvas>
-        </tri-widget>
-    </div>
+        <md-expansion-panel-expanded>
+
+            <md-expansion-panel-header>
+                <div class="md-title">Miscellaneous</div>
+                <div class="md-summary">Summary</div>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-header>
+
+            <md-expansion-panel-content>
+                <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'
+                     ng-repeat="chart in vm.problem.stem.charts">
+                    <tri-widget flex content-padding>
+                        <canvas class="chart-pie"
+                                chart-data="chart.chart.data"
+                                chart-labels="chart.chart.labels"
+                                chart-legend="true"
+                                chart-options="chart.chart.options"></canvas>
+                    </tri-widget>
+                </div>
+            </md-expansion-panel-content>
+
+            <md-expansion-panel-footer>
+                <div flex></div>
+                <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+            </md-expansion-panel-footer>
+
+        </md-expansion-panel-expanded>
+    </md-expansion-panel>
+        <!--</div>-->
+
+    </md-expansion-panel>
+</md-expansion-panel-group>
+
 </div>

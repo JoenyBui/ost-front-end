@@ -68,18 +68,30 @@
                     </form>
                 </md-content>
             </md-tab>
-            <md-tab label="Editor">
+            <md-tab label="Roles">
                 <md-content class="md-padding">
-                    <form name="editor">
-                        <md-input-container class="md-block">
-                            <label for="pen-name" translate>PROFILE.PASSWORD.CURRENT</label>
-                            <input id="pen-name" label="pen-name" name="pen-name" type="text" ng-model="vm.user.current"/>
-                        </md-input-container>
-
-                        <md-button class="md-raised md-primary margin-left-0"
-                                   ng-disabled="profile.$invalid"
-                                   translate="PROFILE.BUTTON"
-                                   ng-click="vm.updateEditor()"></md-button>
+                    <form name="roles">
+                        <div layout="row">
+                            <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+                            <p label="pen-name" name="pen-name">Editor Setting</p>
+                            <span flex></span>
+                            <md-button ng-disabled="profile.$invalid"
+                                       ng-click="vm.openEditor()">{{vm.roleGroup.editor.title}}</md-button>
+                        </div>
+                        <div layout="row">
+                            <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+                            <p label="pen-name" name="pen-name">Sensei Setting</p>
+                            <span flex></span>
+                            <md-button ng-disabled="profile.$invalid"
+                                       ng-click="vm.openSensei()">{{vm.roleGroup.sensei.title}}</md-button>
+                        </div>
+                        <div layout="row">
+                            <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+                            <p label="pen-name" name="pen-name">Pupil Setting</p>
+                            <span flex></span>
+                            <md-button ng-disabled="profile.$invalid"
+                                       ng-click="vm.openPupil()">{{vm.roleGroup.pupil.title}}</md-button>
+                        </div>
                     </form>
                 </md-content>
             </md-tab>

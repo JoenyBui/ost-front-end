@@ -6,7 +6,11 @@
         .module('app.editor')
         .controller('AddWritingDialogController', AddWritingDialogController);
 
-    function AddWritingDialogController($rootScope) {
+    function AddWritingDialogController($rootScope, $mdDialog, djangoAuth) {
         var vm = this;
+
+        vm.cancel = function () {
+            $mdDialog.hide();
+        };
     }
 })();

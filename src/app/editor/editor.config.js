@@ -55,6 +55,22 @@
                     return djangoAuth.authenticationStatus()
                 }
             }
+        })
+        .state('triangular.admin-default.editor-settings', {
+            url: '/editor/settings',
+            views: {
+                '': {
+                    templateUrl: 'app/editor/settings/editor.settings.tmpl.html',
+                    controller: 'EditorSettingController',
+                    controllerAs: 'vm'
+
+                }
+            },
+            resolve: {
+                'authenticationStatus': function (djangoAuth) {
+                    return djangoAuth.authenticationStatus()
+                }
+            }
         });
 
         triMenuProvider.addMenu({
@@ -67,8 +83,8 @@
                 state: 'triangular.admin-default.editor-dashboard',
                 type: 'link'
             }, {
-                name: 'MENU.EDITOR.MATH-PAGE',
-                state: 'triangular.admin-default.math',
+                name: 'MENU.EDITOR.SETTINGS',
+                state: 'triangular.admin-default.editor-settings',
                 type: 'link'
             }]
         });

@@ -105,4 +105,13 @@ gulp.task('clean', function () {
   return $.del([path.join(paths.dist, '/'), path.join(paths.tmp, '/')]);
 });
 
-gulp.task('buildapp', ['html', 'images', 'fonts', 'translations', 'misc', 'data', 'examplejs']);
+gulp.task('buildapp', [
+  'ng-config',
+  'html',
+  'images',
+  'fonts',
+  'translations',
+  'misc',
+  'data',
+  'examplejs'
+]);

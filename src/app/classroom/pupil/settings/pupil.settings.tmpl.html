@@ -1,0 +1,34 @@
+<div class="full-image-background mb-bg-01 padding-20 padding-top-200 overlay-gradient-30" layout="row" layout-align="start center">
+    <div class="margin-right-20">
+        <img src="assets/images/avatars/avatar-5.png" alt="girl-avatar" class="make-round" width="100"/>
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{ vm.pupil.pen_name }}/ Profile</h3>
+        <p class="font-weight-300 margin-top-0">Edit your name, avatar etc</p>
+    </div>
+</div>
+
+<div layout="row" class="profile" layout-wrap>
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Pupil">
+                <md-content class="md-padding">
+                    <form name="profile">
+                        <md-input-container class="md-block">
+                            <label for="name" translate>CLASSROOM.PUPIL.SETTINGS.PROFILE.NAME.LABEL</label>
+                            <input id="name" label="name" name="name" type="text" ng-model="vm.pupil.pen_name" required/>
+                            <div ng-messages="profile.name.$error">
+                                <div ng-message when="required"><span translate>CLASSROOM.PUPIL.SETTINGS.PROFILE.NAME.PLEASE_VALID</span></div>
+                            </div>
+                        </md-input-container>
+
+                        <md-button class="md-raised md-primary margin-left-0"
+                                   ng-disabled="profile.$invalid"
+                                   translate="CLASSROOM.PUPIL.SETTINGS.BUTTON"
+                                   ng-click="vm.update_settings()"></md-button>
+                    </form>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

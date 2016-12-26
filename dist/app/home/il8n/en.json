@@ -6,10 +6,9 @@
   },
   "HOME": {
     "DASHBOARDS": {
-      "ALL": "All Problems",
       "EDITOR": "Editor Problems",
-      "PUPIL": "Pupil Problems",
-      "SENSEI": "Sensei Problems"
+      "PUPIL": "Pupil Tests",
+      "SENSEI": "Sensei Tests"
     }
   }
 }

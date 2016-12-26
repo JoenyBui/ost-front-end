@@ -12,6 +12,17 @@
     function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, djangoAuth) {
         var vm = this;
 
+        $scope.$on('search', function ($event) {
+            $mdDialog.show({
+                controller: 'SenseiTestSearchDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/classroom/sensei/test/sensei-test.search-dialog.tmpl.html',
+                clickOutsideToClose: true,
+                focusOnOpen: false,
+                targetEvent: $event
+            })
+        });
+
         vm.test = {
             id: -1,
             name: "",

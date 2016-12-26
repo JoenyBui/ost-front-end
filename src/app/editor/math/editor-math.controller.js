@@ -6,88 +6,31 @@
         .controller('EditorMathPageController', EditorMathPageController);
 
     /* @ngInject */
-    function EditorMathPageController($scope, $log, $mdDialog, $stateParams, djangoAuth) {
-        
+    function EditorMathPageController($scope, $log, $mdDialog, $stateParams, $mdExpansionPanel, $mdToast, Editor, djangoAuth) {
         var vm = this;
 
-        var UNASSIGNED = 0;
-        var FILL_IN_THE_BLANK = 1;
-        var TRUE_OF_FALSE = 2;
-        var MULTIPLE_CHOICE = 3;
-        var PROBLEM_SET = 4;
-        var SHORT_ANSWER = 5;
-        var MULTIPLE_ANSWER = 6;
-        var WORD_PROBLEM = 7;
+        // Expansion of the panel.
+        $mdExpansionPanel().waitFor('base').then(function (instance) {
+            instance.expand();
+        });
 
         vm.problemId = null;
         vm.autocompleteRequireMatch = true;
 
         // Initialize problem problem.
-        vm.problem = {
-            id: -1,
-            name: 'Test Problem',
-            domain: 1000,
-            stem: {
-                statement: "Tell if the fraction on the left is less or greater than the fraction on the right.",
-                figures: [],
-                charts: []
-            },
-            keys: {
-                answer: 0,
-                choices: [
-                    "2/3",
-                    "3/5"
-                ],
-                variables: [
-                    {name: 'numerator', value: 1, type: 'whole'},
-                    {name: 'denominator', value: 2, type: 'whole'}
-                ]
-            }
-        };
-
+        vm.problem = new Editor.Math();
+        
         // ====================================================
         // Status
         // ====================================================
-        vm.statusType = {
-            options: [
-                ['Created', 0],
-                ['Draft', 1],
-                ['Submitted', 2],
-                ['Reviewed', 3],
-                ['Published', 4],
-                ['Revised', 5],
-                ['Lock', 6]
-            ],
-            selectedItem: 0
-        };
+        vm.statusType = Editor.STATUS_TYPE;
 
         // ====================================================
         // Question Type
         // ====================================================
 
-        vm.questionType = {
-            options : [
-                ['Fill-in-the-Blank', FILL_IN_THE_BLANK],
-                ['True or False', TRUE_OF_FALSE],
-                ['Multiple Choice', MULTIPLE_CHOICE]
-            ],
-            selectedItem: 0,
-            tf: {
-                answer: false
-            },
-            mc: {
-                answer: null,
-                choices: [null, null, null]
-            },
-            fib: {
-                answer: null
-            }
-        };
-        vm.qtype_options = [
-            ['Fill-in-the-Blank', FILL_IN_THE_BLANK],
-            ['True or False', TRUE_OF_FALSE],
-            ['Multiple Choice', MULTIPLE_CHOICE]
-        ];
+        vm.questionType = Editor.QUESTION_TYPE_OPTIONS;
+        vm.qtype_options = Editor.QTYPE_OPTIONS;
 
         vm.add_mc_item = function () {
             vm.questionType.mc.choices.push(null)
@@ -161,6 +104,7 @@
                     (String(topic.key).indexOf(lowercaseQuery) === 0);
             };
         };
+
         // ======================================================
         // Editor
         // ======================================================
@@ -223,70 +167,22 @@
                     url: 'v1/math/maths/' + vm.problemId + '/',
                     data: {}
                 }).then(function (data) {
-                    if ('id' in data) {
-                        vm.problem.id = data['id'];
-                    }
-
-                    if ('name' in data) {
-                        vm.problem.name = data['name'];
-                    }
-
-                    if ('domain' in data) {
-                        vm.problem.domain = data['domain']
-                    }
-
-                    if ('status' in data) {
-                        vm.statusType.selectedItem = data['status'];
-                    }
-
-                    if ('stem' in data) {
-                        if(data['stem'].constructor == Object) {
-                            if ('statement' in data['stem']) {
-                                vm.problem.stem.statement = data['stem']['statement'];
-                            }
-
-                            if ('figures' in data['stem']){
-                                vm.problem.stem.figures = data['stem']['figures'];
-                            }
-
-                            if ('charts' in data['stem']) {
-                                vm.problem.stem.charts = data['stem']['charts'];
-                            }
-                        }
-                    }
-
-                    if ('keys' in data) {
-                        if (data['keys'].constructor == Object) {
-                            if ('answer' in data['keys']) {
-                                vm.problem.keys.answer = data['keys']['answer'];
-                            }
-
-                            if ('choices' in data['keys']) {
-                                vm.problem.keys.choices = data['keys']['choices'];
-                            }
-
-                            if ('variables' in data['keys']) {
-                                vm.problem.keys.variables = data['keys']['variables'];
-                            }
-                        }
-                    }
+                    // Open the data.
+                    vm.problem.open(data);
 
                     if ('qtype' in data) {
-                        vm.questionType.selectedItem = data['qtype'];
 
-                        var qtype = data['qtype'];
-
-                        if (qtype == TRUE_OF_FALSE) {
+                        if (vm.problem.qtype == Editor.TRUE_OF_FALSE) {
                             /*True or False*/
                             vm.questionType.tf.answer = vm.problem.keys.answer;
                             vm.questionType.tf.choices = null;
                         }
-                        else if (qtype == MULTIPLE_CHOICE) {
+                        else if (vm.problem.qtype == Editor.MULTIPLE_CHOICE) {
                             /*Multiple Choice*/
                             vm.questionType.mc.answer = vm.problem.keys.answer;
                             vm.questionType.mc.choices = vm.problem.keys.choices;
                         }
-                        else if (qtype == FILL_IN_THE_BLANK) {
+                        else if (vm.problem.qtype == Editor.FILL_IN_THE_BLANK) {
                             /*Fill in the Blank*/
                             vm.questionType.fib.answer = vm.problem.keys.answer;
                             vm.questionType.fib.choices = null;
@@ -343,7 +239,6 @@
                             }
                         })
                     }
-
                     // vm.problem = data;
                 }, function (reason) {
                     $log.log(reason);
@@ -353,7 +248,26 @@
         
         /*
         * Broadcast Function
+        *
         * */
+        $scope.$on('save', function (ev) {
+            djangoAuth.request({
+                method: 'PUT',
+                url: 'v1/math/maths/' + vm.problem.id + '/',
+                data: vm.problem
+            }).then(function(data) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Save Job')
+                );
+            }, function(reason) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(reason)
+                );
+            });
+        });
+        
         $scope.$on('submitJob', function(ev) {
             var job = angular.copy(vm.problem);
 
@@ -374,17 +288,17 @@
             job.qtype = vm.questionType.selectedItem;
 
             // job.keys = {};
-            if (job.qtype == TRUE_OF_FALSE) {
+            if (job.qtype == Editor.TRUE_OF_FALSE) {
                 /*True or False*/
                 job.keys.answer = vm.questionType.tf.answer;
                 job.keys.choices = null;
             }
-            else if (job.qtype == MULTIPLE_CHOICE) {
+            else if (job.qtype == Editor.MULTIPLE_CHOICE) {
                 /*Multiple Choice*/
                 job.keys.answer = vm.questionType.mc.answer;
                 job.keys.choices = vm.questionType.mc.choices;
             }
-            else if (job.qtype == FILL_IN_THE_BLANK) {
+            else if (job.qtype == Editor.FILL_IN_THE_BLANK) {
                 /*Fill in the Blank*/
                 job.keys.answer = vm.questionType.fib.answer;
                 job.keys.choices = null;
@@ -410,11 +324,16 @@
                     url: requestUrl,
                     data: job
                 }).then(function(data) {
-                    $log.log(data);
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Submit Job')
+                    );
                 }, function(reason) {
-                    $log.log(reason);
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent(reason)
+                    );
                 });
-
             })
         });
 
