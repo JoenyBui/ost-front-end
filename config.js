@@ -3,10 +3,11 @@
  */
 // Shared env vars in all environments
 var shared = {
-    apiUrl: process.env.API_URL || 'http://127.0.0.1:8000',
-    apiToken: process.env.API_TOKEN,
-    debug: process.env.DEBUG || true,
-    version: process.env.VERSION || 'debug'
+    URL_PATH: process.env.URL_PATH || 'http://localhost:3000/',
+    URL_DOMAIN: process.env.URL_DOMAIN || 'www.mywaterbuffalo',
+    API_TOKEN: process.env.API_TOKEN,
+    DEBUG: process.env.DEBUG || true,
+    VERSION: process.env.VERSION || 'debug'
 };
 
 var debug = null;
@@ -17,14 +18,14 @@ if (process.env.DEBUG == 'false'){
     debug = true;
 }
 
-//
 var environments = {
     development: {
         ENV_VARS: shared,
         API_CONFIG: {
-            url: 'http://127.0.0.1:8000',
+            url: 'http://127.0.0.1:8000/',
             path: 'http://localhost:3000/',
-            domain: 'localhost'
+            domain: 'localhost',
+            accounts: 'rest-auth/'
         },
         GLOBAL_SETTINGS: {
             debug: debug,
@@ -34,9 +35,10 @@ var environments = {
     production: {
         ENV_VARS: shared,
         API_CONFIG: {
-            url: 'https://api.mywaterbuffalo.com',
+            url: 'https://api.mywaterbuffalo.com/',
             path: 'https://wwww.mywaterbuffalo.com',
-            domain: 'www.mywaterbuffalo'
+            domain: 'www.mywaterbuffalo',
+            accounts: 'rest-auth/'
         },
         GLOBAL_SETTINGS: {
             debug: false,
