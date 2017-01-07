@@ -2,152 +2,155 @@
  * Created by joeny on 8/30/16.
  */
 (function () {
-    angular
-        .module('app.editor')
-        .controller('AddMathDialogController', AddMathDialogController);
+  angular
+    .module('app.editor')
+    .controller('AddMathDialogController', AddMathDialogController);
 
-    function AddMathDialogController($rootScope, $mdDialog, $state, $log, djangoAuth) {
-        var vm = this;
+  function AddMathDialogController($rootScope, $mdDialog, $state, $log, djangoAuth, Editor) {
+    var vm = this;
 
-        vm.problem = {
-            name: '',
-            status: 0,
-            editors: [],
-            topics: [1],
-            domain: 1000,
-            stem: {
-                "statement": "",
-                "figures": [],
-                "charts": []
-            },
-            keys: {
-                "variables": [],
-                "choices": [],
-                "answer": null
-            }
-        };
+    vm.problem = new Editor.Math();
+    vm.problem.editors.push(djangoAuth.roles.editor);
 
-        // ====================================================
-        // Topic
-        // ====================================================
-        vm.topicSelectedItem = null;
-        vm.topicSearchText = null;
-        vm.topicItems = [];
-        vm.topicLists = [];
+    // vm.problem = {
+    //   name: '',
+    //   status: 0,
+    //   editors: [],
+    //   topics: [1],
+    //   domain: 1000,
+    //   stem: {
+    //     "statement": "",
+    //     "figures": [],
+    //     "charts": []
+    //   },
+    //   keys: {
+    //     "variables": [],
+    //     "choices": [],
+    //     "answer": null
+    //   }
+    // };
 
-        var promiseTopic = djangoAuth.request({
-            method: 'GET',
-            url: 'v1/topic/topics/',
-            data: {}
-        }).then(function (data) {
-            vm.topicLists = data.map(function(top) {
-                top._lowername = top.name.toLowerCase();
-                return top;
-            });
-        }, function (reason) {
-            $log.log(reason);
-        });
+    // ====================================================
+    // Topic
+    // ====================================================
+    vm.topicSelectedItem = null;
+    vm.topicSearchText = null;
+    vm.topicItems = [];
+    vm.topicLists = [];
 
-        vm.querySearchTopic = function (query) {
-            var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
-            return results;
-        };
+    djangoAuth.request({
+      method: 'GET',
+      url: 'v1/topic/topics/',
+      data: {}
+    }).then(function (data) {
+      vm.topicLists = data.map(function(top) {
+        top._lowername = top.name.toLowerCase();
+        return top;
+      });
+    }, function (reason) {
+      $log.log(reason);
+    });
 
-        /**
-         * Create filter function for a query string
-         */
-        vm.createFilterForTopic = function (query) {
-            var lowercaseQuery = angular.lowercase(query);
-            return function filterFn(topic) {
-                return (topic._lowername.indexOf(lowercaseQuery) === 0) ||
-                    (String(topic.key).indexOf(lowercaseQuery) === 0);
-            };
-        };
+    vm.querySearchTopic = function (query) {
+      var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
+      return results;
+    };
 
-        // ======================================================
-        // Editor
-        // ======================================================
-        vm.editorSelectedItem = null;
-        vm.editorSearchText = null;
-        vm.editorItems = [];
-        vm.editorLists = [];
+    /**
+     * Create filter function for a query string
+     */
+    vm.createFilterForTopic = function (query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(topic) {
+        return (topic._lowername.indexOf(lowercaseQuery) === 0) ||
+          (String(topic.key).indexOf(lowercaseQuery) === 0);
+      };
+    };
 
-        var promiseEditor = djangoAuth.request({
-            method: 'GET',
-            url: 'v1/editor/editors/',
-            data: {}
-        }).then(function (data) {
+    // ======================================================
+    // Editor
+    // ======================================================
+    vm.editorSelectedItem = null;
+    vm.editorSearchText = null;
+    vm.editorItems = [];
+    vm.editorLists = [];
 
-            vm.editorLists = data.map(function(edi) {
-                edi._lowername = edi.pen_name.toLowerCase();
+    var promiseEditor = djangoAuth.request({
+      method: 'GET',
+      url: 'v1/editor/editors/',
+      data: {}
+    }).then(function (data) {
 
-                return edi;
-            });
+      vm.editorLists = data.map(function(edi) {
+        edi._lowername = edi.pen_name.toLowerCase();
 
-        }, function(reason) {
-            $log.log(reason);
-        });
+        return edi;
+      });
 
-        vm.transformChip = function(chip) {
-            // If it is an object, it's already a known chip
-            if (angular.isObject(chip)) {
-                return chip;
-            }
+    }, function(reason) {
+      $log.log(reason);
+    });
 
-            // Otherwise, create a new one
-            return {name: chip, type: 'new'}
-        };
+    vm.transformChip = function(chip) {
+      // If it is an object, it's already a known chip
+      if (angular.isObject(chip)) {
+        return chip;
+      }
 
-        vm.querySearchEditor = function (query) {
-            var results = query ? this.editorLists.filter(this.createFilterForEditor(query)) : [];
-            return results;
-        };
+      // Otherwise, create a new one
+      return {name: chip, type: 'new'}
+    };
 
-        /**
-         * Create filter function for a query string
-         */
-        vm.createFilterForEditor = function (query) {
-            var lowercaseQuery = angular.lowercase(query);
-            return function filterFn(editors) {
-                return editors._lowername.indexOf(lowercaseQuery) === 0;
-            };
-        };
+    vm.querySearchEditor = function (query) {
+      var results = query ? this.editorLists.filter(this.createFilterForEditor(query)) : [];
+      return results;
+    };
 
-        vm.createNewProblem = function () {
-            var job = angular.copy(vm.problem);
+    /**
+     * Create filter function for a query string
+     */
+    vm.createFilterForEditor = function (query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(editors) {
+        return editors._lowername.indexOf(lowercaseQuery) === 0;
+      };
+    };
 
-            job.editors = [];
-            for (var index in vm.editorItems) {
-                var item = vm.editorItems[index];
-                job.editors.push(item.id);
-            }
+    vm.createNewProblem = function () {
+      var job = angular.copy(vm.problem);
 
-            job.topics = [];
-            for (var index in vm.topicItems) {
-                var item = vm.topicItems[index];
-                job.topics.push(item.id);
-            }
+      job.editors = [];
+      for (var index in vm.editorItems) {
+        var item = vm.editorItems[index];
+        job.editors.push(item.id);
+      }
 
-            var addItem = djangoAuth.request({
-                method: 'POST',
-                url: 'v1/math/maths/',
-                data: job
-            }).then(function (data) {
-                $state.go(
-                    'triangular.admin-default.math', {
-                        'problemId': data.id
-                    });
+      job.topics = [];
+      for (var index in vm.topicItems) {
+        var item = vm.topicItems[index];
+        job.topics.push(item.id);
+      }
 
-                $mdDialog.hide()
-            }, function (reason) {
-                $log.log(reason);
+      var addItem = djangoAuth.request({
+        method: 'POST',
+        url: 'v1/math/maths/',
+        data: job
+      }).then(function (data) {
+        $state.go(
+          'triangular.admin-default.math', {
+            'problemId': data.id
+          });
 
-                $mdDialog.hide();
-            });
-        };
+        $mdDialog.hide()
+      }, function (reason) {
+        $log.log(reason);
 
-        vm.cancel = function () {
-            $mdDialog.hide();
-        };
-    }
+        $mdDialog.hide();
+      });
+    };
+
+    vm.cancel = function () {
+      $mdDialog.hide();
+    };
+  }
 })();
