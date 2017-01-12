@@ -155,6 +155,11 @@
       };
     };
 
+    // Establish the toolbar for editor.
+    vm.tinymceOptions = {
+      plugins: 'link image code',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+    };
 
     // Ping existing database if there is something interesting.
     if ($stateParams.hasOwnProperty('problemId')) {
@@ -172,7 +177,6 @@
           vm.problem.open(data);
 
           if ('qtype' in data) {
-
             if (vm.problem.qtype == Editor.TRUE_OF_FALSE) {
               /*True or False*/
               vm.questionType.tf.answer = vm.problem.keys.answer;
@@ -187,7 +191,6 @@
               /*Fill in the Blank*/
               vm.questionType.fib.answer = vm.problem.keys.answer;
               vm.questionType.fib.choices = null;
-
             }
           }
 
@@ -234,7 +237,6 @@
 
                     break;
                   }
-
                 }
               }
             })
@@ -251,6 +253,37 @@
      *
      * */
     $scope.$on('save', function (ev) {
+      vm.problem.status = vm.statusType.selectedItem;
+
+      vm.problem.editors = [];
+      for (var index in vm.editorItems) {
+        var item = vm.editorItems[index];
+        vm.problem.editors.push(item.id);
+      }
+
+      vm.problem.topics = [];
+      for (var index in vm.topicItems) {
+        var item = vm.topicItems[index];
+        vm.problem.topics.push(item.id);
+      }
+
+      if (vm.problem.qtype == Editor.TRUE_OF_FALSE) {
+        /*True or False*/
+        vm.problem.keys.answer = vm.questionType.tf.answer;
+        vm.problem.keys.choices = null;
+      }
+      else if (vm.problem.qtype == Editor.MULTIPLE_CHOICE) {
+        /*Multiple Choice*/
+        vm.problem.keys.answer = vm.questionType.mc.answer;
+        vm.problem.keys.choices = vm.questionType.mc.choices;
+      }
+      else if (vm.problem.qtype == Editor.FILL_IN_THE_BLANK) {
+        /*Fill in the Blank*/
+        vm.problem.keys.answer = vm.questionType.fib.answer;
+        vm.problem.keys.choices = null;
+      }
+
+      // Save job file.
       djangoAuth.request({
         method: 'PUT',
         url: 'v1/math/maths/' + vm.problem.id + '/',
@@ -268,74 +301,73 @@
       });
     });
 
-    $scope.$on('submitJob', function (ev) {
-      var job = angular.copy(vm.problem);
-
-      job.status = vm.statusType.selectedItem;
-
-      job.editors = [];
-      for (var index in vm.editorItems) {
-        var item = vm.editorItems[index];
-        job.editors.push(item.id);
-      }
-
-      job.topics = [];
-      for (var index in vm.topicItems) {
-        var item = vm.topicItems[index];
-        job.topics.push(item.id);
-      }
-
-      job.qtype = vm.questionType.selectedItem;
-
-      // job.keys = {};
-      if (job.qtype == Editor.TRUE_OF_FALSE) {
-        /*True or False*/
-        job.keys.answer = vm.questionType.tf.answer;
-        job.keys.choices = null;
-      }
-      else if (job.qtype == Editor.MULTIPLE_CHOICE) {
-        /*Multiple Choice*/
-        job.keys.answer = vm.questionType.mc.answer;
-        job.keys.choices = vm.questionType.mc.choices;
-      }
-      else if (job.qtype == Editor.FILL_IN_THE_BLANK) {
-        /*Fill in the Blank*/
-        job.keys.answer = vm.questionType.fib.answer;
-        job.keys.choices = null;
-      }
-
-      $mdDialog.show({
-        templateUrl: 'app/editor/form/editor-submit.tmpl.html',
-        targetEvent: ev,
-        controller: 'EditorSubmitJobController',
-        controllerAs: 'vm',
-        locals: {
-          job: job,
-          requestUrl: 'v1/math/maths/'
-        }
-      })
-        .then(function (args) {
-          var job = args[0];
-          var requestUrl = args[1];
-          var method = args[2];
-
-          djangoAuth.request({
-            method: method,
-            url: requestUrl,
-            data: job
-          }).then(function (data) {
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent('Submit Job')
-            );
-          }, function (reason) {
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent(reason)
-            );
-          });
-        })
-    });
+    // $scope.$on('submitJob', function (ev) {
+    //   var job = angular.copy(vm.problem);
+    //
+    //   job.status = vm.statusType.selectedItem;
+    //
+    //   job.editors = [];
+    //   for (var index in vm.editorItems) {
+    //     var item = vm.editorItems[index];
+    //     job.editors.push(item.id);
+    //   }
+    //
+    //   job.topics = [];
+    //   for (var index in vm.topicItems) {
+    //     var item = vm.topicItems[index];
+    //     job.topics.push(item.id);
+    //   }
+    //
+    //   job.qtype = vm.questionType.selectedItem;
+    //
+    //   // job.keys = {};
+    //   if (job.qtype == Editor.TRUE_OF_FALSE) {
+    //     /*True or False*/
+    //     job.keys.answer = vm.questionType.tf.answer;
+    //     job.keys.choices = null;
+    //   }
+    //   else if (job.qtype == Editor.MULTIPLE_CHOICE) {
+    //     /*Multiple Choice*/
+    //     job.keys.answer = vm.questionType.mc.answer;
+    //     job.keys.choices = vm.questionType.mc.choices;
+    //   }
+    //   else if (job.qtype == Editor.FILL_IN_THE_BLANK) {
+    //     /*Fill in the Blank*/
+    //     job.keys.answer = vm.questionType.fib.answer;
+    //     job.keys.choices = null;
+    //   }
+    //
+    //   $mdDialog.show({
+    //     templateUrl: 'app/editor/form/editor-submit.tmpl.html',
+    //     targetEvent: ev,
+    //     controller: 'EditorSubmitJobController',
+    //     controllerAs: 'vm',
+    //     locals: {
+    //       job: job,
+    //       requestUrl: 'v1/math/maths/'
+    //     }
+    //   }).then(function (args) {
+    //     var job = args[0];
+    //     var requestUrl = args[1];
+    //     var method = args[2];
+    //
+    //     djangoAuth.request({
+    //       method: method,
+    //       url: requestUrl,
+    //       data: job
+    //     }).then(function (data) {
+    //       $mdToast.show(
+    //         $mdToast.simple()
+    //           .textContent('Submit Job')
+    //       );
+    //     }, function (reason) {
+    //       $mdToast.show(
+    //         $mdToast.simple()
+    //           .textContent(reason)
+    //       );
+    //     });
+    //   })
+    // });
 
     // Add Variable
     $scope.$on('addVariable', function (ev) {
@@ -347,10 +379,9 @@
         locals: {
           variable: null
         }
-      })
-        .then(function (answer) {
-          vm.problem.keys.variables.push(answer);
-        });
+      }).then(function (answer) {
+        vm.problem.keys.variables.push(answer);
+      });
     });
 
     // Add Pie Chart

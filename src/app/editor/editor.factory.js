@@ -257,6 +257,20 @@
 
 		};
 
+		Editor.ProblemInstance = function () {
+			this.data = {
+				keys: 0
+			}
+		};
+
+		Editor.ProblemInstance.prototype = {
+			open: function (data) {
+				if ('id' in data) {
+					this.id = data.id;
+				}
+			}
+		};
+
 		return Editor;
 	}
 })();

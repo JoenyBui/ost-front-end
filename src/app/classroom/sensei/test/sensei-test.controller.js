@@ -21,29 +21,29 @@
         focusOnOpen: false,
         targetEvent: $event
       })
-        .then(function (addList) {
+      .then(function (addList) {
 
-          // Add items to list.
-          for (var i = 0; i < addList.length; i++) {
+        // Add items to list.
+        for (var i = 0; i < addList.length; i++) {
 
-            djangoAuth.request({
-              method: 'POST',
-              url: 'v1/problem/problem-instance/',
-              data: {
-                root: addList[i]
-              }
-            }).then(function (data) {
-              vm.test.problems.push(data.id);
+          djangoAuth.request({
+            method: 'POST',
+            url: 'v1/problem/problem-instance/',
+            data: {
+              root: addList[i]
+            }
+          }).then(function (data) {
+            vm.test.problems.push(data.id);
 
-            }, function (reason) {
+          }, function (reason) {
 
-            });
+          });
 
-          }
+        }
 
-        }, function () {
-          // Pass
-        });
+      }, function () {
+        // Pass
+      });
     });
 
     vm.test = {
@@ -64,27 +64,29 @@
           url: 'v1/classroom/exam-problems/' + testId + '/',
           data: {}
         }).then(function (data) {
-          if ('id' in data) {
-            vm.test.id = data['id'];
-          }
+          vm.test = data;
 
-          if ('name' in data) {
-            vm.test.name = data['name'];
-          }
-
-          if ('teacher' in data) {
-            vm.test.teacher = data['teacher'];
-          }
-
-          if ('problems' in data) {
-            vm.test.problems = data['problems'];
-          }
-
-          if ('info' in data) {
-            if ('problems' in data['info']) {
-              vm.problemInfo = data['info']['problems'];
-            }
-          }
+          // if ('id' in data) {
+          //   vm.test.id = data['id'];
+          // }
+          //
+          // if ('name' in data) {
+          //   vm.test.name = data['name'];
+          // }
+          //
+          // if ('teacher' in data) {
+          //   vm.test.teacher = data['teacher'];
+          // }
+          //
+          // if ('problems' in data) {
+          //   vm.test.problems = data['problems'];
+          // }
+          //
+          // if ('info' in data) {
+          //   if ('problems' in data['info']) {
+          //     vm.problemInfo = data['info']['problems'];
+          //   }
+          // }
 
         }, function (reason) {
 
