@@ -1,33 +1,32 @@
 <div class="sensei-test-container">
 
-    <div class="dashboard-container overlay-10 padded-content-page" layout="column">
-        <div layout-fill layout="row" layout-align="center center">
-            <md-card flex="80" flex-xs="90" class="margin-top-20 margin-bottom-20">
-                <md-toolbar md-theme="{{triSkin.elements.content}}">
-                    <h2 class="md-toolbar-tools" translate>Test</h2>
-                </md-toolbar>
+  <div class="dashboard-container overlay-10 padded-content-page" layout="column">
+    <div layout-fill layout="row" layout-align="center center">
+      <md-card flex="80" flex-xs="90" class="margin-top-20 margin-bottom-20">
+        <md-toolbar md-theme="{{triSkin.elements.content}}">
+          <h2 class="md-toolbar-tools" translate>Test</h2>
+        </md-toolbar>
 
-                <md-card-content class="overflow-auto">
-                    <md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">
-                        <label>Problem ID</label>
-                        <input type='text' ng-model="vm.test.id" readonly>
-                    </md-input-container>
+        <md-card-content class="overflow-auto">
+          <md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">
+            <label>Problem ID</label>
+            <input type='text' ng-model="vm.test.id" readonly>
+          </md-input-container>
 
-                    <md-input-container class="md-block">
-                        <label>Problem Name</label>
-                        <input type='text' ng-model="vm.test.name">
-                    </md-input-container>
-                </md-card-content>
-            </md-card>
-        </div>
-
-        <div layout-fill layout="column" layout-xs="column"
-             ng-repeat="(key, item) in vm.problemInfo track by $index">
-            <ost-problem title="Problem {{key}}"
-                         item="item" layout-margin layout-align="center center"
-                         flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">
-            </ost-problem>
-        </div>
+          <md-input-container class="md-block">
+            <label>Problem Name</label>
+            <input type='text' ng-model="vm.test.name">
+          </md-input-container>
+        </md-card-content>
+      </md-card>
     </div>
 
+    <div layout-fill layout="column" layout-xs="column"
+         ng-repeat="(key, item) in vm.test.problems track by $index">
+      <ost-problem title="{{item}}"
+                   id="item" layout-margin layout-align="center center"
+                   flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">
+      </ost-problem>
+    </div>
+  </div>
 </div>

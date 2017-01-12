@@ -1,7 +1,7 @@
 (function () { 
  return angular.module("app")
-.constant("ENV_VARS", {"URL_PATH":"http://www.mywaterbuffalo.com/","URL_DOMAIN":"www.mywaterbuffalo","DEBUG":"False","VERSION":"0.0.4"})
-.constant("API_CONFIG", {"url":"https://api.mywaterbuffalo.com/","path":"https://wwww.mywaterbuffalo.com","domain":"www.mywaterbuffalo","accounts":"rest-auth/"})
-.constant("GLOBAL_SETTINGS", {"debug":false,"version":"0.0.4"});
+.constant("ENV_VARS", {"URL_PATH":"http://localhost:3000/","URL_DOMAIN":"www.mywaterbuffalo","DEBUG":true,"VERSION":"debug"})
+.constant("API_CONFIG", {"url":"http://127.0.0.1:8000/","path":"http://localhost:3000/","domain":"localhost","accounts":"rest-auth/"})
+.constant("GLOBAL_SETTINGS", {"debug":true,"version":".debug"});
 
 })();

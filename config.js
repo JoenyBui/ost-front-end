@@ -14,7 +14,7 @@ var debug = null;
 
 if (process.env.DEBUG == 'false'){
     debug = false;
-} else if (process.env.DEBUG == 'true') {
+} else {
     debug = true;
 }
 
