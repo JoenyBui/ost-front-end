@@ -34,6 +34,7 @@
       vm.topicSearchText = null;
       vm.topicItems = [];
       vm.topicLists = [];
+      vm.topicMapper = {};
 
       // TODO: Load the topic promise at resolves.
       var promiseTopic = djangoAuth.request({
@@ -45,6 +46,12 @@
           top._lowername = top.name.toLowerCase();
           return top;
         });
+
+        for (var index in vm.topicLists) {
+          var item = vm.topicLists[index];
+
+          vm.topicMapper[item.id] = index;
+        }
 
         // Add the topic.
         for (var id in vm.topics) {
@@ -75,7 +82,7 @@
        *
       * */
       vm.addItem = function(key) {
-        var item = vm.topicLists[key];
+        var item = vm.topicLists[vm.topicMapper[key]];
 
         // Add Item to index.
         vm.topicItems.push(item);
