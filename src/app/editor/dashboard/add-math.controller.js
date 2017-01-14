@@ -9,8 +9,11 @@
   function AddMathDialogController($rootScope, $mdDialog, $state, $log, djangoAuth, Editor) {
     var vm = this;
 
+    var MATH_ID = 0;
+
     vm.problem = new Editor.Math();
     vm.problem.editors.push(djangoAuth.roles.editor);
+    vm.problem.topics = [MATH_ID];
 
     // vm.problem = {
     //   name: '',
@@ -51,6 +54,10 @@
       $log.log(reason);
     });
 
+    /**
+     * Query search topic for item.
+     *
+     * */
     vm.querySearchTopic = function (query) {
       var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
       return results;

@@ -2,10 +2,8 @@
  * Created by joeny on 8/21/16.
  */
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.components', [
-
-        ]);
+  angular
+    .module('app.components', []);
 })();

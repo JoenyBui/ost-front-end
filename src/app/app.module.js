@@ -26,7 +26,7 @@
 			'ui.codemirror',
 			'restangular',
 			'material.components.expansionPanels',
-			'ui.tinymce',
+			//TODO: 'ui.tinymce',
 			
 			'app.components',
 			'app.home',
