@@ -9,8 +9,11 @@
   function AddMathDialogController($rootScope, $mdDialog, $state, $log, djangoAuth, Editor) {
     var vm = this;
 
+    var MATH_ID = 1;
+
     vm.problem = new Editor.Math();
     vm.problem.editors.push(djangoAuth.roles.editor);
+    vm.problem.topics = [MATH_ID];
 
     // vm.problem = {
     //   name: '',
@@ -51,6 +54,10 @@
       $log.log(reason);
     });
 
+    /**
+     * Query search topic for item.
+     *
+     * */
     vm.querySearchTopic = function (query) {
       var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
       return results;
@@ -117,24 +124,24 @@
     };
 
     vm.createNewProblem = function () {
-      var job = angular.copy(vm.problem);
-
-      job.editors = [];
-      for (var index in vm.editorItems) {
-        var item = vm.editorItems[index];
-        job.editors.push(item.id);
-      }
-
-      job.topics = [];
-      for (var index in vm.topicItems) {
-        var item = vm.topicItems[index];
-        job.topics.push(item.id);
-      }
+      // var job = angular.copy(vm.problem);
+      //
+      // job.editors = [];
+      // for (var index in vm.editorItems) {
+      //   var item = vm.editorItems[index];
+      //   job.editors.push(item.id);
+      // }
+      //
+      // job.topics = [];
+      // for (var index in vm.topicItems) {
+      //   var item = vm.topicItems[index];
+      //   job.topics.push(item.id);
+      // }
 
       var addItem = djangoAuth.request({
         method: 'POST',
         url: 'v1/math/maths/',
-        data: job
+        data: vm.problem
       }).then(function (data) {
         $state.go(
           'triangular.admin-default.math', {

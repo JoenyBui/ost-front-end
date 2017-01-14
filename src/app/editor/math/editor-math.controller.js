@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  //TODO: For this to work, we need to have a resolve and load the data of the item before it enters.
   angular
     .module('app.editor')
     .controller('EditorMathPageController', EditorMathPageController);
