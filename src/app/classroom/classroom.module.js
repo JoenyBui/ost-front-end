@@ -2,10 +2,10 @@
  * Created by joeny on 4/9/16.
  */
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.classroom', [
-            'jsonFormatter'
-        ])
+  angular
+    .module('app.classroom', [
+      'jsonFormatter'
+    ])
 })();

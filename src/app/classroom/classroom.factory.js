@@ -2,20 +2,28 @@
  * Created by joeny on 12/4/16.
  */
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app')
-        .factory('Classroom', classroomFactory);
+  angular
+    .module('app')
+    .factory('Classroom', classroomFactory);
 
-    function classroomFactory() {
-        var Classroom = Classroom || {};
+  function classroomFactory() {
+    var Classroom = Classroom || {};
 
-        Classroom.Test = function () {
-            this.id = -1;
-            this.name = '';
-        };
+    Classroom.Test = function () {
+      this.id = -1;
+      this.name = '';
+      this.teacher = null;
+      this.problems = [];
+    };
 
-        return Classroom;
-    }
+    Classroom.Test.prototype = {
+      addProblem: function () {
+
+      }
+    };
+
+    return Classroom;
+  }
 })();
