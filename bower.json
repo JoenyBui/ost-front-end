@@ -41,7 +41,9 @@
     "angular-jk-carousel": "^0.1.6",
     "angular-material-expansion-panel": "^0.7.0",
     "angular-nvd3": "^1.0.9",
-    "angular-ui-tinymce": "^0.0.18"
+    "angular-ui-tinymce": "^0.0.18",
+    "angularfire": "^2.2.0",
+    "firechat": "^3.0.1"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8"

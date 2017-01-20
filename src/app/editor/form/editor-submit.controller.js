@@ -2,36 +2,36 @@
  * Created by joeny on 8/11/16.
  */
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.editor')
-        .controller('EditorSubmitJobController', EditorSubmitJobController);
+  angular
+    .module('app.editor')
+    .controller('EditorSubmitJobController', EditorSubmitJobController);
 
-    function EditorSubmitJobController($interval, $mdDialog, djangoAuth, job, requestUrl) {
-        var vm = this;
+  function EditorSubmitJobController($interval, $mdDialog, djangoAuth, job, requestUrl) {
+    var vm = this;
 
-        vm.job = job;
-        vm.requestUrl = requestUrl;
-        
-        vm.submit = function () {
-            // POST Solution
-            var method = 'POST';
+    vm.job = job;
+    vm.requestUrl = requestUrl;
 
-            if (vm.job.id != -1) {
-                vm.requestUrl += vm.job.id + '/';
+    vm.submit = function () {
+      // POST Solution
+      var method = 'POST';
 
-                // Update Solution
-                method = 'PUT';
-            }
+      if (vm.job.id != -1) {
+        vm.requestUrl += vm.job.id + '/';
 
-            /*Submit Job*/
-            $mdDialog.hide([vm.job, vm.requestUrl, method]);
-        };
+        // Update Solution
+        method = 'PUT';
+      }
 
-        vm.cancel = function () {
-            $mdDialog.cancel();
-        };
-    }
+      /*Submit Job*/
+      $mdDialog.hide([vm.job, vm.requestUrl, method]);
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+  }
 
 })();

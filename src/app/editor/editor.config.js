@@ -12,14 +12,34 @@
     $stateProvider
       .state('triangular.admin-default.math', {
         url: '/editor/math/:problemId',
-        // url: '/editor/fraction/{problemId:[0-9]}',
         views: {
           '': {
             templateUrl: 'app/editor/math/editor-math.tmpl.html',
 
             // set the controller to load for this page
             controller: 'EditorMathPageController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            resolve: {
+              'loadItem': function ($stateParams, Editor, djangoAuth) {
+                var problemId = $stateParams.problemId;
+
+                return djangoAuth.request({
+                  method: 'GET',
+                  url: 'v1/math/maths/' + problemId + '/',
+                  data: {}
+                }).then(function (data) {
+                  // Initialize new Math Problem.
+                  var problem = new Editor.Math();
+
+                  // Load problem with the data.
+                  problem.open(data);
+
+                  return problem;
+                }, function (reason) {
+                  $log.log(reason);
+                });
+              }
+            }
           },
           'belowContent': {
             templateUrl: 'app/editor/math/fab-button.tmpl.html',

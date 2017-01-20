@@ -20,8 +20,12 @@
         if (GLOBAL_SETTINGS.debug == false) {
 
           // TODO: Fix the state change to progressively check authentication.
-
-          var requireLogin = toState.data.requireLogin;
+          var requireLogin = false;
+          if ('data' in toState) {
+            if ('requireLogin' in toState.data) {
+              requireLogin = toState.data.requireLogin;
+            }
+          }
 
           // if (djangoAuth.authenticated == null) {
           //

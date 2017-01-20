@@ -1,14 +1,13 @@
 (function () {
   'use strict';
 
-  //TODO: For this to work, we need to have a resolve and load the data of the item before it enters.
   angular
     .module('app.editor')
     .controller('EditorMathPageController', EditorMathPageController);
 
   /* @ngInject */
   function EditorMathPageController($scope, $log, $mdDialog, $stateParams, $mdExpansionPanel, $mdToast,
-                                    Editor, djangoAuth) {
+                                    Editor, djangoAuth, loadItem) {
     var vm = this;
 
     // Expansion of the panel.
@@ -16,11 +15,11 @@
       instance.expand();
     });
 
-    vm.problemId = null;
+    // vm.problemId = null;
     vm.autocompleteRequireMatch = true;
 
     // Initialize problem problem.
-    vm.problem = new Editor.Math();
+    vm.problem = loadItem;
 
     // ====================================================
     // Status
@@ -73,111 +72,111 @@
     // ====================================================
     // Topic
     // ====================================================
-    vm.topicSelectedItem = null;
-    vm.topicSearchText = null;
-    vm.topicItems = [];
-    vm.topicLists = [];
-
-    var promiseTopic = djangoAuth.request({
-      method: 'GET',
-      url: 'v1/topic/topics/',
-      data: {}
-    }).then(function (data) {
-      vm.topicLists = data.map(function (top) {
-        top._lowername = top.name.toLowerCase();
-        return top;
-      });
-    }, function (reason) {
-      $log.log(reason);
-    });
-
-    vm.querySearchTopic = function (query) {
-      var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
-      return results;
-    };
-
-    /**
-     * Create filter function for a query string
-     */
-    vm.createFilterForTopic = function (query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(topic) {
-        return (topic._lowername.indexOf(lowercaseQuery) === 0) ||
-          (String(topic.key).indexOf(lowercaseQuery) === 0);
-      };
-    };
+    // vm.topicSelectedItem = null;
+    // vm.topicSearchText = null;
+    // vm.topicItems = [];
+    // vm.topicLists = [];
+    //
+    // var promiseTopic = djangoAuth.request({
+    //   method: 'GET',
+    //   url: 'v1/topic/topics/',
+    //   data: {}
+    // }).then(function (data) {
+    //   vm.topicLists = data.map(function (top) {
+    //     top._lowername = top.name.toLowerCase();
+    //     return top;
+    //   });
+    // }, function (reason) {
+    //   $log.log(reason);
+    // });
+    //
+    // vm.querySearchTopic = function (query) {
+    //   var results = query ? this.topicLists.filter(this.createFilterForTopic(query)) : [];
+    //   return results;
+    // };
+    //
+    // /**
+    //  * Create filter function for a query string
+    //  */
+    // vm.createFilterForTopic = function (query) {
+    //   var lowercaseQuery = angular.lowercase(query);
+    //   return function filterFn(topic) {
+    //     return (topic._lowername.indexOf(lowercaseQuery) === 0) ||
+    //       (String(topic.key).indexOf(lowercaseQuery) === 0);
+    //   };
+    // };
 
     // ======================================================
     // Editor
     // ======================================================
-    vm.editorSelectedItem = null;
-    vm.editorSearchText = null;
-    vm.editorItems = [];
-    vm.editorLists = [];
-
-    var promiseEditor = djangoAuth.request({
-      method: 'GET',
-      url: 'v1/editor/editors/',
-      data: {}
-    }).then(function (data) {
-
-      vm.editorLists = data.map(function (edi) {
-        edi._lowername = edi.pen_name.toLowerCase();
-
-        return edi;
-      });
-
-    }, function (reason) {
-      $log.log(reason);
-    });
-
-    vm.transformChip = function (chip) {
-      // If it is an object, it's already a known chip
-      if (angular.isObject(chip)) {
-        return chip;
-      }
-
-      // Otherwise, create a new one
-      return {name: chip, type: 'new'}
-    };
-
-    vm.querySearchEditor = function (query) {
-      var results = query ? this.editorLists.filter(this.createFilterForEditor(query)) : [];
-      return results;
-    };
-
-    /**
-     * Create filter function for a query string
-     */
-    vm.createFilterForEditor = function (query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(editors) {
-        return editors._lowername.indexOf(lowercaseQuery) === 0;
-      };
-    };
-
-    // Establish the toolbar for editor.
-    vm.tinymceOptions = {
-      plugins: 'link image code',
-      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-    };
+    // vm.editorSelectedItem = null;
+    // vm.editorSearchText = null;
+    // vm.editorItems = [];
+    // vm.editorLists = [];
+    //
+    // var promiseEditor = djangoAuth.request({
+    //   method: 'GET',
+    //   url: 'v1/editor/editors/',
+    //   data: {}
+    // }).then(function (data) {
+    //
+    //   vm.editorLists = data.map(function (edi) {
+    //     edi._lowername = edi.pen_name.toLowerCase();
+    //
+    //     return edi;
+    //   });
+    //
+    // }, function (reason) {
+    //   $log.log(reason);
+    // });
+    //
+    // vm.transformChip = function (chip) {
+    //   // If it is an object, it's already a known chip
+    //   if (angular.isObject(chip)) {
+    //     return chip;
+    //   }
+    //
+    //   // Otherwise, create a new one
+    //   return {name: chip, type: 'new'}
+    // };
+    //
+    // vm.querySearchEditor = function (query) {
+    //   var results = query ? this.editorLists.filter(this.createFilterForEditor(query)) : [];
+    //   return results;
+    // };
+    //
+    // /**
+    //  * Create filter function for a query string
+    //  */
+    // vm.createFilterForEditor = function (query) {
+    //   var lowercaseQuery = angular.lowercase(query);
+    //   return function filterFn(editors) {
+    //     return editors._lowername.indexOf(lowercaseQuery) === 0;
+    //   };
+    // };
+    //
+    // // Establish the toolbar for editor.
+    // vm.tinymceOptions = {
+    //   plugins: 'link image code',
+    //   toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+    // };
 
     // Ping existing database if there is something interesting.
-    if ($stateParams.hasOwnProperty('problemId')) {
-      var problemId = $stateParams.problemId;
+    // if ($stateParams.hasOwnProperty('problemId')) {
+    //   var problemId = $stateParams.problemId;
+    //
+    //   if (!(problemId === "")) {
+    //     vm.problemId = problemId;
+    //
+    //     djangoAuth.request({
+    //       method: 'GET',
+    //       url: 'v1/math/maths/' + vm.problemId + '/',
+    //       data: {}
+    //     }).then(function (data) {
+    //       // Open the data.
+    //       vm.problem.open(data);
 
-      if (!(problemId === "")) {
-        vm.problemId = problemId;
-
-        djangoAuth.request({
-          method: 'GET',
-          url: 'v1/math/maths/' + vm.problemId + '/',
-          data: {}
-        }).then(function (data) {
-          // Open the data.
-          vm.problem.open(data);
-
-          if ('qtype' in data) {
+          // if ('qtype' in vm.problem.qtype) {
             if (vm.problem.qtype == Editor.TRUE_OF_FALSE) {
               /*True or False*/
               vm.questionType.tf.answer = vm.problem.keys.answer;
@@ -193,61 +192,62 @@
               vm.questionType.fib.answer = vm.problem.keys.answer;
               vm.questionType.fib.choices = null;
             }
-          }
+          // }
+          // }
 
-          if ('topics' in data) {
-            promiseTopic.then(function () {
-              var topicPk = data['topics'];
+          // if ('topics' in data) {
+          //   promiseTopic.then(function () {
+          //     var topicPk = vm.problem.topics;
+          //
+          //     // TODO: Need to do this in the backend.
+          //     for (var index in vm.topicLists) {
+          //       var item = vm.topicLists[index];
+          //
+          //       for (var index_pk in topicPk) {
+          //         var pk = topicPk[index_pk];
+          //
+          //         if (item.id == pk) {
+          //           vm.topicItems.push(item);
+          //
+          //           // Remove the editor from the pk
+          //           topicPk.splice(topicPk.indexOf(pk), 1);
+          //
+          //           break;
+          //         }
+          //       }
+          //     }
+          //   });
+          // }
 
-              // TODO: Need to do this in the backend.
-              for (var index in vm.topicLists) {
-                var item = vm.topicLists[index];
-
-                for (var index_pk in topicPk) {
-                  var pk = topicPk[index_pk];
-
-                  if (item.id == pk) {
-                    vm.topicItems.push(item);
-
-                    // Remove the editor from the pk
-                    topicPk.splice(topicPk.indexOf(pk), 1);
-
-                    break;
-                  }
-                }
-              }
-            });
-          }
-
-          if ('editors' in data) {
-            promiseEditor.then(function () {
-              var editorPk = data['editors'];
-
-              // TODO: Need to do this in the backend.
-              for (var index in vm.editorLists) {
-                var item = vm.editorLists[index];
-
-                for (var index_pk in editorPk) {
-                  var pk = editorPk[index_pk];
-
-                  if (item.id == pk) {
-                    vm.editorItems.push(item);
-
-                    // Remove the editor from the pk
-                    editorPk.splice(editorPk.indexOf(pk), 1);
-
-                    break;
-                  }
-                }
-              }
-            })
-          }
+          // if ('editors' in data) {
+          //   promiseEditor.then(function () {
+          //     var editorPk = vm.problem.editors;
+          //
+          //     // TODO: Need to do this in the backend.
+          //     for (var index in vm.editorLists) {
+          //       var item = vm.editorLists[index];
+          //
+          //       for (var index_pk in editorPk) {
+          //         var pk = editorPk[index_pk];
+          //
+          //         if (item.id == pk) {
+          //           vm.editorItems.push(item);
+          //
+          //           // Remove the editor from the pk
+          //           editorPk.splice(editorPk.indexOf(pk), 1);
+          //
+          //           break;
+          //         }
+          //       }
+          //     }
+          //   });
+          // }
           // vm.problem = data;
-        }, function (reason) {
-          $log.log(reason);
-        });
-      }
-    }
+    //     }, function (reason) {
+    //       $log.log(reason);
+    //     });
+    //   }
+    // }
 
     /*
      * Broadcast Function

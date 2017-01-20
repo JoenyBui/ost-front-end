@@ -27,7 +27,8 @@
 			'restangular',
 			'material.components.expansionPanels',
 			'ui.tinymce',
-			
+			'firebase',
+
 			'app.components',
 			'app.home',
 			'app.editor',
@@ -45,6 +46,17 @@
 		.config(function (RestangularProvider, API_CONFIG) {
 			RestangularProvider.setBaseUrl(API_CONFIG.url);
 		})
+		.config(function () {
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA9ZLPjeYrB_qZzpBmUjEmNILajZxG9TD0",
+        authDomain: "ost-front-end.firebaseapp.com",
+        databaseURL: "https://ost-front-end.firebaseio.com",
+        storageBucket: "ost-front-end.appspot.com",
+        messagingSenderId: "120293626118"
+      };
+      firebase.initializeApp(config);
+    })
 		.run(function (djangoAuth, Restangular, API_CONFIG) {
 			return djangoAuth.initialize(API_CONFIG.url, false)
 				.then(function(data) {
