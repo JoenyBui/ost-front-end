@@ -88,7 +88,9 @@
         vm.topicItems.push(item);
       };
 
-    //  TODO: Needs to capture the submit entry so it could save it back to the model.
+      vm.onAdd = function (chip) {
+        vm.topics.push(chip.id)
+      }
     }
   }
 })();

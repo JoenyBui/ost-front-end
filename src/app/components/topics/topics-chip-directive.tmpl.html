@@ -1,7 +1,8 @@
 <md-chips ng-model="vm.topicItems"
           md-autocomplete-snap
           md-transform-chip="vm.transformChip($chip)"
-          md-require-match="vm.autocompleteRequireMatch">
+          md-require-match="vm.autocompleteRequireMatch"
+          md-on-add="vm.onAdd($chip)">
   <md-autocomplete
       md-selected-item="vm.topicSelectedItem"
       md-search-text="vm.topicSearchText"

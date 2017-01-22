@@ -86,11 +86,15 @@
           return editors._lowername.indexOf(lowercaseQuery) === 0;
         };
       };
-      
+
       vm.addItem = function (key) {
         var item = vm.editorLists[vm.editorMapper[key]];
 
         vm.editorItems.push(item);
+      };
+
+      vm.onAdd = function (chip) {
+
       }
     }
   }
