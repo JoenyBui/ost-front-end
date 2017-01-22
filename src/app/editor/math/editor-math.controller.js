@@ -256,17 +256,17 @@
     $scope.$on('save', function (ev) {
       vm.problem.status = vm.statusType.selectedItem;
 
-      vm.problem.editors = [];
-      for (var index in vm.editorItems) {
-        var item = vm.editorItems[index];
-        vm.problem.editors.push(item.id);
-      }
-
-      vm.problem.topics = [];
-      for (var index in vm.topicItems) {
-        var item = vm.topicItems[index];
-        vm.problem.topics.push(item.id);
-      }
+      // vm.problem.editors = [];
+      // for (var index in vm.editorItems) {
+      //   var item = vm.editorItems[index];
+      //   vm.problem.editors.push(item.id);
+      // }
+      //
+      // vm.problem.topics = [];
+      // for (var index in vm.topicItems) {
+      //   var item = vm.topicItems[index];
+      //   vm.problem.topics.push(item.id);
+      // }
 
       if (vm.problem.qtype == Editor.TRUE_OF_FALSE) {
         /*True or False*/
