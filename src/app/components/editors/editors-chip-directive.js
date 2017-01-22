@@ -94,7 +94,7 @@
       };
 
       vm.onAdd = function (chip) {
-
+        vm.editors.push(chip.id)
       }
     }
   }
