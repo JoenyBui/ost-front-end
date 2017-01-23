@@ -1,82 +1,82 @@
 <md-dialog class="fullscreenDialog" aria-label="Search for Problems" flex="80">
-    <form ng-cloak>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Searched Problem Instance</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="vm.close()" aria-label="cancel">
-                    <md-icon md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Searched Problem Instance</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.close()" aria-label="cancel">
+          <md-icon md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 
-        <md-dialog-content content="md-padding" layout="column">
+    <md-dialog-content content="md-padding" layout="column">
 
-            <form>
-                <div layout="row">
-                    <md-autocomplete
-                        ng-disabled="vm.isDisabled"
-                        md-no-cached="vm.noCache"
-                        md-selected-item="vm.selectedItem"
-                        md-search-text-change="vm.searchTextChange(vm.searchText)"
-                        md-search-text="vm.searchText"
-                        md-selected-item-change="vm.selectedItemChange(item)"
-                        md-items="item in vm.querySearch(vm.searchText)"
-                        md-item-text="item.display"
-                        md-min-length="0"
-                        placeholder="Search for problems..."
-                        layout-fill>
+      <form>
+        <div layout="row">
+          <md-autocomplete
+              ng-disabled="vm.isDisabled"
+              md-no-cached="vm.noCache"
+              md-selected-item="vm.selectedItem"
+              md-search-text-change="vm.searchTextChange(vm.searchText)"
+              md-search-text="vm.searchText"
+              md-selected-item-change="vm.selectedItemChange(item)"
+              md-items="item in vm.querySearch(vm.searchText)"
+              md-item-text="item.display"
+              md-min-length="0"
+              placeholder="Search for problems..."
+              layout-fill>
 
-                        <md-item-template>
-                            <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
-                        </md-item-template>
-                    </md-autocomplete>
-                    <!--<md-input-container class="md-block" flex="80">-->
-                        <!--<label>&nbsp;</label>-->
-                        <!--<input type='text' ng-model="vm.searchText" placeholder="enter search" autofocus>-->
-                    <!--</md-input-container>-->
+            <md-item-template>
+              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+          </md-autocomplete>
+          <!--<md-input-container class="md-block" flex="80">-->
+          <!--<label>&nbsp;</label>-->
+          <!--<input type='text' ng-model="vm.searchText" placeholder="enter search" autofocus>-->
+          <!--</md-input-container>-->
 
-                    <span flex></span>
-                    <md-button aria-label="Search" ng-click="vm.searchForProblems(vm.searchText)">
-                        <md-icon md-font-icon="zmdi zmdi-search alert-error"></md-icon>
-                    </md-button>
-                </div>
+          <span flex></span>
+          <md-button aria-label="Search" ng-click="vm.searchForProblems(vm.searchText)">
+            <md-icon md-font-icon="zmdi zmdi-search alert-error"></md-icon>
+          </md-button>
+        </div>
 
-                <div layout="row" layout-align="space-between center">
-                    <span>Filter the Domain</span>
+        <div layout="row" layout-align="space-between center">
+          <span>Filter the Domain</span>
 
-                    <md-select ng-model="vm.domain">
-                        <md-option ng-repeat="topic in vm.topics" ng-value="topic.key">
-                            {{topic.name}}
-                        </md-option>
-                    </md-select>
+          <md-select ng-model="vm.domain">
+            <md-option ng-repeat="topic in vm.topics" ng-value="topic.key">
+              {{topic.name}}
+            </md-option>
+          </md-select>
 
-                </div>
-            </form>
+        </div>
+      </form>
 
-            <md-list flex>
-                <md-list-item class="md-2-line" ng-repeat="item in vm.results">
-                    <md-checkbox ng-model="item.selected"></md-checkbox>
-                    <div class="md-list-item-text">
-                        <h3>ID: {{item.id}}</h3>
-                        <p>Name: {{item.info.name}}</p>
-                    </div>
-                    <md-divider></md-divider>
-                </md-list-item>
-            </md-list>
+      <md-list flex>
+        <md-list-item class="md-2-line" ng-repeat="item in vm.results">
+          <md-checkbox ng-model="item.selected"></md-checkbox>
+          <div class="md-list-item-text">
+            <h3>ID: {{item.id}}</h3>
+            <p>Name: {{item.name}}</p>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+      </md-list>
 
-            <md-divider></md-divider>
+      <md-divider></md-divider>
 
-        </md-dialog-content>
+    </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-            <span flex></span>
-            <div class="button-toolbar" layout="row" layout-align="start center">
-                <md-button class="md-accent" ng-click="vm.addCheckItem()">Add Problems</md-button>
-            </div>
-            <md-button href="" ng-click="vm.close()">
-                Close
-            </md-button>
-        </md-dialog-actions>
-    </form>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <div class="button-toolbar" layout="row" layout-align="start center">
+        <md-button class="md-accent" ng-click="vm.addCheckItem()">Add Problems</md-button>
+      </div>
+      <md-button href="" ng-click="vm.close()">
+        Close
+      </md-button>
+    </md-dialog-actions>
+  </form>
 </md-dialog>

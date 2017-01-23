@@ -9,8 +9,10 @@
     .controller('SenseiTestController', SenseiTestController);
 
   /* @ngInject */
-  function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, djangoAuth) {
+  function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, $q, Classroom, djangoAuth) {
     var vm = this;
+
+    vm.test = new Classroom.Test();
 
     $scope.$on('search', function ($event) {
       $mdDialog.show({
@@ -23,18 +25,13 @@
       })
       .then(function (addList) {
 
-        // Add items to list.
-        for (var i = 0; i < addList.length; i++) {
+        if (addList != null) {
+          var promises = vm.test.addProblems(addList);
 
-          djangoAuth.request({
-            method: 'POST',
-            url: 'v1/problem/problem-instance/',
-            data: {
-              root: addList[i]
-            }
-          }).then(function (data) {
-            vm.test.problems.push(data.id);
-
+          $q.all(
+            promises
+          ).then(function (value) {
+            vm.test.save();
           }, function (reason) {
 
           });
@@ -45,13 +42,6 @@
         // Pass
       });
     });
-
-    vm.test = {
-      id: -1,
-      name: "",
-      teacher: "",
-      problems: []
-    };
 
     vm.problemInfo = [];
 
