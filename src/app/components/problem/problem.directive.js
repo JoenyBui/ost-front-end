@@ -17,6 +17,7 @@
       scope: {
         title: '@',
         subtitle: '@',
+        teacher: '=',
         columns: '=',
         contents: '=',
         id: '=',
@@ -30,6 +31,7 @@
     };
 
     function link($scope, $element, attrs) {
+      $scope.vm.teacher = attrs.teacher || false;
       $scope.vm.title = attrs.title;
       $scope.vm.subtitle = attrs.subtitle;
     }
@@ -37,9 +39,8 @@
     function Controller(Editor, djangoAuth) {
       var vm = this;
 
-      vm.item = null;
-      vm.problem = null;
-      vm.instance = null;
+      vm.problemInstance = new Editor.ProblemInstance();
+      vm.problemInstance.id = vm.id;
 
       vm.UNASSIGNED = 0;
       vm.FILL_IN_THE_BLANK = 1;
@@ -50,18 +51,27 @@
       vm.MULTIPLE_ANSWER = 6;
       vm.WORD_PROBLEM = 7;
 
+      vm.saveItem = function () {
+        djangoAuth.request({
+          method: 'PUT',
+          url: 'v1/problem/problem-instance/' + vm.problemInstance.id + '/',
+          data: vm.problemInstance
+        }).then(function (data) {
+
+        }, function (reason) {
+          
+        })
+      };
 
       djangoAuth.request({
         method: 'GET',
-        url: 'v1/problem/problem-instance/' + vm.id + '/',
+        url: 'v1/problem/problem-instance/' + vm.problemInstance.id + '/',
         data: {}
       }).then(function (data) {
-        vm.instance = data;
-        vm.problem = vm.instance.info;
-        vm.item = vm.problem.base[0];
+        vm.problemInstance.open(data);
 
       }, function (reason) {
-        console.log(reason);
+        $log.log(reason);
       });
     }
   }

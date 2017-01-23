@@ -22,12 +22,6 @@
 
           <tri-widget content-padding flex title="Problem" subtitle="Information">
 
-            <!--<div>-->
-            <!--<md-input-container class="md-block" md-theme="{{triSkin.elements.content}}">-->
-            <!--<label>Problem ID</label>-->
-            <!--<input type='text' ng-model="vm.problem.id" readonly>-->
-            <!--</md-input-container>-->
-
             <md-input-container class="md-block">
               <label>Problem Name</label>
               <input type='text' ng-model="vm.problem.name">
@@ -36,45 +30,6 @@
             <!--</div>-->
             <ost-topics-chip title="Topics" topics="vm.problem.topics"></ost-topics-chip>
             <ost-editors-chip title="Add Editors" editors="vm.problem.editors"></ost-editors-chip>
-
-            <!--<md-chips ng-model="vm.topicItems"-->
-                      <!--md-autocomplete-snap-->
-                      <!--md-transform-chip="vm.transformChip($chip)"-->
-                      <!--md-require-match="vm.autocompleteRequireMatch">-->
-              <!--<md-autocomplete-->
-                  <!--md-selected-item="vm.topicSelectedItem"-->
-                  <!--md-search-text="vm.topicSearchText"-->
-                  <!--md-items="item in vm.querySearchTopic(vm.topicSearchText)"-->
-                  <!--md-item-text="item.name"-->
-                  <!--placeholder="Search for topics">-->
-                <!--<span md-highlight-text="vm.topicSearchText">{{item.name}} ({{item.key}})</span>-->
-              <!--</md-autocomplete>-->
-              <!--<md-chip-template>-->
-                    <!--<span>-->
-                        <!--<strong>{{$chip.name}}</strong>-->
-                        <!--<em>({{$chip.key}})</em>-->
-                    <!--</span>-->
-              <!--</md-chip-template>-->
-            <!--</md-chips>-->
-
-            <!--<md-chips ng-model="vm.editorItems"-->
-                      <!--md-autocomplete-snap-->
-                      <!--md-transform-chip="vm.transformChip($chip)"-->
-                      <!--md-require-match="vm.autocompleteRequireMatch">-->
-              <!--<md-autocomplete-->
-                  <!--md-selected-item="vm.editorSelectedItem"-->
-                  <!--md-search-text="vm.editorSearchText"-->
-                  <!--md-items="item in vm.querySearchEditor(vm.editorSearchText)"-->
-                  <!--md-item-text="item.pen_name"-->
-                  <!--placeholder="Search for editors">-->
-                <!--<span md-highlight-text="vm.editorSearchText">{{item.pen_name}}</span>-->
-              <!--</md-autocomplete>-->
-              <!--<md-chip-template>-->
-                    <!--<span>-->
-                        <!--<strong>{{$chip.pen_name}}</strong>-->
-                    <!--</span>-->
-              <!--</md-chip-template>-->
-            <!--</md-chips>-->
 
             <md-input-container class="md-block">
               <label>Status</label>
@@ -263,23 +218,7 @@
 
       </md-expansion-panel-expanded>
     </md-expansion-panel>
-    <!--</div>-->
 
-    <!--<div>-->
-    <!--<tri-widget>-->
-
-    <!--<md-list flex>-->
-    <!--<md-list-item class="md-3-line" ng-repeat="se (2)topic in vm.topicLists | filter:query | orderBy: orderList"-->
-    <!--ng-click="null">-->
-    <!--<div class="md-list-item-text" layout="column">-->
-    <!--<h3>Name: {{topic.name}}</h3>-->
-    <!--<h4>Key: {{topic.key}}</h4>-->
-    <!--<md-divider ng-hide="$last"></md-divider>-->
-    <!--</div>-->
-    <!--</md-list-item>-->
-    <!--</md-list>-->
-    <!--</tri-widget>-->
-    <!--</div>-->
     <md-expansion-panel md-component-id="misc">
       <md-expansion-panel-collapsed>
         <div class="md-title">Miscellaneous</div>

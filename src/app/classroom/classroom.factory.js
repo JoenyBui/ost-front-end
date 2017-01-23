@@ -8,7 +8,7 @@
     .module('app')
     .factory('Classroom', classroomFactory);
 
-  function classroomFactory(djangoAuth) {
+  function classroomFactory(Editor, djangoAuth) {
     var Classroom = Classroom || {};
 
     Classroom.Sensei = function () {
@@ -29,18 +29,19 @@
         var vm = this;
 
         for (var i=0; i < list.length; i++) {
+          var instance = new Editor.ProblemInstance();
+          instance.root = list[i];
+
           promises.push(
             djangoAuth.request({
               method: 'POST',
               url: 'v1/problem/problem-instance/',
-              data: {
-                root: list[i]
-              }
+              data: instance
             }).then(function (data) {
               vm.problems.push(data.id);
 
             }, function (reason) {
-
+              $log.log(reason);
             })
           );
         }
@@ -79,13 +80,37 @@
       this.results = {};
       this.grade = -1.0;
       this.status = 0;
+      this.created = null;
+      this.modified = null;
+      this.info = null;
     };
 
 
     Classroom.PupilTest.prototype = {
       open: function (data) {
         this.id = data.id;
+        this.student = data.student;
+        this.exam = data.exam;
+        this.answers = data.answer;
+        this.results = data.results;
+        this.grade = data.grade;
+        this.status = data.status;
+        this.created = data.created;
+        this.modified = data.modified;
 
+        this.info = data.info;
+      },
+
+      shuffle: function (a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+          j = Math.floor(Math.random() * i);
+          x = a[i - 1];
+          a[i - 1] = a[j];
+          a[j] = x;
+        }
+
+        return a;
       }
     };
 

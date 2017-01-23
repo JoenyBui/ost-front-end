@@ -194,37 +194,10 @@
 
 				if ('stem' in data) {
 					this.stem = data.stem;
-
-					// if(data['stem'].constructor == Object) {
-					// 	if ('statement' in data['stem']) {
-					// 		this.stem.statement = data['stem']['statement'];
-					// 	}
-          //
-					// 	if ('figures' in data['stem']){
-					// 		this.stem.figures = data['stem']['figures'];
-					// 	}
-          //
-					// 	if ('charts' in data['stem']) {
-					// 		this.stem.charts = data['stem']['charts'];
-					// 	}
-					// }
 				}
 
 				if ('keys' in data) {
 					this.keys = data.keys;
-					// if (data['keys'].constructor == Object) {
-					// 	if ('answer' in data['keys']) {
-					// 		this.keys.answer = data['keys']['answer'];
-					// 	}
-          //
-					// 	if ('choices' in data['keys']) {
-					// 		this.keys.choices = data['keys']['choices'];
-					// 	}
-          //
-					// 	if ('variables' in data['keys']) {
-					// 		this.keys.variables = data['keys']['variables'];
-					// 	}
-					// }
 				}
 
 				if ('qtype' in data) {
@@ -257,18 +230,50 @@
 
 		};
 
+    Editor.ProblemItem = function () {
+			this.id = -1;
+			this.stem = "";
+			this.choices = null;
+			this.answer = null;
+    };
+
+    Editor.ProblemItem.prototype = {
+    	'open': function (data) {
+				this.stem = data.stem;
+				this.choices = data.choices;
+				this.answer = data.answer;
+      }
+		};
+
 		Editor.ProblemInstance = function () {
+			this.id = -1;
+			this.root = -1;
 			this.data = {
-				keys: 0
-			}
+				keys: {},
+				index: 0
+			};
+      this.info = {};
+      this.links = {};
+
+      this.item = {};
 		};
 
 		Editor.ProblemInstance.prototype = {
 			open: function (data) {
-				if ('id' in data) {
-					this.id = data.id;
-				}
-			}
+				this.id = data.id;
+				this.root = data.root;
+				this.data = data.data;
+				this.info = data.info;
+				this.links = data.links;
+
+        this.item = new Editor.ProblemItem();
+        this.item.open(this.info.base[this.data.index]);
+			},
+			
+			switchItem: function (index) {
+        this.item = new Editor.ProblemItem();
+        this.item.open(this.info.base[index]);
+      }
 		};
 
 		return Editor;

@@ -18,7 +18,7 @@
 
     <div layout-fill layout="column" layout-xs="column"
          ng-repeat="(key, item) in vm.test.problems track by $index">
-      <ost-problem title="{{item}}"
+      <ost-problem title="{{item}}" teacher="true"
                    id="item" layout-margin layout-align="center center"
                    flex="80" flex-xs="90" class="margin-top-10 margin-bottom-10">
       </ost-problem>

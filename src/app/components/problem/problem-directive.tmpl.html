@@ -1,41 +1,58 @@
 <md-card flex="vm.flex" flex-xs="vm.flexXs">
   <md-toolbar md-theme="{{triSkin.elements.content}}">
-    <h2 class="md-toolbar-tools" translate>{{vm.problem.name}}</h2>
+    <!--<h2 class="md-toolbar-tools" translate>{{vm.problemInstance.info.name}}</h2>-->
+    <h2 class="md-toolbar-tools" translate>{{vm.title}}</h2>
   </md-toolbar>
 
   <md-card-content>
-    <!--<p>-->
-    <!--{{::vm.item.stem}}-->
-    <!--</p>-->
 
-    <p ng-bind-html="vm.item.stem"></p>
+    <div ng-if="vm.teacher">
+      <!-- Modify Problem Instance to have some unique parameters. -->
+      <md-input-container class="md-block">
+        <label>Choose version of question.</label>
+        <md-select ng-model="vm.problemInstance.data.index">
+          <md-option ng-repeat="item in vm.problemInstance.info.base track by $index" ng-value="$index">
+          <span>
+            <strong>{{$index + 1}}</strong>
+          </span>
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
 
-    <div ng-if="vm.item.qtype == vm.FILL_IN_THE_BLANK">
+
+    <p ng-bind-html="vm.problemInstance.item.stem"></p>
+
+    <div ng-if="vm.problemInstance.info.qtype == vm.FILL_IN_THE_BLANK">
       <md-input-container class="md-block" flex-gt-sm>
         <label>Answer</label>
         <input ng-model="vm.item.answer">
       </md-input-container>
     </div>
 
-    <div ng-if="vm.item.qtype == vm.TRUE_OF_FALSE">
-      <md-radio-group ng-model="vm.item.answer">
+    <div ng-if="vm.problemInstance.info.qtype == vm.TRUE_OF_FALSE">
+      <md-radio-group ng-model="vm.problemInstance.answer">
         <md-radio-button ng-value="true">True</md-radio-button>
         <md-radio-button ng-value="false">False</md-radio-button>
       </md-radio-group>
     </div>
 
-    <div ng-if="vm.item.qtype == vm.MULTIPLE_CHOICE">
-      <md-radio-group ng-model="vm.item.answer" ng-repeat="choice in vm.item.choices track by $index">
+    <div ng-if="vm.problemInstance.info.qtype == vm.MULTIPLE_CHOICE">
+      <md-radio-group ng-model="vm.problemInstance.item.answer" ng-repeat="choice in vm.problemInstance.item.choices track by $index">
         <md-radio-button ng-value="{{$index}}">{{choice}}</md-radio-button>
       </md-radio-group>
     </div>
   </md-card-content>
 
-  <md-divider></md-divider>
-  <md-dialog-actions layout="row">
-    <span flex></span>
-    <md-button ng-click="answer('useful')">
-      Save Instance
-    </md-button>
-  </md-dialog-actions>
+  <div ng-if="vm.teacher">
+    <!--  Save Problem Instance -->
+    <md-divider></md-divider>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="vm.saveItem()">
+        Save Instance
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
 </md-card>
