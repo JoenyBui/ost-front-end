@@ -1,47 +1,47 @@
 <div class="dashboard-container overlay-10 padded-content-page" layout="column">
-    <div layout="row" layout-margin>
-        <tri-widget flex="100" flex-xs="100" server-widget>
-            <md-tabs layout-fill flex md-dynamic-height md-no-disconnect md-stretch-tabs="always" md-no-pagination>
+  <div layout="row" layout-margin>
+    <tri-widget flex="100" flex-xs="100" server-widget>
+      <md-tabs layout-fill flex md-dynamic-height md-no-disconnect md-stretch-tabs="always" md-no-pagination>
 
-                <md-tab label="{{'HOME.DASHBOARDS.EDITOR' | translate}}">
-                    <md-content class="md-padding">
-                        <md-list>
-                            <md-list-item class="md-2-line" ng-repeat="item in vm.editor_items">
-                                <div class="md-list-item-text">
-                                    <span><a ng-href="{{item.href}}">{{item.name}}</a></span>
-                                    <p>Last updated {{item.modified}}</p>
-                                </div>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-                </md-tab>
+        <md-tab label="{{'HOME.DASHBOARDS.EDITOR' | translate}}">
+          <md-content class="md-padding">
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="item in vm.editor_items">
+                <div class="md-list-item-text">
+                  <span><a ng-href="{{item.href}}">{{item.name}}</a></span>
+                  <p>Last updated {{item.modified}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+          </md-content>
+        </md-tab>
 
-                <md-tab label="{{'HOME.DASHBOARDS.PUPIL' | translate}}">
-                    <md-content class="md-padding">
-                        <md-list>
-                            <md-list-item class="md-2-line" ng-repeat="item in vm.pupil_items">
-                                <div class="md-list-item-text">
-                                    <span><a ng-href="{{item.href}}">{{item.name}}</a></span>
-                                    <p>Last updated {{item.modified}}</p>
-                                </div>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-                </md-tab>
+        <md-tab label="{{'HOME.DASHBOARDS.PUPIL' | translate}}">
+          <md-content class="md-padding">
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="item in vm.pupil_items">
+                <div class="md-list-item-text">
+                  <span><a ng-href="{{item.href}}">{{item.info.exam}}</a></span>
+                  <p>Last updated {{item.modified}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+          </md-content>
+        </md-tab>
 
-                <md-tab label="{{'HOME.DASHBOARDS.SENSEI' | translate}}">
-                    <md-content class="md-padding">
-                        <md-list>
-                            <md-list-item class="md-2-line" ng-repeat="item in vm.sensei_items">
-                                <div class="md-list-item-text">
-                                    <span><a ng-href="{{item.href}}">{{item.name}}</a></span>
-                                    <p>Last updated {{item.modified}}</p>
-                                </div>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-                </md-tab>
-            </md-tabs>
-        </tri-widget>
-    </div>
+        <md-tab label="{{'HOME.DASHBOARDS.SENSEI' | translate}}">
+          <md-content class="md-padding">
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="item in vm.sensei_items">
+                <div class="md-list-item-text">
+                  <span><a ng-href="{{item.href}}">{{item.name}}</a></span>
+                  <p>Last updated {{item.modified}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </tri-widget>
+  </div>
 </div>

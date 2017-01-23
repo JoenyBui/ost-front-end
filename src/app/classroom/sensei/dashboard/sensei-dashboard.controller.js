@@ -83,18 +83,6 @@
         }
       );
     };
-    // vm.openTest = function (item, $event) {
-    //     $mdDialog.show({
-    //         controller: 'SenseiDashboardDialogController',
-    //         controllerAs: 'vm',
-    //         templateUrl: 'app/classroom/sensei/dashboard/sensei-dashboard-dialog.tmpl.html',
-    //         clickOutsideToClose: true,
-    //         focusOnOpen: false,
-    //         targetEvent: $event,
-    //         locals: {
-    //             test: item
-    //         }
-    //     });
-    // };
+
   }
 })();

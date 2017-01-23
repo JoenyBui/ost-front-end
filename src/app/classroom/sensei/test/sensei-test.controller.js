@@ -9,10 +9,10 @@
     .controller('SenseiTestController', SenseiTestController);
 
   /* @ngInject */
-  function SenseiTestController($scope, $log, $mdDialog, $mdSidenav, $stateParams, $q, Classroom, djangoAuth) {
+  function SenseiTestController($scope, $log, $mdToast, $mdDialog, $mdSidenav, $stateParams, $q, djangoAuth, loadItem) {
     var vm = this;
 
-    vm.test = new Classroom.Test();
+    vm.test = loadItem;
 
     $scope.$on('search', function ($event) {
       $mdDialog.show({
@@ -31,7 +31,23 @@
           $q.all(
             promises
           ).then(function (value) {
-            vm.test.save();
+            var savePromise = vm.test.save();
+
+            savePromise.then(function (data) {
+              $mdToast.show(
+                $mdToast.simple()
+                  .content('Added questions to test.')
+                  .position('bottom right')
+                  .hideDelay(5000)
+              )
+            }, function (reason) {
+              $mdToast.show(
+                $mdToast.simple()
+                  .content(reason)
+                  .position('bottom right')
+                  .hideDelay(5000)
+              )
+            });
           }, function (reason) {
 
           });
@@ -44,117 +60,6 @@
     });
 
     vm.problemInfo = [];
-
-    if ($stateParams.hasOwnProperty('testId')) {
-      var testId = $stateParams.testId;
-
-      if (!(testId === "")) {
-        djangoAuth.request({
-          method: 'GET',
-          url: 'v1/classroom/exam-problems/' + testId + '/',
-          data: {}
-        }).then(function (data) {
-          vm.test = data;
-
-          // if ('id' in data) {
-          //   vm.test.id = data['id'];
-          // }
-          //
-          // if ('name' in data) {
-          //   vm.test.name = data['name'];
-          // }
-          //
-          // if ('teacher' in data) {
-          //   vm.test.teacher = data['teacher'];
-          // }
-          //
-          // if ('problems' in data) {
-          //   vm.test.problems = data['problems'];
-          // }
-          //
-          // if ('info' in data) {
-          //   if ('problems' in data['info']) {
-          //     vm.problemInfo = data['info']['problems'];
-          //   }
-          // }
-
-        }, function (reason) {
-
-        });
-      }
-    }
-
-    // list of `state` value/display objects
-    vm.results = [];
-    vm.selectedItem = null;
-    vm.searchText = null;
-    vm.limit = 10;
-    vm.offset = 1;
-    vm.simulateQuery = false;
-    vm.isDisabled = false;
-
-    vm.querySearch = function (query) {
-      var results = query ? vm.results.filter(createFilterFor(query)) : vm.results, deferred;
-      if (self.simulateQuery) {
-        deferred = $q.defer();
-        $timeout(function () {
-          deferred.resolve(results);
-        }, Math.random() * 1000, false);
-        return deferred.promise;
-      } else {
-        return results;
-      }
-    };
-
-    vm.searchTextChange = function (text) {
-      var results = djangoAuth.request({
-        method: 'GET',
-        url: 'v1/problem/problem-instance/?limit=' + vm.limit + '&offset= ' + vm.index * vm.limit + '&search=' + vm.searchText,
-        data: {}
-      }).then(function (data) {
-        vm.results = data.results;
-
-        $mdSidenav('right').toggle();
-      }, function (reason) {
-        console.log(reason);
-      });
-    };
-
-    vm.selectedItemChange = function (item) {
-      $log.info('Item changed to ' + item);
-    };
-
-    /**
-     * Build `states` list of key/value pairs
-     */
-    function loadAll() {
-      /* jshint multistr: true */
-      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-								Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-								Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-								Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-								North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-								South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-								Wisconsin, Wyoming';
-
-      return allStates.split(/, +/g).map(function (state) {
-        return {
-          value: state.toLowerCase(),
-          display: state
-        };
-      });
-    }
-
-    /**
-     * Create filter function for a query string
-     */
-    vm.createFilterFor = function (query) {
-      var lowercaseQuery = angular.lowercase(query);
-
-      return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
-      };
-    };
 
     vm.add_check_item = function () {
       var dataChanged = false;
@@ -170,7 +75,6 @@
 
             dataChanged = true;
           }
-
         }
       }
 
@@ -185,7 +89,6 @@
 
         });
       }
-
 
       $mdSidenav('right').toggle();
     };
